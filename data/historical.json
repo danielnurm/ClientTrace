@@ -1,0 +1,132 @@
+{
+  "company": "KONE Corporation",
+  "domain": "kone.com",
+  "year": 2023,
+  "customers": [
+    {
+      "name": "110 North Wacker, Chicago, USA",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/110-north-wacker.aspx"
+    },
+    {
+      "name": "ALICE@Mediapolis, Singapore",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230610001356/https://www.kone.com/en/references/alice-mediapolis.aspx"
+    },
+    {
+      "name": "Beijing Daxing International Airport, China",
+      "logo_url": "https://web.archive.org/web/20230122142100im_/https://www.kone.com/en/Images/bejing-daxing-international-airport-2-450x800_tcm17-109770.jpg?v=1",
+      "source_url": "https://web.archive.org/web/20230331094431/https://www.kone.com/en/references/bejing-daxing-international-airport-china.aspx"
+    },
+    {
+      "name": "CITIC Tower",
+      "logo_url": "https://web.archive.org/web/20230331102622im_/https://www.kone.com/en/Images/China%20Zun_1440x700_tcm17-42242.jpg",
+      "source_url": "https://web.archive.org/web/20230331102622/https://www.kone.com/en/references/citic-tower.aspx"
+    },
+    {
+      "name": "Edificio Bronce, Madrid, Spain",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/edificio-bronce-madrid-spain.aspx"
+    },
+    {
+      "name": "Finland at Dubai Expo 2020",
+      "logo_url": "https://web.archive.org/web/20230324201315im_/https://www.kone.com/en/Images/Dubai%2017_1440x670_tcm17-111547.jpg",
+      "source_url": "https://web.archive.org/web/20230324201315/https://www.kone.com/en/references/finland-at-dubai-expo-2020.aspx"
+    },
+    {
+      "name": "HUS Helsinki University Hospital, Finland",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230610003535/https://www.kone.com/en/references/helsinki-university-hospital-finland.aspx"
+    },
+    {
+      "name": "Humlegården Fastigheter",
+      "logo_url": "https://web.archive.org/web/20230609050204im_/https://www.kone.com/en/Images/Humlegarden_hero%201440x700_tcm17-60598.jpg",
+      "source_url": "https://web.archive.org/web/20230609050204/https://www.kone.com/en/references/humlegarden-fastigheter.aspx"
+    },
+    {
+      "name": "Jeddah Tower",
+      "logo_url": "https://web.archive.org/web/20230331094843im_/https://www.kone.com/en/Images/jeddahtower-hero-2880x1340_tcm17-9035.jpg",
+      "source_url": "https://web.archive.org/web/20230331094843/https://www.kone.com/en/references/jeddah-tower.aspx"
+    },
+    {
+      "name": "K-Kampus, Helsinki, Finland",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230324201315/https://www.kone.com/en/references/k-kampus-helsinki-finland.aspx"
+    },
+    {
+      "name": "Keeping people on the move for one of the world’s biggest events",
+      "logo_url": "https://web.archive.org/web/20231204234744im_/https://www.kone.com/en/Images/Nizhny%20Novgorod%20Stadium-hero-image_tcm17-74852.jpg",
+      "source_url": "https://web.archive.org/web/20231204234744/https://www.kone.com/en/references/keeping-people-on-the-move-for-one-of-the-worlds-biggest-events.aspx"
+    },
+    {
+      "name": "Länsimetro",
+      "logo_url": "https://web.archive.org/web/20230331095031im_/https://www.kone.com/en/Images/herobanner_tcm17-51443.jpg",
+      "source_url": "https://web.archive.org/web/20230331095031/https://www.kone.com/en/references/lansimetro.aspx"
+    },
+    {
+      "name": "Lee Garden One",
+      "logo_url": "https://web.archive.org/web/20230307092434im_/https://www.kone.com/en/Images/Lee-Garden-One-1440x670_tcm17-50598.jpg",
+      "source_url": "https://web.archive.org/web/20230307092434/https://www.kone.com/en/references/lee-garden-one.aspx"
+    },
+    {
+      "name": "Nanjing Metro Line 4, China",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/nanjing-metro-line-4-china.aspx"
+    },
+    {
+      "name": "Nausicaá, Boulougne-sur-Mer, France",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230129232053/https://www.kone.com/en/references/nausicaa.aspx"
+    },
+    {
+      "name": "One Bloor East",
+      "logo_url": "https://web.archive.org/web/20230401014355im_/https://www.kone.com/en/Images/One_Bloor_1440x670_tcm17-42241.jpg",
+      "source_url": "https://web.archive.org/web/20230401014355/https://www.kone.com/en/references/one-bloor-east.aspx"
+    },
+    {
+      "name": "Princess Tower",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20231130014224/https://www.kone.com/en/references/princess-tower.aspx"
+    },
+    {
+      "name": "Shanghai Metro City",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230609035333/https://www.kone.com/en/references/shanghai-metro-city.aspx"
+    },
+    {
+      "name": "Sky Tower",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230401010202/https://www.kone.com/en/references/sky-tower.aspx"
+    },
+    {
+      "name": "Supersizing Seattle",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230610011111/https://www.kone.com/en/references/supersizing-seattle.aspx"
+    },
+    {
+      "name": "The Elbphilharmonie",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230308131732/https://www.kone.com/en/references/the-elbphilharmonie.aspx"
+    },
+    {
+      "name": "The Shard",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230206214842/https://www.kone.com/en/references/the-shard.aspx"
+    },
+    {
+      "name": "The Sky Is No Limit For Chinas Aviation Sector",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230331100249/https://www.kone.com/en/references/the-sky-is-no-limit-for-chinas-aviation-sector.aspx"
+    },
+    {
+      "name": "Torre Anseli",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20230610005934/https://www.kone.com/en/references/torre-anseli.aspx"
+    },
+    {
+      "name": "Zebrabox self-storage, Winterthur, Switzerland",
+      "logo_url": "https://web.archive.org/web/20230122142100im_/https://www.kone.com/en/Images/ref_zebrabox-winterthur_450x400_tcm17-118828.jpg?v=1",
+      "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/zebrabox-self-storage-winterthur-switzerland.aspx"
+    }
+  ]
+}
