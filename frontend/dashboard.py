@@ -35,7 +35,7 @@ def render(data):
         textposition="outside",
     ))
     fig.update_layout(height=300, margin=dict(t=20, b=20), yaxis_title="Customers")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig)
 
     # --- Table of all customers ---
     rows = (
@@ -55,7 +55,7 @@ def render(data):
 
     st.dataframe(
         df.style.map(color, subset=["Status"]),
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
         column_config={"Source": st.column_config.LinkColumn("Source")},
     )
