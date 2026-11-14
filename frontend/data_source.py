@@ -12,6 +12,12 @@ from datetime import datetime
 from frontend.mock_data import MOCK_NEW, MOCK_OLD
 
 
+def _snapshot_key(source_url):
+    """Sortable snapshot time from a Wayback URL ("20230324201307"), "" if none."""
+    m = re.search(r"/web/(\d{4,14})", source_url or "")
+    return m.group(1) if m else ""
+
+
 def _snapshot_date(source_url):
     """Wayback snapshot date from its URL: .../web/20230324201307/... → "24 Mar 2023"."""
     m = re.search(r"/web/(\d{4})(\d{2})?(\d{2})?", source_url or "")
@@ -135,7 +141,8 @@ def run_analysis(url, year):
         result = _simple_compare(old, new)
 
     # Lost customers: copies with evidence attached, so cached lists aren't changed
-    lost = [{**c, "snapshot_date": _snapshot_date(c["source_url"])} for c in result["lost"]]
+    lost = [{**c, "snapshot_date": _snapshot_date(c["source_url"]),
+             "snapshot_key": _snapshot_key(c["source_url"])} for c in result["lost"]]
     mentions_checked = False
     if lost and not demo:
         mentions, err = _try("backend.context_api:find_site_mentions", url, [c["name"] for c in lost])
