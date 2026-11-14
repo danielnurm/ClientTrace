@@ -10,6 +10,7 @@ import streamlit as st
 VERDICTS = {  # verdict → (label, color, sort order)
     "switched_away":    ("Switched away", "#e5484d", 0),
     "competitor_added": ("Competitor added", "#d97706", 1),
+    "runs_competitor":  ("Runs a competitor", "#d97706", 2),
     "removed":          ("Removed", "#e5484d", 2),
     "still_running":    ("Still running", "#30a46c", 3),
     "won":              ("Won from competitor", "#3e63dd", 3),
@@ -68,6 +69,9 @@ def _row(r, product):
     if r["verdict"] == "error":
         lines.append(f"<span style='opacity:.6'>{escape(r.get('error', ''))[:120]}</span>")
     else:
+        if r["verdict"] == "runs_competitor":
+            lines.append(f"<b>Runs {escape(', '.join(r.get('competitors', [])))} instead of {escape(product)}</b>"
+                         " <span style='opacity:.6'>(when it switched is unknown without archive history)</span>")
         lines.append(f"Runs now: {_products_text(r['products'])}")
         for s in r.get("signals", []):
             lines.append(f"Signal: {escape(_signal_text(s))}")
@@ -112,7 +116,7 @@ def render_switches():
         return
     s = rep["summary"]
     n = sum(s.values())
-    lost = s.get("switched_away", 0) + s.get("removed", 0)
+    lost = s.get("switched_away", 0) + s.get("removed", 0) + s.get("runs_competitor", 0)
     st.markdown(f"### Of {n} customer sites, {s.get('still_running', 0)} still run {escape(rep['product'])}, "
                 f"{lost} dropped it and {s.get('competitor_added', 0)} added a competitor")
     m = st.columns(4)

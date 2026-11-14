@@ -179,6 +179,15 @@ class SupplierTest(unittest.TestCase):
                 {"name": "A", "domain": "a.fi"}, {"name": "B", "domain": "b.fi"}, {"name": "C", "domain": "c.fi"}])
         self.assertEqual(r["summary"], {"still_running": 1, "not_detected": 1, "error": 1})
 
+    def test_runs_competitor_instead(self):
+        live = {"d.fi": {"site": "d.fi", "url": "https://www.d.fi/", "checked_at": "2026-11-14T12:00:00+00:00",
+                         "latency_ms": 5, "products": ["Genesys", "Hotjar"], "found_in": {"Genesys": "gtm", "Hotjar": "gtm"}}}
+        with mock.patch.object(st, "check_sites", return_value=live), \
+                mock.patch.object(st, "_cached_history", return_value=None):
+            r = st.supplier_report("giosg.com", "Giosg", customers=[{"name": "D", "domain": "d.fi"}])
+        row = r["customers"][0]
+        self.assertEqual((row["verdict"], row["competitors"]), ("runs_competitor", ["Genesys"]))  # Hotjar isn't chat
+
     def test_no_domain_found_is_a_row_not_a_crash(self):
         # review fix: find_customer_domain → None used to raise KeyError in the summary
         with mock.patch.object(st, "find_customer_domain", return_value=None), \

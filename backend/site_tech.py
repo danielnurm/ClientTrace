@@ -365,7 +365,16 @@ def _verdict(report: dict, product: str) -> tuple[str, str]:
         return "still_running", p["confidence"]
     if p and p["status"] == "removed":
         return "removed", p["confidence"]
+    if competitors_running(report, product):
+        return "runs_competitor", "medium"  # the supplier's product isn't there, a rival's is
     return "not_detected", "low"
+
+
+def competitors_running(report: dict, product: str) -> list[str]:
+    """Products of the same category as `product` that the site runs now (not `product` itself)."""
+    cat = category_of(product)
+    return sorted(p for p, i in report["products"].items()
+                  if p != product and i["status"] == "running" and i["category"] == cat)
 
 
 def supplier_report(supplier_url: str, product: str, customers: Optional[list[dict]] = None,
@@ -420,6 +429,7 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
             r["previous_check"] = (stored["previous"] or {}).get("checked_at")
         info = rep["products"].get(product, {})
         r.update(verdict=verdict, confidence=conf, history=hist is not None,
+                 competitors=competitors_running(rep, product),
                  signals=[s for s in rep["signals"] if product in (s.get("from"), s.get("to"), s.get("new"), *s.get("alongside", []))],
                  products={p: {k: i.get(k) for k in ("category", "status", "live", "since", "confidence")}
                            for p, i in rep["products"].items()},
