@@ -1,24 +1,39 @@
 """
-Laita .env tiedostoon 
+Vertaa vanhan ja uuden asiakaslistan.
 
-OPENAI_API_KEY = "{key tähän}"
+Hyväksyy README:n customer-dictit ({"name", "logo_url", "source_url"})
+tai pelkät nimet, ja palauttaa samaa tyyppiä kuin sai.
 
+OPENAI_API_KEY .env-tiedostossa on vapaaehtoinen:
+- avaimen kanssa nimet matchataan AI:lla (gpt-4o-mini)
+- ilman avainta (tai jos AI-kutsu epäonnistuu) käytetään ilmaista
+  sääntöpohjaista vertailua: yhtiömuodot pois + pienet kirjoitusvirheet
 """
 
+from __future__ import annotations
 
-import os
 import json
-from openai import OpenAI
-from pydantic import BaseModel
+import os
+import unicodedata
+from difflib import SequenceMatcher
+from typing import Any, Optional
+
 from dotenv import load_dotenv
+from pydantic import BaseModel
+
+from analysis.customer_extraction import rough_normalize
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# Kuinka samankaltaisten normalisoitujen nimien pitää olla (0–1)
+FUZZY_THRESHOLD = 0.9
+# Lyhyet nimet vain tarkalla osumalla: "Neste" ≠ "Nestle"
+FUZZY_MIN_LENGTH = 8
 
 
 class CustomerMatch(BaseModel):
     old_customer: str
-    new_customer: str | None
+    new_customer: Optional[str]  # Optional eikä "str | None": Python 3.9 + pydantic
     is_match: bool
     reason: str
 
@@ -27,31 +42,55 @@ class ComparisonResult(BaseModel):
     matches: list[CustomerMatch]
 
 
-def compare_customers(
-    old_customers: list[str],
-    new_customers: list[str]
-) -> dict[str, list[str]]:
+def _get_client():
+    """OpenAI-client vasta käytössä, ei importissa → import ei kaadu ilman avainta."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return None
+    from openai import OpenAI
 
-    # Jos molemmat listat ovat tyhjiä
-    if not old_customers and not new_customers:
-        return {"lost": [], "retained": [], "added": []}
+    return OpenAI(api_key=api_key)
 
-    # Jos vanha lista on tyhjä, kaikki asiakkaat ovat uusia
-    if not old_customers:
-        return {
-            "lost": [],
-            "retained": [],
-            "added": new_customers
-        }
 
-    # Jos uusi lista on tyhjä, kaikki vanhat asiakkaat ovat kadonneet
-    if not new_customers:
-        return {
-            "lost": old_customers,
-            "retained": [],
-            "added": []
-        }
+def _name(item: Any) -> str:
+    return (item.get("name") or "") if isinstance(item, dict) else str(item)
 
+
+def _normalize(name: str) -> str:
+    """rough_normalize + ääkköset/aksentit pois: "Wärtsilä Oyj" → "wartsila"."""
+    folded = unicodedata.normalize("NFKD", rough_normalize(name))
+    return "".join(ch for ch in folded if not unicodedata.combining(ch))
+
+
+def _rule_based_matches(old_names: list[str], new_names: list[str]) -> dict[str, str]:
+    """Ilmainen matchaus: {vanha nimi: uusi nimi}. Jokainen nimi käytetään kerran."""
+    new_norm = {n: _normalize(n) for n in new_names}
+    matches: dict[str, str] = {}
+    used: set[str] = set()
+
+    for old in old_names:
+        old_norm = _normalize(old)
+        best, best_score = None, 0.0
+        for new, norm in new_norm.items():
+            if new in used:
+                continue
+            if norm == old_norm:
+                score = 1.0
+            elif min(len(norm), len(old_norm)) >= FUZZY_MIN_LENGTH:
+                score = SequenceMatcher(None, old_norm, norm).ratio()
+            else:
+                score = 0.0
+            if score > best_score:
+                best, best_score = new, score
+        if best is not None and best_score >= FUZZY_THRESHOLD:
+            matches[old] = best
+            used.add(best)
+
+    return matches
+
+
+def _ai_matches(client, old_names: list[str], new_names: list[str]) -> dict[str, str]:
+    """AI-matchaus: {vanha nimi: uusi nimi}."""
     response = client.responses.parse(
         model="gpt-4o-mini",
         input=[
@@ -86,8 +125,8 @@ def compare_customers(
             {
                 "role": "user",
                 "content": json.dumps({
-                    "old_customers": old_customers,
-                    "new_customers": new_customers
+                    "old_customers": old_names,
+                    "new_customers": new_names
                 })
             }
         ],
@@ -95,42 +134,56 @@ def compare_customers(
     )
 
     result = response.output_parsed
-
     if result is None:
         raise ValueError("AI could not compare the customer lists.")
 
-    # Muodostetaan palautettavat listat
-    lost = []
-    retained = []
+    # Hyväksytään vain nimet, jotka oikeasti ovat listoissa (AI voi keksiä nimiä)
+    old_set, new_set = set(old_names), set(new_names)
+    matches: dict[str, str] = {}
+    used: set[str] = set()
+    for m in result.matches:
+        if (m.is_match and m.old_customer in old_set and m.new_customer in new_set
+                and m.old_customer not in matches and m.new_customer not in used):
+            matches[m.old_customer] = m.new_customer
+            used.add(m.new_customer)
+    return matches
 
-    matched_new_customers = set()
 
-    for match in result.matches:
-        if match.is_match and match.new_customer is not None:
-            retained.append(match.new_customer)
-            matched_new_customers.add(match.new_customer)
+def compare_customers(old_customers: list[Any], new_customers: list[Any]) -> dict[str, list[Any]]:
+    """Palauttaa {"lost": [...], "retained": [...], "added": [...]}.
+    retained sisältää uuden listan version asiakkaasta."""
+    # Nimi → alkuperäinen alkio (dict tai str); tuplanimistä ensimmäinen
+    old_by = {}
+    for item in old_customers:
+        old_by.setdefault(_name(item).strip(), item)
+    new_by = {}
+    for item in new_customers:
+        new_by.setdefault(_name(item).strip(), item)
+    old_by.pop("", None)
+    new_by.pop("", None)
+
+    old_names, new_names = list(old_by), list(new_by)
+
+    matches: dict[str, str] = {}
+    if old_names and new_names:
+        client = _get_client()
+        if client is not None:
+            try:
+                matches = _ai_matches(client, old_names, new_names)
+            except Exception:
+                matches = _rule_based_matches(old_names, new_names)
         else:
-            lost.append(match.old_customer)
+            matches = _rule_based_matches(old_names, new_names)
 
-    # Asiakkaat, joita ei löytynyt vanhasta listasta
-    added = [
-        customer
-        for customer in new_customers
-        if customer not in matched_new_customers
-    ]
-
+    matched_new = set(matches.values())
     return {
-        "lost": lost,
-        "retained": retained,
-        "added": added
+        "lost": [old_by[n] for n in old_names if n not in matches],
+        "retained": [new_by[matches[n]] for n in old_names if n in matches],
+        "added": [new_by[n] for n in new_names if n not in matched_new],
     }
 
 
-
-
-old = ["Nokia", "Teboil", "Apple"]
-new = ["Nokia Oyj", "TeboiL", "Google"]
-
-result = compare_customers(old, new)
-
-print(result)
+if __name__ == "__main__":
+    old = ["Nokia", "Teboil", "Apple"]
+    new = ["Nokia Oyj", "TeboiL", "Google"]
+    print(compare_customers(old, new))
