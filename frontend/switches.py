@@ -124,6 +124,67 @@ def _competitor_chart(customers):
                     use_container_width=True)
 
 
+# ---------- how customers switch (archive timeline) ----------
+
+def _swatch(cls, product):
+    from frontend.switch_chart import STYLE, label
+    _, _, color, hatch = STYLE[cls]
+    bg = (f"repeating-linear-gradient(45deg, {color} 0 3px, #52514e 3px 4px)" if hatch else color)
+    return (f"<span style='display:inline-flex;align-items:center;gap:6px;margin:2px 14px 2px 0'>"
+            f"<span style='display:inline-block;width:22px;height:12px;border-radius:3px;background:{bg}'></span>"
+            f"{escape(label(cls, product))}</span>")
+
+
+def _switch_section(customers, product):
+    from frontend import switch_chart as sc
+    with_tl = [c for c in customers if c.get("timeline")]
+    without = [c["site"] for c in customers if not c.get("timeline")]
+    if not with_tl:
+        st.caption("No archive history built yet for these customers. Build it once (a few minutes per site): "
+                   f"`python -m backend.switch_timeline build {product} " + " ".join(without) + "`")
+        return
+    quiet = [c for c in with_tl if c["status"] == "healthy" and not c["timeline"]["summary"]["changed"]]
+    shown = [c for c in with_tl if c not in quiet]
+    entries = [{"site": c["site"] + (" · demo" if c["timeline"].get("demo") else ""), "status": c["status"],
+                "timeline": c["timeline"]} for c in shown]
+
+    real_switch = any(e["timeline"]["summary"].get("switch") for e in entries if not e["timeline"].get("demo"))
+    text = sc.headline(entries, product)
+    st.markdown(f"**{escape(text)}**" if real_switch else escape(text))
+    hidden = [e["site"] for e in entries if e["timeline"]["summary"].get("ours_hidden")]
+    if hidden:
+        st.caption(f"On {', '.join(hidden)} a chat tool loads through Google Tag Manager, which the archive "
+                   "doesn't store, so those months can't show whether it was there.")
+    if entries:
+        icons = {k: v[0] for k, v in STATUSES.items()}
+        st.plotly_chart(sc.figure(entries, product, icons), use_container_width=True,
+                        config={"displayModeBar": False})
+        st.markdown("".join(_swatch(c, product) for c in sc.legend_classes(entries))
+                    + "<span style='display:inline-flex;align-items:center;gap:6px;margin:2px 14px 2px 0'>"
+                      "◆ switch (last month with " + escape(product) + " → first month without)</span>",
+                    unsafe_allow_html=True)
+    if quiet:
+        with st.expander(f"🟢 {len(quiet)} healthy customer{'s' if len(quiet) != 1 else ''} with no change "
+                         "in the archived period"):
+            st.markdown(", ".join(escape(c["site"]) for c in quiet))
+    if without:
+        st.caption("No archive history yet for: " + ", ".join(without) +
+                   f". Build it with `python -m backend.switch_timeline build {product} " + " ".join(without) + "`.")
+    with st.expander("Archive snapshots behind the chart (proof)"):
+        rows = []
+        for e in entries + [{"site": c["site"], "timeline": c["timeline"]} for c in quiet]:
+            for m in e["timeline"]["months"]:
+                for snap in m.get("snapshots", []):
+                    rows.append({"Customer": e["site"], "Month": m["month"], "Page": snap["page"],
+                                 "Status": sc.label(m["class"], product),
+                                 "Detected": ", ".join(snap.get("products", [])) or "–", "Snapshot": snap["url"]})
+        if rows:
+            st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch",
+                         column_config={"Snapshot": st.column_config.LinkColumn("Snapshot", display_text="open")})
+        else:
+            st.caption("No archive snapshots.")
+
+
 # ---------- customer cards ----------
 
 def _evidence(r, product):
@@ -247,6 +308,11 @@ def render_switches():
 
     st.markdown(f"#### Competitors on your customers' sites")
     _competitor_chart(rep["customers"])
+
+    st.markdown("#### How customers switch")
+    st.caption("Which chat ran on each customer's own site, month by month, from the Wayback Machine. "
+               "Orange is the warning time: both chats on the site at once.")
+    _switch_section(rep["customers"], product)
 
     st.markdown("#### Customers, most urgent first")
     st.markdown("".join(_card(c, product) for c in rep["customers"]), unsafe_allow_html=True)

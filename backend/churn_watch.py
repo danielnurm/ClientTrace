@@ -199,7 +199,8 @@ STATUS_ORDER = {"likely_switching": 0, "possibly_trialling": 1, "on_competitor":
 
 def check_customer(site: str, product: str, record: bool = True) -> dict:
     """Full early-warning check for one customer site (live, plain requests)."""
-    row = {"site": st._site_key(site)}
+    from backend.switch_timeline import cached as cached_timeline
+    row = {"site": st._site_key(site), "timeline": cached_timeline(site)}
     try:
         live = st.check_site(site)
     except Exception as e:

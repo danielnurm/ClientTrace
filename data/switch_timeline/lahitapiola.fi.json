@@ -1,0 +1,435 @@
+{
+ "site": "lahitapiola.fi",
+ "product": "Giosg",
+ "demo": false,
+ "generated_at": "2026-11-14T15:28:27+00:00",
+ "pages": [
+  "/",
+  "/henkilo/asiakkaalle/yhteystiedot/"
+ ],
+ "live": {
+  "checked_at": "2026-11-14T15:27:24+00:00",
+  "products": [
+   "Genesys"
+  ],
+  "found_in": {
+   "Genesys": "html"
+  }
+ },
+ "months": [
+  {
+   "month": "2023-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2023-12-04",
+     "url": "https://web.archive.org/web/20231204162334/https://www.lahitapiola.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2023-12-06",
+     "url": "https://web.archive.org/web/20231206081824/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2024-05-13",
+     "url": "https://web.archive.org/web/20240513093812/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-08",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-09",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-10",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2024-10-14",
+     "url": "https://web.archive.org/web/20241014082713/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-11",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2025-03-06",
+     "url": "https://web.archive.org/web/20250306125451/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2025-06-23",
+     "url": "https://web.archive.org/web/20250623230424/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-08",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-09",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-10",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-11",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2025-11-13",
+     "url": "https://web.archive.org/web/20251113094045/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2026-02-18",
+     "url": "https://web.archive.org/web/20260218155820/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2026-06-08",
+     "url": "https://web.archive.org/web/20260608085832/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/henkilo/asiakkaalle/yhteystiedot/",
+     "date": "2026-07-19",
+     "url": "https://web.archive.org/web/20260719153924/https://www.lahitapiola.fi/henkilo/asiakkaalle/yhteystiedot/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-08",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2026-09",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2026-10",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2026-11",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  }
+ ],
+ "summary": {
+  "first_competitor_seen": "2023-12",
+  "ours_last_seen": null,
+  "switch": null,
+  "warning_months": null,
+  "ours_hidden": false,
+  "changed": false,
+  "latest_archived_class": "competitor_only"
+ }
+}
