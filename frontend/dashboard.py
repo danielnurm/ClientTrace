@@ -2,7 +2,6 @@
 from html import escape
 from urllib.parse import urlparse
 
-import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -13,9 +12,6 @@ STATUS_COLORS = {
     "Retained": "#30a46c",          # green
     "New": "#3e63dd",               # blue
 }
-TIMELINE_EMPHASIS = "#2a78d6"   # removed: the point of the chart
-TIMELINE_CONTEXT = "#898781"    # still there: context, drawn at reduced opacity
-MUTED_INK = "#898781"
 
 
 def _month(date):
@@ -24,46 +20,6 @@ def _month(date):
         return pd.Timestamp(date).strftime("%b %Y")
     except (ValueError, TypeError):
         return date or ""
-
-
-def _timeline_chart(tl, domain):
-    """One bar per page/customer from first to last archive capture. Removed ones in the
-    emphasis hue on top; the rest in gray. A vertical rule marks when the section
-    stopped being archived (a site move), where bars ending there say nothing."""
-    removed_label = "Removed"
-    other_label = ("Still there when the section stopped being archived"
-                   if tl.get("section_end") else "Still there at the last capture")
-    df = pd.DataFrame(tl["rows"])
-    df["start"], df["end"] = pd.to_datetime(df["start"]), pd.to_datetime(df["end"])
-    df["status"] = df["removed"].map({True: removed_label, False: other_label})
-    df["from_label"] = df["start"].dt.strftime("%b %Y")
-    df["until_label"] = df["end"].dt.strftime("%b %Y")
-    order = list(df["name"])
-
-    bars = alt.Chart(df).mark_bar(height=10, cornerRadius=4).encode(
-        x=alt.X("start:T", title=None, axis=alt.Axis(format="%Y", grid=True, tickCount=6)),
-        x2="end:T",
-        y=alt.Y("name:N", sort=order, title=None, axis=alt.Axis(labelLimit=240, ticks=False, domain=False)),
-        color=alt.Color("status:N", title=None,
-                        scale=alt.Scale(domain=[removed_label, other_label],
-                                        range=[TIMELINE_EMPHASIS, TIMELINE_CONTEXT]),
-                        legend=alt.Legend(orient="top", direction="horizontal", symbolType="square")),
-        opacity=alt.condition("datum.removed", alt.value(1.0), alt.value(0.45)),
-        tooltip=[alt.Tooltip("name:N", title="Customer"),
-                 alt.Tooltip("from_label:N", title="Archived from"),
-                 alt.Tooltip("until_label:N", title="Archived until"),
-                 alt.Tooltip("status:N", title="Status")],
-    )
-    chart = bars
-    if tl.get("section_end"):
-        mark = pd.DataFrame({"x": [pd.to_datetime(tl["section_end"] + "-01")],
-                             "label": [f"Section stopped being archived ({_month(tl['section_end'] + '-01')})"]})
-        rule = alt.Chart(mark).mark_rule(color=MUTED_INK, strokeWidth=1).encode(x="x:T")
-        text = alt.Chart(mark).mark_text(align="right", dx=-4, dy=6, baseline="top",
-                                         color=MUTED_INK, fontSize=11).encode(x="x:T", y=alt.value(0), text="label:N")
-        chart = bars + rule + text
-    st.altair_chart(chart.properties(height=24 * len(df) + 40).configure_view(stroke=None),
-                    use_container_width=True)
 
 
 def _link(url, text):
@@ -179,33 +135,6 @@ def render(data):
     c2.metric("Showcased now", len(data["new"]))
     c3.metric("Leads", len(leads))
     c4.metric("Share lost", f"{share} %")
-
-    # --- Timeline ---
-    if tl and tl["rows"]:
-        st.markdown("#### When they disappeared")
-        st.caption(f"Each bar runs from the first to the last time the archive captured the page on "
-                   f"{domain}. The archive's start dates depend on its coverage, not on when the "
-                   "relationship began."
-                   + (f" {tl['not_shown']} more pages that were never removed are not shown."
-                      if tl["not_shown"] else ""))
-        _timeline_chart(tl, domain)
-        with st.expander(f"Timeline data ({len(tl['rows'])} rows)"):
-            st.dataframe(pd.DataFrame([{
-                "Customer": r["name"], "Archived from": r["start"], "Archived until": r["end"],
-                "Status": "Removed" if r["removed"] else "Still there at the end",
-                "In this comparison": "yes" if r["in_comparison"] else "",
-            } for r in tl["rows"]]), width="stretch", hide_index=True)
-    elif not data.get("demo") and lost:
-        st.markdown("#### When they disappeared")
-        st.caption("No timeline yet. It reads the archive back to "
-                   f"{year - 2} to show when each customer disappeared. Free, takes a few minutes.")
-        if st.button("Build timeline"):
-            from backend.wayback import get_customer_timeline
-            from frontend.data_source import run_analysis
-            with st.spinner("Reading the archive… one request every few seconds, so this takes a few minutes."):
-                get_customer_timeline(data["url"], year)
-            st.session_state["result"] = run_analysis(data["url"], year)
-            st.rerun()
 
     # --- Ranked leads ---
     if leads:
