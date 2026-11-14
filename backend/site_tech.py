@@ -365,26 +365,25 @@ def _verdict(report: dict, product: str) -> tuple[str, str]:
         return "still_running", p["confidence"]
     if p and p["status"] == "removed":
         return "removed", p["confidence"]
+    if competitors_running(report, product):
+        return "runs_competitor", "medium"  # the supplier's product isn't there, a rival's is
     return "not_detected", "low"
 
 
-def supplier_report(supplier_url: str, product: str, customers: Optional[list[dict]] = None,
-                    search=None, record: bool = False) -> dict:
-    """One input → full result. Combines five sources:
-      1. the supplier's customer page (Context.dev, cached)  2. each customer's homepage live
-      3. its GTM containers live  4. its Wayback history (if cached)  5. a web search for its domain.
+def competitors_running(report: dict, product: str) -> list[str]:
+    """Products of the same category as `product` that the site runs now (not `product` itself)."""
+    cat = category_of(product)
+    return sorted(p for p, i in report["products"].items()
+                  if p != product and i["status"] == "running" and i["category"] == cat)
 
-    `customers`: optional [{"name", "domain"?}] to skip step 1. record=True stores each live
-    check and adds "changes" (diff vs. the previous stored check) and "previous_check". Returns
-    {"supplier", "product", "elapsed_ms", "summary": {verdict: n}, "customers": [{"name", "domain",
-     "verdict", "confidence", "signals", "products", "evidence", "history": bool, "error"?}]}.
-    """
-    start = time.monotonic()
+
+def resolve_customers(supplier_url: str, customers: Optional[list[dict]] = None, search=None) -> list[dict]:
+    """[{"name", "domain"}] or [{"name", "domain": None, "verdict": "error", "error"}] per customer.
+    customers=None reads them from the supplier's customer page (Context.dev, cached)."""
     supplier_host = _host(supplier_url)
     if customers is None:
         from backend.context_api import get_current_customers
         customers = get_current_customers(supplier_url)
-
     rows = []
     for c in customers:
         domain = c.get("domain")
@@ -403,6 +402,23 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
                          "error": "no website found for this customer"})
             continue
         rows.append({"name": c["name"], "domain": domain})
+    return rows
+
+
+def supplier_report(supplier_url: str, product: str, customers: Optional[list[dict]] = None,
+                    search=None, record: bool = False) -> dict:
+    """One input → full result. Combines five sources:
+      1. the supplier's customer page (Context.dev, cached)  2. each customer's homepage live
+      3. its GTM containers live  4. its Wayback history (if cached)  5. a web search for its domain.
+
+    `customers`: optional [{"name", "domain"?}] to skip step 1. record=True stores each live
+    check and adds "changes" (diff vs. the previous stored check) and "previous_check". Returns
+    {"supplier", "product", "elapsed_ms", "summary": {verdict: n}, "customers": [{"name", "domain",
+     "verdict", "confidence", "signals", "products", "evidence", "history": bool, "error"?}]}.
+    """
+    start = time.monotonic()
+    supplier_host = _host(supplier_url)
+    rows = resolve_customers(supplier_url, customers, search)
 
     todo = [r for r in rows if r.get("domain") and "error" not in r]
     live = check_sites([r["domain"] for r in todo])
@@ -420,6 +436,7 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
             r["previous_check"] = (stored["previous"] or {}).get("checked_at")
         info = rep["products"].get(product, {})
         r.update(verdict=verdict, confidence=conf, history=hist is not None,
+                 competitors=competitors_running(rep, product),
                  signals=[s for s in rep["signals"] if product in (s.get("from"), s.get("to"), s.get("new"), *s.get("alongside", []))],
                  products={p: {k: i.get(k) for k in ("category", "status", "live", "since", "confidence")}
                            for p, i in rep["products"].items()},
