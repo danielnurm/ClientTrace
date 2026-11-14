@@ -4,17 +4,17 @@
   "year": 2023,
   "customers": [
     {
-      "name": "110 North Wacker, Chicago, USA",
+      "name": "110 North Wacker",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/110-north-wacker.aspx"
     },
     {
-      "name": "ALICE@Mediapolis, Singapore",
+      "name": "ALICE@Mediapolis",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230610001356/https://www.kone.com/en/references/alice-mediapolis.aspx"
     },
     {
-      "name": "Beijing Daxing International Airport, China",
+      "name": "Beijing Daxing International Airport",
       "logo_url": "https://web.archive.org/web/20230122142100im_/https://www.kone.com/en/Images/bejing-daxing-international-airport-2-450x800_tcm17-109770.jpg?v=1",
       "source_url": "https://web.archive.org/web/20230331094431/https://www.kone.com/en/references/bejing-daxing-international-airport-china.aspx"
     },
@@ -24,7 +24,7 @@
       "source_url": "https://web.archive.org/web/20230331102622/https://www.kone.com/en/references/citic-tower.aspx"
     },
     {
-      "name": "Edificio Bronce, Madrid, Spain",
+      "name": "Edificio Bronce",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/edificio-bronce-madrid-spain.aspx"
     },
@@ -34,7 +34,7 @@
       "source_url": "https://web.archive.org/web/20230324201315/https://www.kone.com/en/references/finland-at-dubai-expo-2020.aspx"
     },
     {
-      "name": "HUS Helsinki University Hospital, Finland",
+      "name": "HUS Helsinki University Hospital",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230610003535/https://www.kone.com/en/references/helsinki-university-hospital-finland.aspx"
     },
@@ -49,14 +49,9 @@
       "source_url": "https://web.archive.org/web/20230331094843/https://www.kone.com/en/references/jeddah-tower.aspx"
     },
     {
-      "name": "K-Kampus, Helsinki, Finland",
+      "name": "K-Kampus",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230324201315/https://www.kone.com/en/references/k-kampus-helsinki-finland.aspx"
-    },
-    {
-      "name": "Keeping people on the move for one of the world’s biggest events",
-      "logo_url": "https://web.archive.org/web/20231204234744im_/https://www.kone.com/en/Images/Nizhny%20Novgorod%20Stadium-hero-image_tcm17-74852.jpg",
-      "source_url": "https://web.archive.org/web/20231204234744/https://www.kone.com/en/references/keeping-people-on-the-move-for-one-of-the-worlds-biggest-events.aspx"
     },
     {
       "name": "Länsimetro",
@@ -69,12 +64,12 @@
       "source_url": "https://web.archive.org/web/20230307092434/https://www.kone.com/en/references/lee-garden-one.aspx"
     },
     {
-      "name": "Nanjing Metro Line 4, China",
+      "name": "Nanjing Metro Line 4",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/nanjing-metro-line-4-china.aspx"
     },
     {
-      "name": "Nausicaá, Boulougne-sur-Mer, France",
+      "name": "Nausicaá",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230129232053/https://www.kone.com/en/references/nausicaa.aspx"
     },
@@ -114,17 +109,12 @@
       "source_url": "https://web.archive.org/web/20230206214842/https://www.kone.com/en/references/the-shard.aspx"
     },
     {
-      "name": "The Sky Is No Limit For Chinas Aviation Sector",
-      "logo_url": "",
-      "source_url": "https://web.archive.org/web/20230331100249/https://www.kone.com/en/references/the-sky-is-no-limit-for-chinas-aviation-sector.aspx"
-    },
-    {
       "name": "Torre Anseli",
       "logo_url": "",
       "source_url": "https://web.archive.org/web/20230610005934/https://www.kone.com/en/references/torre-anseli.aspx"
     },
     {
-      "name": "Zebrabox self-storage, Winterthur, Switzerland",
+      "name": "Zebrabox self-storage",
       "logo_url": "https://web.archive.org/web/20230122142100im_/https://www.kone.com/en/Images/ref_zebrabox-winterthur_450x400_tcm17-118828.jpg?v=1",
       "source_url": "https://web.archive.org/web/20230324201307/https://www.kone.com/en/references/zebrabox-self-storage-winterthur-switzerland.aspx"
     }

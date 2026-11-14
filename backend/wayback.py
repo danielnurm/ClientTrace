@@ -288,6 +288,29 @@ def _customers_from_listing(ts: str, original: str, below: list, own: str) -> tu
     return customers, _company_name(page, own)
 
 
+FILLER_WORDS = {"the", "a", "an", "of", "for", "on", "in", "to", "is", "are", "and",
+                "with", "how", "why", "what", "our", "your", "no", "one"}
+
+
+def _strip_location(name: str) -> str:
+    """'Edificio Bronce, Madrid, Spain' → 'Edificio Bronce' (location suffix off),
+    so the same project matches its current name."""
+    return name.split(", ", 1)[0].strip() or name
+
+
+def _is_headline(name: str) -> bool:
+    """Article titles, e.g. 'Keeping people on the move for one of the world's
+    biggest events': 5+ words with 2+ filler words. Short names are kept."""
+    words = re.findall(r"[\w'’@-]+", name.lower())
+    return len(words) >= 5 and sum(w in FILLER_WORDS for w in words) >= 2
+
+
+def _clean_customers(customers: list[dict]) -> list[dict]:
+    """Strip location suffixes, drop headline-like names, then de-duplicate."""
+    cleaned = [{**c, "name": _strip_location(c["name"])} for c in customers]
+    return _dedupe([c for c in cleaned if not _is_headline(c["name"])])
+
+
 def _dedupe(customers: list[dict]) -> list[dict]:
     seen, out = set(), []
     for c in customers:
@@ -311,7 +334,7 @@ def fetch_historical(url: str, year: int) -> dict:
     for ts, original, below in _find_listing_pages(domain, year):
         found, company = _customers_from_listing(ts, original, below, own)
         customers += found
-    return {"company": company, "domain": domain, "year": year, "customers": _dedupe(customers)}
+    return {"company": company, "domain": domain, "year": year, "customers": _clean_customers(customers)}
 
 
 def _load_cache(url: str, year: int, path: Path = CACHE_PATH) -> Optional[dict]:
@@ -321,7 +344,7 @@ def _load_cache(url: str, year: int, path: Path = CACHE_PATH) -> Optional[dict]:
     except (OSError, ValueError):
         return None
     if data.get("domain") == _domain(url) and data.get("year") == year:
-        return data
+        return {**data, "customers": _clean_customers(data["customers"])}
     return None
 
 
