@@ -1,0 +1,77 @@
+{
+  "domain": "kone.com",
+  "source": "https://www.kone.com/en/references/",
+  "retrieved_at": "2026-11-14T10:23:00.335809+00:00",
+  "customers": [
+    {
+      "name": "Bloomberg",
+      "logo_url": "",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/bloomberg.html"
+    },
+    {
+      "name": "Draken",
+      "logo_url": "",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/draken.html"
+    },
+    {
+      "name": "Cayan Tower",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:2654e79f-09b9-4a4b-b6f4-f0a473b522a8",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/cayan-tower.html"
+    },
+    {
+      "name": "Hongqiao Transport Hub",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:2bafc2d8-ebfe-4abe-9bd6-f33cb0bc63dd",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/hongqiao-transport-hub.html"
+    },
+    {
+      "name": "Markthal Rotterdam",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:bd99be9d-1cf9-4e7d-8d52-77b91fb6cbad",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/markthal-rotterdam.html"
+    },
+    {
+      "name": "Tower City Rapid Station",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:33291707-ecf2-40e2-9cdc-9f9e8855ef96",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/tower-city-rapid-station.html"
+    },
+    {
+      "name": "Sky Tower",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:dc081674-57bd-4414-9846-0790cf539ab0",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/sky-tower.html"
+    },
+    {
+      "name": "Greenland Puli Center",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:a5774b6b-dbcc-4d83-aede-cf1869ef67e1",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/greenland-puli-center.html"
+    },
+    {
+      "name": "The Shard",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:14e2fdd8-a736-4d45-aca9-152485388a49",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/the-shard.html"
+    },
+    {
+      "name": "One Bloor East",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:bb50da71-db81-48a9-9db7-1dad9334ec41",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/one-bloor-east.html"
+    },
+    {
+      "name": "Adam",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:100e2447-261a-495b-a94e-7378850e64c3",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/adam.html"
+    },
+    {
+      "name": "Oslo Airport",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:069ff374-e2d9-4ca2-9e86-4ee943155d3f",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/oslo-airport.html"
+    },
+    {
+      "name": "Groupama Arena",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:54242519-8814-4bf9-8161-b2d35e1c339a",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/groupama-arena.html"
+    },
+    {
+      "name": "The Elbphilharmonie",
+      "logo_url": "https://assets.kone.com/adobe/assets/urn:aaid:aem:351da255-1aa4-4bf8-a519-f1a861703350",
+      "source_url": "https://www.kone.com/global/en/newsroom/references/the-elbphilharmonie.html"
+    }
+  ]
+}
