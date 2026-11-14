@@ -1,0 +1,184 @@
+{
+  "url": "https://www.vainu.com/customers/billetto/",
+  "html": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "markdown": {
+    "requested": true,
+    "success": true,
+    "data": "[Vainu home](https://www.vainu.com/)\n\nProduct Solutions Data & Trust Resources\n\n[Login](https://vainu.app) [Book a demo](https://www.vainu.com/free-trial/)\n\nProduct Three products. \nOne data source. [Product overview→](https://www.vainu.com/product)\n\n[Reach Find the companies and people worth contacting.](https://www.vainu.com/product/reach) [Filter & segment](https://www.vainu.com/product/reach#filter) [550+ data fields](https://www.vainu.com/product/reach#depth) [Decision-makers](https://www.vainu.com/product/reach#contacts) [Self-updating lists](https://www.vainu.com/product/reach#lists)\n\n[Data Sync Any data point, into any system you run.](https://www.vainu.com/product/data-sync) [Customer 360](https://www.vainu.com/product/data-sync#customer-360) [The live record](https://www.vainu.com/product/data-sync#record) [Vainu View](https://www.vainu.com/product/data-sync#vainu-view) [Change events](https://www.vainu.com/product/data-sync#events)\n\n[Discover Know why to reach out, and when.](https://www.vainu.com/product/discover) [Why and when](https://www.vainu.com/product/discover#signals) [Where it arrives](https://www.vainu.com/product/discover#delivery) [AI agents](https://www.vainu.com/product/discover#agents) [What's included](https://www.vainu.com/product/discover#included)\n\nSolutions Three ways \nto get it. [Delivery overview→](https://www.vainu.com/delivery)\n\nDelivery methods [Vainu Platform Run it yourself, in our UI](https://www.vainu.com/delivery/platform) [Vainu Headless Data and agents over API, MCP and CLI](https://www.vainu.com/delivery/headless) [Vainu Outcomes We run it, you get the finished work](https://www.vainu.com/delivery/outcomes)\n\nUse cases [Sales teams Fill pipeline with best-fit accounts](https://www.vainu.com/solutions/vainu-for-sales-teams/) [CRM teams Keep every record clean and current](https://www.vainu.com/solutions/vainu-for-crm-teams/) [Data & AI teams Pipe Nordic data anywhere](https://www.vainu.com/solutions/vainu-for-data-teams/)\n\nData & Trust We collect it \nourselves. [Data & Trust→](https://www.vainu.com/our-data/)\n\n[Overview We collect it ourselves, so we can stand behind it.](https://www.vainu.com/our-data/) [How we collect it](https://www.vainu.com/our-data/#how-we-collect) [Certifications & audits](https://www.vainu.com/our-data/#compliance) [Where the data lives](https://www.vainu.com/our-data/#jurisdiction) [Security FAQ](https://www.vainu.com/our-data/#faq)\n\n[Structured data Company and contact records, one schema.](https://www.vainu.com/our-data/structured) [Company data](https://www.vainu.com/our-data/structured#companies) [Contact data](https://www.vainu.com/our-data/structured#contacts) [Browse the fields](https://www.vainu.com/our-data/structured#catalogue) [Human-verified](https://www.vainu.com/our-data/structured#verified)\n\n[Unstructured data The documents behind the numbers.](https://www.vainu.com/our-data/unstructured) [Financial statements](https://www.vainu.com/our-data/unstructured#financials) [Meeting minutes](https://www.vainu.com/our-data/unstructured#minutes) [Budget documents](https://www.vainu.com/our-data/unstructured#budgets) [Company websites](https://www.vainu.com/our-data/unstructured#websites) [Strategy documents](https://www.vainu.com/our-data/unstructured#strategy)\n\nResources The product, \ndocumented. [Help center→](https://help.vainu.app/en/)\n\nRead & watch [Resource Hub Newsletter, playbooks and blog](https://www.vainu.com/resources/) [Events Webinars and meetups](https://www.vainu.com/events) [Reviews Scores from G2, Google and Trustmary](https://www.vainu.com/reviews/)\n\nDecide [Customer stories Measured outcomes, named companies](https://www.vainu.com/customers/) [Pricing Estimate your plan](https://www.vainu.com/pricing) [Legal Privacy policy and data statements](https://www.vainu.com/legal-stuff/)\n\nCompany [About us Helsinki-born, Nordic-wide](https://www.vainu.com/about-us/) [Careers Open roles](https://www.vainu.com/career) [Partners Build and resell on Vainu](https://www.vainu.com/partners/)\n\nHelp [Help center Guides for the Vainu app](https://help.vainu.app/en/) [Documentation API, MCP and CLI for developers](https://developers.vainu.com/)\n\n**Product**\n\n[ReachFind the companies and people worth contacting.](https://www.vainu.com/product/reach)\n\n[Data SyncAny data point, into any system you run.](https://www.vainu.com/product/data-sync)\n\n[DiscoverKnow why to reach out, and when.](https://www.vainu.com/product/discover)\n\n**Solutions**\n\nDelivery methods\n\n[Vainu PlatformRun it yourself, in our UI](https://www.vainu.com/delivery/platform) [Vainu HeadlessData and agents over API, MCP and CLI](https://www.vainu.com/delivery/headless) [Vainu OutcomesWe run it, you get the finished work](https://www.vainu.com/delivery/outcomes)\n\nUse cases\n\n[Sales teamsFill pipeline with best-fit accounts](https://www.vainu.com/solutions/vainu-for-sales-teams/) [CRM teamsKeep every record clean and current](https://www.vainu.com/solutions/vainu-for-crm-teams/) [Data & AI teamsPipe Nordic data anywhere](https://www.vainu.com/solutions/vainu-for-data-teams/)\n\n**Data & Trust**\n\n[OverviewWe collect it ourselves, so we can stand behind it.](https://www.vainu.com/our-data/)\n\n[Structured dataCompany and contact records, one schema.](https://www.vainu.com/our-data/structured)\n\n[Unstructured dataThe documents behind the numbers.](https://www.vainu.com/our-data/unstructured)\n\n**Resources**\n\nRead & watch\n\n[Resource HubNewsletter, playbooks and blog](https://www.vainu.com/resources/) [EventsWebinars and meetups](https://www.vainu.com/events) [ReviewsScores from G2, Google and Trustmary](https://www.vainu.com/reviews/)\n\nDecide\n\n[Customer storiesMeasured outcomes, named companies](https://www.vainu.com/customers/) [PricingEstimate your plan](https://www.vainu.com/pricing) [LegalPrivacy policy and data statements](https://www.vainu.com/legal-stuff/)\n\nCompany\n\n[About usHelsinki-born, Nordic-wide](https://www.vainu.com/about-us/) [CareersOpen roles](https://www.vainu.com/career) [PartnersBuild and resell on Vainu](https://www.vainu.com/partners/)\n\nHelp\n\n[Help centerGuides for the Vainu app](https://help.vainu.app/en/) [DocumentationAPI, MCP and CLI for developers](https://developers.vainu.com/)\n\nSee it on your own market\n\n30 minutes, with your data.\n\n[Book a demo →](https://www.vainu.com/free-trial/) [Login](https://vainu.app)\n\nCustomer story\n\n# A sharper ICP and more relevant leads\n\nBilletto is a Nordic ticketing platform and events community, present in 14 European countries and selling over 2 million tickets a year. With Vainu, its sales team got past basic company fields and built a clearer picture of which companies to go after.\n\n[Book a demo](https://www.vainu.com/free-trial/) [All customer stories](https://www.vainu.com/customers/)\n\nBilletto\n\nIndustry\n\nSaaS, ticketing, events\n\nHeadquarters\n\nCopenhagen, Denmark\n\nMarkets\n\nEurope\n\nDelivery methods\n\nHubSpot CRM, Salesforce, API\n\nIn this story\n\n[The same static data as everyone else](https://www.vainu.com/customers/billetto/#cs-challenge) [More than basic filtering](https://www.vainu.com/customers/billetto/#cs-solution)\n\n[Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https://www.vainu.com/customers/billetto/ 'Share on LinkedIn') [Share on X](https://twitter.com/intent/tweet?url=https://www.vainu.com/customers/billetto/ 'Share on X') [Copy link to this story](https://www.vainu.com/customers/billetto/# 'Copy link')\n\n## The same static data as everyone else\n\nBefore Vainu, Billetto only had access to static B2B data: company name, VAT number, address, number of employees, revenue. As Chief Sales Officer Martin Nørtoft puts it, that is fine if you do not know you could get more, but it is also limited, because it is what all your competitors get and you do not get the newest data necessarily. Rich B2B data was hard to come by in Denmark, which held back more nuanced market strategies, and Billetto wanted a provider whose coverage spanned the whole Nordic region, plus a way to differentiate its market approach and lift conversion rates.\n\n> When we chose Vainu, it was because we could get access to e-commerce data, social media data, we could get access to whether the company was still active, we could do keyword search, we could do so many other things than just basic filtering data.\n\nMartin Nørtoft, Chief Sales Officer · Billetto\n\n## More than basic filtering\n\nBilletto chose Vainu for more than basic filtering data: e-commerce data, social media data, whether a company is still active, and keyword search. Working with that data, the team improved its understanding of its ideal customer profile and generated more leads that were genuinely relevant. New customers are enriched automatically by matching their VAT number against Vainu’s data, so Billetto knows more about its existing organizers than it did before. Vainu is also integrated with Slack, so the team gets the most relevant notifications about changes at target companies and can contact them proactively.\n\n> \\[Vainu\\] should have a hundred percent market share in Denmark... There’s no objection other than price that is valid, and the price objection will only be valid if you don’t understand the return on the investment.\n> \n> Martin Nørtoft, Chief Sales Officer\n\nMore leads and a better understanding of the marketEnriching incoming leads automatically via VAT numberStaying up to date with the latest changes at target companies through Slack notifications\n\nGet started\n\n### See it work on your own account list.\n\nBook a demo and we will run it against the companies you actually sell to.\n\n[Book a demo](https://www.vainu.com/free-trial/)\n\n### More stories\n\n[All customer stories](https://www.vainu.com/customers/)\n\n[Eilakaisla A sales pipeline rebuilt around data. Read the story →](https://www.vainu.com/customers/eilakaisla/) [3stepIT Vainu enables us to react proactively. Read the story →](https://www.vainu.com/customers/3stepit/) [Gigantti 20+% B2B revenue growth a year Read the story →](https://www.vainu.com/customers/gigantti/)\n\n[Vainu home](https://www.vainu.com/)\n\nNordic company data, \nrefreshed every day.\n\n[**4.6** on G2](https://www.g2.com/products/vainu/reviews)·[**4.2** on Google](https://www.google.com/maps?cid=14764003922032553416)·[**4.0** on Trustmary](https://www.vainu.com/reviews/)\n\n[Login](https://vainu.app) [Book a demo](https://www.vainu.com/free-trial/)\n\nProduct\n\n[Product overview](https://www.vainu.com/product) [Reach](https://www.vainu.com/product/reach) [Data Sync](https://www.vainu.com/product/data-sync) [Discover](https://www.vainu.com/product/discover)\n\nSolutions\n\n[Delivery overview](https://www.vainu.com/delivery) [Vainu Platform](https://www.vainu.com/delivery/platform) [Vainu Headless](https://www.vainu.com/delivery/headless) [Vainu Outcomes](https://www.vainu.com/delivery/outcomes) [Sales teams](https://www.vainu.com/solutions/vainu-for-sales-teams/) [CRM teams](https://www.vainu.com/solutions/vainu-for-crm-teams/) [Data & AI teams](https://www.vainu.com/solutions/vainu-for-data-teams/)\n\nData & Trust\n\n[Overview](https://www.vainu.com/our-data/) [Structured data](https://www.vainu.com/our-data/structured) [Unstructured data](https://www.vainu.com/our-data/unstructured) [Trust center](https://trust.vainu.com/)\n\nResources\n\n[Blog](https://www.vainu.com/blog) [Events](https://www.vainu.com/events) [Reviews](https://www.vainu.com/reviews/) [Customer stories](https://www.vainu.com/customers/) [Pricing](https://www.vainu.com/pricing) [Legal](https://www.vainu.com/legal-stuff/)\n\nCompany\n\n[About us](https://www.vainu.com/about-us/) [Careers](https://www.vainu.com/career) [Partners](https://www.vainu.com/partners/)\n\n[4.6 on G2·4.2 on Google·4.0 on Trustmary](https://www.vainu.com/reviews/)\n\n**Helsinki**\n\nSiltasaarenkatu 8–10, 00530 Helsinki Finland\n\n**Stockholm**\n\nDrottninggatan 55, 111 21 Stockholm Sweden\n\n© 2026 Vainu · The Nordics’ leading data provider\n\n[Privacy policy](https://www.vainu.com/legal-stuff/privacy-policy/) [Database privacy statement](https://www.vainu.com/legal-stuff/database-privacy-statement/) [Customer privacy statement](https://www.vainu.com/legal-stuff/customer-register/) [Security](https://trust.vainu.com/) \n\nLanguage English"
+  },
+  "screenshot": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "images": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "bytes": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "parsed": {
+    "requested": false,
+    "success": null,
+    "data": null,
+    "type": "custom"
+  },
+  "highlights": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "json": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "product": {
+    "requested": false,
+    "success": null,
+    "data": null
+  },
+  "profile": null,
+  "metadata": {
+    "title": "Billetto: A sharper ICP and more relevant leads | Vainu",
+    "description": "Billetto is a Nordic ticketing platform and events community, present in 14 European countries and selling over 2 million tickets a year. With Vainu, its...",
+    "language": "en",
+    "canonicalUrl": "https://www.vainu.com/customers/billetto/",
+    "siteName": "Vainu",
+    "image": "https://www.vainu.com/hubfs/vainu-redesign-assets/archipelago-island-town.jpeg",
+    "favicon": "https://www.vainu.com/hubfs/raw_assets/public/vainu-redesign/assets/brand/favicon.svg",
+    "openGraph": {
+      "description": "Billetto is a Nordic ticketing platform and events community, present in 14 European countries and selling over 2 million tickets a year. With Vainu, its...",
+      "title": "Billetto: A sharper ICP and more relevant leads | Vainu",
+      "image": "https://www.vainu.com/hubfs/vainu-redesign-assets/archipelago-island-town.jpeg",
+      "imageWidth": "1920",
+      "imageHeight": "780",
+      "imageAlt": "Billetto Vainu case study",
+      "url": "https://www.vainu.com/customers/billetto/",
+      "siteName": "Vainu",
+      "type": "website"
+    },
+    "twitter": {
+      "description": "Billetto is a Nordic ticketing platform and events community, present in 14 European countries and selling over 2 million tickets a year. With Vainu, its...",
+      "title": "Billetto: A sharper ICP and more relevant leads | Vainu",
+      "image": "https://www.vainu.com/hubfs/vainu-redesign-assets/archipelago-island-town.jpeg",
+      "imageAlt": "Billetto Vainu case study",
+      "card": "summary_large_image"
+    },
+    "headings": [
+      {
+        "level": 1,
+        "text": "A sharper ICP and more relevant leads"
+      },
+      {
+        "level": 2,
+        "text": "The same static data as everyone else"
+      },
+      {
+        "level": 2,
+        "text": "More than basic filtering"
+      },
+      {
+        "level": 3,
+        "text": "See it work on your own account list."
+      },
+      {
+        "level": 3,
+        "text": "More stories"
+      }
+    ],
+    "additionalMeta": {
+      "charset": "utf-8",
+      "viewport": "width=device-width, initial-scale=1",
+      "google-site-verification": "rpdGCW9vhvCYJY9W9T_vmLh8C9FyfD4tkeYITPbfOjA",
+      "generator": "HubSpot"
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.vainu.com/#org",
+            "name": "Vainu",
+            "url": "https://www.vainu.com",
+            "logo": "//1797693.fs1.hubspotusercontent-na1.net/hubfs/1797693/raw_assets/public/vainu-redesign/assets/brand/vainu-logo-svg-black.svg",
+            "description": "Vainu collects company data on 5.1M+ Nordic companies first-hand from the national business registers, financial statements and company websites, and delivers it into CRMs, warehouses and APIs.",
+            "foundingDate": "2013",
+            "foundingLocation": {
+              "@type": "Place",
+              "name": "Helsinki, Finland"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Siltasaarenkatu 8–10",
+              "postalCode": "00530",
+              "addressLocality": "Helsinki",
+              "addressCountry": "FI"
+            },
+            "areaServed": [
+              {
+                "@type": "Country",
+                "name": "Finland"
+              },
+              {
+                "@type": "Country",
+                "name": "Sweden"
+              },
+              {
+                "@type": "Country",
+                "name": "Norway"
+              },
+              {
+                "@type": "Country",
+                "name": "Denmark"
+              }
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/company/vainu"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Vainu",
+            "url": "https://www.vainu.com",
+            "publisher": {
+              "@id": "https://www.vainu.com/#org"
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "name": "Billetto: A sharper ICP and more relevant leads | Vainu",
+        "url": "https://www.vainu.com/customers/billetto/",
+        "description": "Billetto is a Nordic ticketing platform and events community, present in 14 European countries and selling over 2 million tickets a year. With Vainu, its...",
+        "headline": "Billetto: A sharper ICP and more relevant leads",
+        "author": {
+          "@id": "https://www.vainu.com/#org"
+        },
+        "publisher": {
+          "@id": "https://www.vainu.com/#org"
+        }
+      }
+    ]
+  },
+  "request_id": "c1788f05-36fa-4828-ae53-23ebffa6c765",
+  "cache_metadata": {
+    "status": "hit",
+    "age_ms": 54006
+  },
+  "key_metadata": {
+    "credits_consumed": 1,
+    "credits_remaining": 956
+  }
+}
