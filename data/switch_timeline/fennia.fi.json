@@ -1,0 +1,513 @@
+{
+ "site": "fennia.fi",
+ "product": "Giosg",
+ "demo": false,
+ "generated_at": "2026-11-14T15:27:23+00:00",
+ "pages": [
+  "/",
+  "/yhteystiedot-henkiloasiakkaille"
+ ],
+ "live": {
+  "checked_at": "2026-11-14T15:23:17+00:00",
+  "products": [
+   "Giosg",
+   "Microsoft Clarity",
+   "Salesforce chat"
+  ],
+  "found_in": {
+   "Salesforce chat": "html",
+   "Giosg": "gtm",
+   "Microsoft Clarity": "gtm"
+  }
+ },
+ "months": [
+  {
+   "month": "2023-12",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2023-12-10",
+     "url": "https://web.archive.org/web/20231210012928/https://www.fennia.fi/",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-01",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-02",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-03",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-03-05",
+     "url": "https://web.archive.org/web/20240305113753/https://www.fennia.fi/",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2024-03-05",
+     "url": "https://web.archive.org/web/20240305034604/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-04",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-05",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-06",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-06-18",
+     "url": "https://web.archive.org/web/20240618022342/https://www.fennia.fi/",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2024-06-12",
+     "url": "https://web.archive.org/web/20240612145516/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-07",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-08",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-09",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-09-01",
+     "url": "https://web.archive.org/web/20240901232923/https://www.fennia.fi/",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2024-09-10",
+     "url": "https://web.archive.org/web/20240910153054/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": [
+      "Cookiebot",
+      "Hotjar"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-10",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-11",
+   "class": "ours_hidden",
+   "vendors": [
+    "Cookiebot",
+    "Hotjar"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-12",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-12-02",
+     "url": "https://web.archive.org/web/20241202191743/https://www.fennia.fi/",
+     "products": []
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2024-12-06",
+     "url": "https://web.archive.org/web/20241206041443/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-01",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-02",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-03",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-03-04",
+     "url": "https://web.archive.org/web/20250304155520/https://www.fennia.fi/",
+     "products": []
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2025-03-16",
+     "url": "https://web.archive.org/web/20250316060145/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-04",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-05",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-06",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-06-09",
+     "url": "https://web.archive.org/web/20250609093550/https://www.fennia.fi/",
+     "products": []
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2025-06-09",
+     "url": "https://web.archive.org/web/20250609093604/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-07",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-08",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-09",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-09-05",
+     "url": "https://web.archive.org/web/20250905140634/https://www.fennia.fi/",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-10",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-11",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-12",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-12-01",
+     "url": "https://web.archive.org/web/20251201112442/https://www.fennia.fi/",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-01",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-01-02",
+     "url": "https://web.archive.org/web/20260102062039/https://www.fennia.fi/",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-02",
+   "class": "ours_hidden",
+   "vendors": [],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-02-03",
+     "url": "https://web.archive.org/web/20260203131826/https://www.fennia.fi/",
+     "products": []
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2026-02-07",
+     "url": "https://web.archive.org/web/20260207012302/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": []
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-03",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-03-03",
+     "url": "https://web.archive.org/web/20260303172422/https://www.fennia.fi/",
+     "products": [
+      "Salesforce chat"
+     ]
+    },
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2026-03-08",
+     "url": "https://web.archive.org/web/20260308172457/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": [
+      "Salesforce chat"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-04",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-05",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-06",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-07",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-08",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-09",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [
+    {
+     "page": "/yhteystiedot-henkiloasiakkaille",
+     "date": "2026-09-14",
+     "url": "https://web.archive.org/web/20260914062440/https://www.fennia.fi/yhteystiedot-henkiloasiakkaille",
+     "products": [
+      "Salesforce chat"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-10",
+   "class": "competitor_ours_hidden",
+   "vendors": [
+    "Salesforce chat"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-10-06",
+     "url": "https://web.archive.org/web/20261006182614/https://www.fennia.fi/",
+     "products": [
+      "Salesforce chat"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-11",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  }
+ ],
+ "summary": {
+  "first_competitor_seen": "2026-03",
+  "ours_last_seen": null,
+  "switch": null,
+  "warning_months": null,
+  "ours_hidden": true,
+  "changed": true,
+  "latest_archived_class": "competitor_ours_hidden"
+ }
+}
