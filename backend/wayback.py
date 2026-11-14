@@ -3,10 +3,10 @@
 Finds archived customer/reference pages of a company for a given year via the
 Wayback CDX API, and extracts customer names + logos from them.
 
-Results are cached in data/historical.json; get_historical_customers() reads
-the cache when it matches the domain + year, so Wayback is only hit once.
+Results are cached per company and year in data/historical/<domain>_<year>.json;
+get_historical_customers() reads the cache first, so Wayback is only hit once.
 
-CLI:  python -m backend.wayback kone.com 2023   → (re)fetches and writes data/historical.json
+CLI:  python -m backend.wayback kone.com 2023   → (re)fetches and writes data/historical/kone.com_2023.json
 """
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ CDX_URL = "https://web.archive.org/cdx/search/cdx"
 TIMEOUT = 40
 HEADERS = {"User-Agent": "ClientTrace/0.1 (historical customer research)"}
 
-CACHE_PATH = Path(__file__).resolve().parent.parent / "data" / "historical.json"
+CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "historical"
 
 # Paths where companies typically list their customers.
 # Full-domain CDX queries time out on big sites, so we probe these one by one:
@@ -337,8 +337,14 @@ def fetch_historical(url: str, year: int) -> dict:
     return {"company": company, "domain": domain, "year": year, "customers": _clean_customers(customers)}
 
 
-def _load_cache(url: str, year: int, path: Path = CACHE_PATH) -> Optional[dict]:
+def _cache_path(url: str, year: int) -> Path:
+    """One file per company and year, so fetching a new company never replaces another."""
+    return CACHE_DIR / f"{_domain(url)}_{year}.json"
+
+
+def _load_cache(url: str, year: int, path: Optional[Path] = None) -> Optional[dict]:
     """Cached result if it is for the same domain and year, else None."""
+    path = path or _cache_path(url, year)
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -350,15 +356,17 @@ def _load_cache(url: str, year: int, path: Path = CACHE_PATH) -> Optional[dict]:
 
 def get_historical_customers(url: str, year: int) -> list[dict]:
     """Agreed interface (CONTRIBUTING.md): customers found in the Wayback Machine for `year`.
-    Uses data/historical.json when it already holds this domain + year."""
+    Uses data/historical/<domain>_<year>.json when it exists."""
     cached = _load_cache(url, year)
     if cached is not None:
         return cached["customers"]
     return save_historical(url, year)["customers"]
 
 
-def save_historical(url: str, year: int, path: Path = CACHE_PATH) -> dict:
-    """Fetches from Wayback (ignoring the cache) and writes the result to `path`."""
+def save_historical(url: str, year: int, path: Optional[Path] = None) -> dict:
+    """Fetches from Wayback (ignoring the cache) and writes the result to `path`
+    (default: this company's cache file)."""
+    path = path or _cache_path(url, year)
     result = fetch_historical(url, year)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -369,4 +377,4 @@ if __name__ == "__main__":
     target = sys.argv[1] if len(sys.argv) > 1 else "kone.com"
     yr = int(sys.argv[2]) if len(sys.argv) > 2 else 2023
     res = save_historical(target, yr)
-    print(f"{res['company']} ({res['domain']}) {res['year']}: {len(res['customers'])} customers → data/historical.json")
+    print(f"{res['company']} ({res['domain']}) {res['year']}: {len(res['customers'])} customers → {_cache_path(target, yr).relative_to(CACHE_DIR.parent.parent)}")
