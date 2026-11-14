@@ -81,6 +81,12 @@ If you know the address of the customer page, enter it directly, e.g.
   ```bash
   python -m backend.wayback kone.com 2023
   ```
+- **Timelines** (the customer page every six months, to see when each customer
+  appeared and disappeared) are cached in `data/timeline/<domain>_<year>.json`.
+  Fetching one takes a few minutes:
+  ```bash
+  python -m backend.wayback kone.com 2023 --timeline
+  ```
 - **Site checks** are cached per company in `data/mentions/<domain>.json`.
   Each lost customer costs one search, plus a page fetch when a hit can't be
   verified with a plain request.

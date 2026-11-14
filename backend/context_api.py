@@ -15,7 +15,8 @@ from dotenv import load_dotenv
 # Same HTML parsing as the historical side → names come out in the same form
 # and compare well against backend/wayback.py's results.
 from backend.wayback import (
-    LOGO_HINT, _clean, _dedupe, _detail_links, _domain, _name_from_slug, _parse,
+    LOGO_HINT, _clean, _dedupe, _detail_links, _domain, _link_name, _listing_dir,
+    _name_from_slug, _parse,
 )
 
 load_dotenv()
@@ -94,21 +95,7 @@ CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "current"
 # Customer-page paths to try, most common first. Each try costs 1 credit.
 PROBE_PATHS = ["customers", "references", "case-studies", "en/customers", "en/references"]
 MAX_SCRAPES = 4  # credit cap per company
-CTA = re.compile(r"(?i)^(learn|read|see|view|find out)( more)?$|^(case study|read the story)$")
 SOCIAL = re.compile(r"linkedin|twitter|facebook|instagram|youtube|tiktok|github|x-logo", re.I)
-
-
-def _listing_dir(path):
-    """Directory whose sub-pages are the customers:
-    /customers/ → /customers/, /references.html → /references/, /refs/index.html → /refs/."""
-    path = path or "/"
-    if path.endswith("/"):
-        return path
-    parent, last = path.rsplit("/", 1)
-    if "." not in last:
-        return path + "/"
-    stem = last.split(".", 1)[0]
-    return parent + "/" if stem in ("index", "default") else f"{parent}/{stem}/"
 
 
 def _customers_from_html(html, page_url, own):
@@ -129,11 +116,7 @@ def _customers_from_html(html, page_url, own):
     if path != "/":  # "/" would make every link on the page a "customer"
         for detail_path, link in _detail_links(page, page_url, path).items():
             img = link["img"]
-            alt = _clean(re.sub(r"(?i)\blogo\b", "", img["alt"])) if img else ""
-            text = _clean(link["text"])
-            if CTA.match(text) or len(text.split()) > 6:  # "Learn more" / title + description
-                text = ""
-            name = alt or text or _name_from_slug(detail_path)
+            name = _link_name(link, detail_path)
             logo = urljoin(page_url, img["src"]) if img else ""
             if own in logo.rsplit("/", 1)[-1].lower():  # company's own logo
                 logo = ""

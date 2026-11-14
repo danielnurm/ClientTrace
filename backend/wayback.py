@@ -7,6 +7,7 @@ Results are cached per company and year in data/historical/<domain>_<year>.json;
 get_historical_customers() reads the cache first, so Wayback is only hit once.
 
 CLI:  python -m backend.wayback kone.com 2023   → (re)fetches and writes data/historical/kone.com_2023.json
+      python -m backend.wayback kone.com 2023 --timeline   → half-yearly timeline, data/timeline/
 """
 from __future__ import annotations
 
@@ -196,6 +197,33 @@ def _company_name(page: _PageParser, domain: str) -> str:
 
 # ---------- extraction ----------
 
+CTA = re.compile(r"(?i)^(learn|read|see|view|find out)( more)?$|^(case study|read the story)$")
+
+
+def _listing_dir(path: str) -> str:
+    """Directory whose sub-pages are the customers:
+    /customers/ → /customers/, /references.html → /references/, /refs/index.html → /refs/."""
+    path = path or "/"
+    if path.endswith("/"):
+        return path
+    parent, last = path.rsplit("/", 1)
+    if "." not in last:
+        return path + "/"
+    stem = last.split(".", 1)[0]
+    return parent + "/" if stem in ("index", "default") else f"{parent}/{stem}/"
+
+
+def _link_name(link: dict, path: str) -> str:
+    """Customer name for a card/link: image alt, else short link text, else the URL slug.
+    Skips "Learn more"-style texts and long title+description texts."""
+    img = link["img"]
+    alt = _clean(re.sub(r"(?i)\blogo\b", "", img["alt"])) if img else ""
+    text = _clean(link["text"])
+    if CTA.match(text) or len(text.split()) > 6:
+        text = ""
+    return alt or text or _name_from_slug(path)
+
+
 def _logo_wall(page: _PageParser, ts: str, base: str, source: str, own: str) -> list[dict]:
     """Logos shown directly on a listing page (e.g. a customer logo wall)."""
     out = []
@@ -373,8 +401,223 @@ def save_historical(url: str, year: int, path: Optional[Path] = None) -> dict:
     return result
 
 
+# ---------- timeline: when each customer appeared and disappeared ----------
+
+TIMELINE_DIR = Path(__file__).resolve().parent.parent / "data" / "timeline"
+TIMELINE_YEARS_BEFORE = 2   # start this many years before the chosen year
+TIMELINE_STEP_MONTHS = 6    # one snapshot per half-year
+# When a site moves its pages, the archive stops capturing the old ones over a few weeks.
+# Pages last archived within this many months of the section's last capture are treated
+# as "still there when the section was last archived", not as removed.
+SECTION_END_MONTHS = 3
+SLUG = re.compile(r"^[\w\-.%]+$")
+
+
+def _cdx_range(url: str, from_year: int, to_year: int) -> list[tuple[str, str]]:
+    """[(timestamp, original)] of 200-OK captures of exactly `url`, at most one per month."""
+    params = {
+        "url": url,
+        "from": str(from_year), "to": str(to_year),
+        "filter": ["statuscode:200", "mimetype:text/html"],
+        "collapse": "timestamp:6",
+        "fl": "timestamp,original",
+        "output": "json",
+    }
+    resp = _get(CDX_URL, params)
+    if resp.status_code != 200 or not resp.text.strip():
+        return []
+    return [(r[0], r[1]) for r in resp.json()[1:]]
+
+
+def _listing_snapshot(ts: str, original: str, own: str) -> list[dict]:
+    """Customers on one archived listing page, from that page alone (no detail-page
+    fetches), so a whole timeline stays at one request per snapshot."""
+    page = _parse(_fetch(ts, original, retries=2))
+    source = _snapshot_url(ts, original)
+    customers = _logo_wall(page, ts, original, source, own)
+    for path, link in _detail_links(page, original, _listing_dir(urlparse(original).path)).items():
+        logo = _archived_img(ts, original, link["img"]["src"]) if link["img"] else ""
+        if own in logo.rsplit("/", 1)[-1].lower():  # company's own logo
+            logo = ""
+        customers.append({"name": _link_name(link, path), "logo_url": logo,
+                          "source_url": _snapshot_url(ts, urljoin(original, link["href"]))})
+    return _clean_customers(customers)
+
+
+def _key(name: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", name.lower())
+
+
+def _cdx_prefix_monthly(prefix_url: str, from_year: int, to_year: int) -> list[tuple[str, str]]:
+    """[(timestamp, original)] of 200-OK captures under `prefix_url`, at most one per page
+    per month. Rows come sorted by page, then time."""
+    params = {
+        "url": prefix_url + "*",
+        "from": str(from_year), "to": str(to_year),
+        "filter": ["statuscode:200", "mimetype:text/html"],
+        "collapse": "timestamp:6",
+        "fl": "timestamp,original",
+        "limit": "20000",
+        "output": "json",
+    }
+    resp = _get(CDX_URL, params)
+    if resp.status_code != 200 or not resp.text.strip():
+        return []
+    return [(r[0], r[1]) for r in resp.json()[1:]]
+
+
+def _date(ts: str) -> str:
+    return f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}"
+
+
+def _page_path(url: str) -> str:
+    return urlparse(url).path.lower().rstrip("/")
+
+
+def _subpage_history(listing: str, from_year: int, to_year: int, names: dict[str, str]) -> dict:
+    """When each page directly below the listing page was archived, from the archive index
+    alone (one request, no page fetches). A page that was archived regularly and then
+    stopped was most likely removed; `section_last_archived` tells whether the whole
+    section stopped being archived at that point (e.g. the site moved), in which case the
+    last capture says nothing about the page itself."""
+    base = urljoin(listing, _listing_dir(urlparse(listing).path))
+    base_path = _page_path(base)
+    pages: dict[str, dict] = {}
+    for ts, original in _cdx_prefix_monthly(base, from_year, to_year):
+        path = _page_path(original)
+        rest = path[len(base_path):].strip("/")
+        if not rest or "/" in rest or not SLUG.match(rest) or SKIP_LINK.search(original):
+            continue  # the listing itself, deeper pages, files, query and malformed URLs
+        page = pages.setdefault(path, {"path": path, "url": original, "first": ts, "last": ts, "captures": 0})
+        page["first"], page["last"] = min(page["first"], ts), max(page["last"], ts)
+        page["captures"] += 1
+
+    section_last = max((p["last"] for p in pages.values()), default="")
+    section_end_from = _months_before(section_last, SECTION_END_MONTHS)
+    out = []
+    for p in pages.values():
+        name = names.get(p["path"]) or _name_from_slug(p["path"])
+        if _is_headline(name):
+            continue  # article pages, not customers
+        out.append({
+            "name": name,
+            "path": p["path"],
+            "url": p["url"],
+            # when the archive first/last captured the page; "first" is NOT a publication
+            # date (archive coverage is uneven), "last" estimates removal
+            "first_archived": _date(p["first"]),
+            "last_archived": _date(p["last"]),
+            "captures": p["captures"],
+            # still there when the section stopped being archived → no removal date known
+            "until_section_end": p["last"][:6] >= section_end_from,
+        })
+    out.sort(key=lambda p: (p["last_archived"], p["name"]))
+    return {"listing_dir": base,
+            "section_last_archived": _date(section_last) if section_last else None,
+            "section_end_from": f"{section_end_from[:4]}-{section_end_from[4:6]}" if section_end_from else None,
+            "pages": out}
+
+
+def _months_before(ts: str, n: int) -> str:
+    """"202505…", 3 → "202502"."""
+    if not ts:
+        return ""
+    months = int(ts[:4]) * 12 + int(ts[4:6]) - 1 - n
+    return f"{months // 12}{months % 12 + 1:02d}"
+
+
+def _names_by_path(url: str, year: int) -> dict[str, str]:
+    """Customer names from the cached historical result, keyed by their page path, so
+    sub-page history uses exactly the names the comparison uses."""
+    cached = _load_cache(url, year)
+    out = {}
+    for c in (cached or {}).get("customers", []):
+        m = re.match(r"https?://web\.archive\.org/web/\d+[a-z_]*/(.+)$", c.get("source_url") or "")
+        if m:
+            out[_page_path(m.group(1))] = c["name"]
+    return out
+
+
+def fetch_timeline(url: str, year: int) -> dict:
+    """When customers appeared on and disappeared from the company's customer page,
+    from TIMELINE_YEARS_BEFORE years before `year` until today. Two sources:
+    - snapshots: the listing page every TIMELINE_STEP_MONTHS (good for logo walls)
+    - subpages: archive dates of every page below the listing (good for reference
+      pages, whose listing often shows only a few at a time)
+    The customer page is found the same way as in fetch_historical(), using `year`."""
+    domain = _domain(url)
+    own = domain.split(".")[0]
+    listings = [original for _, original, _ in _find_listing_pages(domain, year)]
+    to_year = time.gmtime().tm_year
+
+    # One capture per half-year bucket (the last one in it), across all listing pages
+    buckets: dict[str, dict[str, str]] = {}  # "2023-1" → {listing: timestamp}
+    for listing in listings:
+        for ts, original in _cdx_range(listing, year - TIMELINE_YEARS_BEFORE, to_year):
+            part = (int(ts[4:6]) - 1) // TIMELINE_STEP_MONTHS + 1  # 1 = Jan–Jun, 2 = Jul–Dec
+            buckets.setdefault(f"{ts[:4]}-{part:02d}", {})[original] = ts
+
+    snapshots, seen = [], {}
+    for bucket in sorted(buckets):
+        names, latest = [], ""
+        for original, ts in buckets[bucket].items():
+            try:
+                found = _listing_snapshot(ts, original, own)
+            except Exception:
+                continue  # an unreadable snapshot just leaves a gap
+            latest = max(latest, ts)
+            for c in found:
+                seen.setdefault(_key(c["name"]), c)
+                names.append(c["name"])
+        if latest:
+            snapshots.append({"timestamp": latest,
+                              "date": f"{latest[:4]}-{latest[4:6]}-{latest[6:8]}",
+                              "names": sorted(set(names))})
+
+    customers = []
+    for key, c in seen.items():
+        present = [i for i, s in enumerate(snapshots) if key in {_key(n) for n in s["names"]}]
+        last = present[-1]
+        customers.append({
+            **c,
+            "first_seen": snapshots[present[0]]["date"],
+            "last_seen": snapshots[last]["date"],
+            # first archived snapshot after the last sighting; None = still there at the end
+            "missing_since": snapshots[last + 1]["date"] if last + 1 < len(snapshots) else None,
+            "snapshots_present": len(present),
+        })
+    # Sub-page archive history: sees every reference page, not just what the listing
+    # page shows (often only a few featured ones; the rest load with JavaScript).
+    names = _names_by_path(url, year)
+    subpages = []
+    for listing in listings:
+        try:
+            subpages.append(_subpage_history(listing, year - TIMELINE_YEARS_BEFORE, to_year, names))
+        except Exception:
+            continue
+    return {"domain": domain, "year": year, "listings": listings,
+            "snapshots": snapshots, "customers": customers, "subpages": subpages}
+
+
+def get_customer_timeline(url: str, year: int, refresh: bool = False) -> dict:
+    """Cached fetch_timeline(): data/timeline/<domain>_<year>.json. The first fetch takes
+    roughly a minute (one throttled Wayback request per snapshot)."""
+    path = TIMELINE_DIR / f"{_domain(url)}_{year}.json"
+    if not refresh and path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    result = fetch_timeline(url, year)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    return result
+
+
 if __name__ == "__main__":
     target = sys.argv[1] if len(sys.argv) > 1 else "kone.com"
     yr = int(sys.argv[2]) if len(sys.argv) > 2 else 2023
-    res = save_historical(target, yr)
-    print(f"{res['company']} ({res['domain']}) {res['year']}: {len(res['customers'])} customers → {_cache_path(target, yr).relative_to(CACHE_DIR.parent.parent)}")
+    if "--timeline" in sys.argv:
+        tl = get_customer_timeline(target, yr, refresh=True)
+        print(f"{tl['domain']}: {len(tl['snapshots'])} snapshots, {len(tl['customers'])} customers "
+              f"→ data/timeline/{tl['domain']}_{yr}.json")
+    else:
+        res = save_historical(target, yr)
+        print(f"{res['company']} ({res['domain']}) {res['year']}: {len(res['customers'])} customers → {_cache_path(target, yr).relative_to(CACHE_DIR.parent.parent)}")
