@@ -12,6 +12,56 @@ from datetime import datetime
 from frontend.mock_data import MOCK_NEW, MOCK_OLD
 
 
+MAX_TIMELINE_ROWS = 30
+
+
+def _archived_path(source_url):
+    """Page path of a Wayback snapshot URL (…/web/<ts>/https://x.com/a/b/ → /a/b)."""
+    m = re.match(r"https?://web\.archive\.org/web/\d+[a-z_]*/(.+)$", source_url or "")
+    return re.sub(r"^https?://[^/]+", "", m.group(1)).lower().rstrip("/") if m else None
+
+
+def _name_key(name):
+    return re.sub(r"[^a-z0-9]", "", (name or "").lower())
+
+
+def _timeline_rows(timeline, lost):
+    """Chart rows from the cached timeline, and archive dates attached to each lost customer.
+    Prefers the sub-page archive history (sees every page); falls back to the listing
+    snapshots (logo walls)."""
+    pages = [p for sp in timeline.get("subpages") or [] for p in sp["pages"]]
+    if pages:
+        entries = [{"name": p["name"], "path": p["path"], "start": p["first_archived"],
+                    "end": p["last_archived"], "removed": not p["until_section_end"]} for p in pages]
+        ends = [sp.get("section_end_from") for sp in timeline["subpages"] if sp.get("section_end_from")]
+        section_end = min(ends) if ends else None
+    else:
+        entries = [{"name": c["name"], "path": _archived_path(c.get("source_url")),
+                    "start": c["first_seen"], "end": c["last_seen"],
+                    "removed": c.get("missing_since") is not None} for c in timeline.get("customers") or []]
+        section_end = None
+
+    by_path = {e["path"]: e for e in entries if e["path"]}
+    by_name = {_name_key(e["name"]): e for e in entries}
+    matched = set()
+    for c in lost:
+        e = by_path.get(_archived_path(c["source_url"])) or by_name.get(_name_key(c["name"]))
+        if e:
+            matched.add(id(e))
+            c["archive"] = {"since": e["start"], "until": e["end"], "removed": e["removed"]}
+
+    rows = [e for e in entries if e["removed"] or id(e) in matched]
+    rows.sort(key=lambda e: e["end"], reverse=True)
+    rows.sort(key=lambda e: not e["removed"])  # removed first, newest removal on top
+    shown = rows[:MAX_TIMELINE_ROWS]
+    return {
+        "rows": [{**e, "in_comparison": id(e) in matched} for e in shown],
+        "section_end": section_end,
+        "total": len(entries),
+        "not_shown": len(entries) - len(shown),
+    }
+
+
 def _snapshot_key(source_url):
     """Sortable snapshot time from a Wayback URL ("20230324201307"), "" if none."""
     m = re.search(r"/web/(\d{4,14})", source_url or "")
@@ -155,6 +205,15 @@ def run_analysis(url, year):
 
     current_source, _ = (None, None) if demo else _try("backend.context_api:get_current_source", url)
 
+    # Timeline only from the cache: fetching one takes minutes, the dashboard has a button for it
+    timeline = None
+    if not demo:
+        cached, err = _try("backend.wayback:get_customer_timeline", url, year, False, True)
+        if cached is not None:
+            timeline = _timeline_rows(cached, lost)
+        elif err and not err.endswith("returned None"):
+            notes.append(f"Timeline skipped ({err})")
+
     return {
         "url": url,
         "year": year,
@@ -166,5 +225,6 @@ def run_analysis(url, year):
         "added": result["added"],
         "mentions_checked": mentions_checked,
         "current_source": current_source,
+        "timeline": timeline,
         "notes": notes,
     }

@@ -599,12 +599,16 @@ def fetch_timeline(url: str, year: int) -> dict:
             "snapshots": snapshots, "customers": customers, "subpages": subpages}
 
 
-def get_customer_timeline(url: str, year: int, refresh: bool = False) -> dict:
+def get_customer_timeline(url: str, year: int, refresh: bool = False,
+                          cached_only: bool = False) -> Optional[dict]:
     """Cached fetch_timeline(): data/timeline/<domain>_<year>.json. The first fetch takes
-    roughly a minute (one throttled Wayback request per snapshot)."""
+    a few minutes (one throttled Wayback request per snapshot). cached_only=True returns
+    None instead of fetching, for callers that can't wait."""
     path = TIMELINE_DIR / f"{_domain(url)}_{year}.json"
     if not refresh and path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
+    if cached_only:
+        return None
     result = fetch_timeline(url, year)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
