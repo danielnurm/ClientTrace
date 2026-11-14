@@ -1,3 +1,4 @@
+# Manual check, not a pytest test: calls Context.dev and costs credits on every run.
 import json
 from backend.context_api import scrape_page
 
