@@ -6,7 +6,24 @@ falls back to demo data, so the dashboard can always be run and shown.
 Real and demo customers are never mixed: if either list is missing,
 both come from demo data.
 """
+import re
+from datetime import datetime
+
 from frontend.mock_data import MOCK_NEW, MOCK_OLD
+
+
+def _snapshot_date(source_url):
+    """Wayback snapshot date from its URL: .../web/20230324201307/... → "24 Mar 2023"."""
+    m = re.search(r"/web/(\d{4})(\d{2})?(\d{2})?", source_url or "")
+    if not m:
+        return ""
+    year, month, day = m.groups()
+    if not month:
+        return year
+    try:
+        return datetime(int(year), int(month), int(day or 1)).strftime("%-d %b %Y" if day else "%b %Y")
+    except ValueError:
+        return year
 
 
 def _as_customer(item):
@@ -117,14 +134,30 @@ def run_analysis(url, year):
         notes.append(f"Comparison → simple fallback ({e})")
         result = _simple_compare(old, new)
 
+    # Lost customers: copies with evidence attached, so cached lists aren't changed
+    lost = [{**c, "snapshot_date": _snapshot_date(c["source_url"])} for c in result["lost"]]
+    mentions_checked = False
+    if lost and not demo:
+        mentions, err = _try("backend.context_api:find_site_mentions", url, [c["name"] for c in lost])
+        if mentions is None:
+            notes.append(f"Site-mention check skipped ({err})")
+        else:
+            mentions_checked = True
+            for c in lost:
+                c["mention"] = mentions.get(c["name"])  # None = this one couldn't be checked
+
+    current_source, _ = (None, None) if demo else _try("backend.context_api:get_current_source", url)
+
     return {
         "url": url,
         "year": year,
         "demo": demo,
         "old": old,
         "new": new,
-        "lost": result["lost"],
+        "lost": lost,
         "retained": result["retained"],
         "added": result["added"],
+        "mentions_checked": mentions_checked,
+        "current_source": current_source,
         "notes": notes,
     }

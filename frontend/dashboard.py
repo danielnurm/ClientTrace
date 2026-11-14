@@ -1,38 +1,57 @@
 """Draws the results. Gets a ready-made dict from data_source.run_analysis."""
 from html import escape
+from urllib.parse import urlparse
 
 import pandas as pd
-import plotly.graph_objects as go
 import streamlit as st
 
 STATUS_COLORS = {
-    "Lost": "#e5484d",       # red
-    "Retained": "#30a46c",   # green
-    "New": "#3e63dd",        # blue
+    "Gone from site": "#e5484d",    # red
+    "Lost": "#e5484d",
+    "Still mentioned": "#d97706",   # amber
+    "Retained": "#30a46c",          # green
+    "New": "#3e63dd",               # blue
 }
 
 
-def _logo_wall(customers):
-    """Grid of logos; customers without a logo get a name tile."""
-    tiles = []
-    for c in customers:
-        name = escape(c["name"])
-        logo = c.get("logo_url") or ""
-        if logo.startswith(("http://", "https://")):
-            inner = (f'<img src="{escape(logo, quote=True)}" alt="{name}" '
-                     'style="max-width:100%;max-height:48px;object-fit:contain">')
-        else:
-            inner = f'<span style="font-weight:600">{name}</span>'
-        tiles.append(
-            '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;'
-            'gap:6px;padding:12px;min-height:90px;border:1px solid rgba(128,128,128,.3);'
-            f'border-radius:8px;text-align:center" title="{name}">{inner}'
-            + (f'<small style="opacity:.7">{name}</small>' if logo else "")
-            + "</div>"
-        )
+def _link(url, text):
+    """HTML link, only for http(s) URLs; plain text otherwise."""
+    if not (url or "").startswith(("http://", "https://")):
+        return escape(text)
+    return f'<a href="{escape(url, quote=True)}" target="_blank">{escape(text)}</a>'
+
+
+def _card(c, current_source, domain):
+    """Evidence card for one lost customer: then (archived) → now (current page / rest of site)."""
+    logo = c.get("logo_url") or ""
+    top = (f'<img src="{escape(logo, quote=True)}" alt="" '
+           'style="max-width:100%;max-height:40px;object-fit:contain">'
+           if logo.startswith(("http://", "https://")) else "")
+    listed = f"Listed {c['snapshot_date']}" if c.get("snapshot_date") else "Listed before"
+    lines = [
+        _link(c["source_url"], f"{listed} ↗"),
+        _link(current_source, "Not on the current page ↗") if current_source else "Not on the current page",
+    ]
+    mention = c.get("mention")
+    if mention is None and "mention" in c:
+        lines.append('<span style="opacity:.7">Rest of site not checked</span>')
+    elif mention and mention["mentioned"]:
+        lines.append("Still on site: " + _link(mention.get("url"), (mention.get("title") or "page") + " ↗"))
+    elif mention:
+        lines.append(f"<strong>Not found anywhere on {escape(domain)}</strong>")
+    return (
+        '<div style="display:flex;flex-direction:column;gap:6px;padding:12px;'
+        'border:1px solid rgba(128,128,128,.3);border-radius:8px">'
+        f"{top}<strong>{escape(c['name'])}</strong>"
+        + "".join(f"<small>{line}</small>" for line in lines)
+        + "</div>"
+    )
+
+
+def _cards(customers, current_source, domain):
     st.markdown(
-        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">'
-        + "".join(tiles) + "</div>",
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">'
+        + "".join(_card(c, current_source, domain) for c in customers) + "</div>",
         unsafe_allow_html=True,
     )
 
@@ -46,36 +65,68 @@ def render(data):
     elif data["notes"]:
         st.info("\n".join(f"- {n}" for n in data["notes"]))
 
-    st.subheader(f"Results: {data['url']}")
-    st.caption(f"Compared {data['year']} with today")
+    domain = urlparse(data["url"]).netloc.lower().removeprefix("www.") or data["url"]
+    lost, year = data["lost"], data["year"]
+    checked = data.get("mentions_checked")
+    gone = [c for c in lost if (c.get("mention") or {}).get("mentioned") is False]
+    still = [c for c in lost if (c.get("mention") or {}).get("mentioned")]
+    unchecked = [c for c in lost if c not in gone and c not in still]
+
+    # --- Headline ---
+    st.subheader(domain)
+    if checked:
+        text = (f"Listed **{len(data['old'])}** customers in {year}. "
+                f"**{len(gone)}** of them are gone from the whole site, "
+                f"**{len(still)}** {'was' if len(still) == 1 else 'were'} dropped from the customer "
+                f"page but {'is' if len(still) == 1 else 'are'} still mentioned elsewhere, and "
+                f"**{len(data['retained'])}** {'is' if len(data['retained']) == 1 else 'are'} still listed.")
+        if unchecked:
+            text += f" {len(unchecked)} couldn't be checked."
+    else:
+        text = (f"Listed **{len(data['old'])}** customers in {year}. "
+                f"**{len(lost)}** {'is' if len(lost) == 1 else 'are'} no longer on the customer page and "
+                f"**{len(data['retained'])}** {'is' if len(data['retained']) == 1 else 'are'} still listed.")
+    st.markdown(text)
 
     # --- Number cards ---
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric(f"Customers in {data['year']}", len(data["old"]))
-    c2.metric("Customers now", len(data["new"]))
-    c3.metric("Disappeared", len(data["lost"]))
-    c4.metric("New", len(data["added"]))
+    cols = st.columns(5 if checked else 4)
+    cols[0].metric(f"Customers in {year}", len(data["old"]))
+    cols[1].metric("Customers now", len(data["new"]))
+    if checked:
+        cols[2].metric("Gone from site", len(gone))
+        cols[3].metric("Still mentioned", len(still))
+    else:
+        cols[2].metric("Disappeared", len(lost))
+    cols[-1].metric("New", len(data["added"]))
 
-    # --- Bar chart ---
-    fig = go.Figure(go.Bar(
-        x=["Retained", "Lost", "New"],
-        y=[len(data["retained"]), len(data["lost"]), len(data["added"])],
-        marker_color=[STATUS_COLORS["Retained"], STATUS_COLORS["Lost"], STATUS_COLORS["New"]],
-        text=[len(data["retained"]), len(data["lost"]), len(data["added"])],
-        textposition="outside",
-    ))
-    fig.update_layout(height=300, margin=dict(t=20, b=20), yaxis_title="Customers")
-    st.plotly_chart(fig)
-
-    # --- Logos of disappeared customers ---
-    if data["lost"]:
-        st.subheader(f"Disappeared since {data['year']}")
-        _logo_wall(data["lost"])
-        st.write("")
+    # --- Evidence for the lost customers ---
+    current_source = data.get("current_source")
+    if checked:
+        if gone:
+            st.markdown(f"#### Gone from {domain}")
+            st.caption("Removed from the customer page and not found anywhere else on the site. "
+                       "The strongest signal.")
+            _cards(gone, current_source, domain)
+        if unchecked:
+            st.markdown("#### Not checked")
+            _cards(unchecked, current_source, domain)
+        if still:
+            with st.expander(f"Dropped from the customer page but still mentioned ({len(still)})"):
+                st.caption("Probably a redesign or rotation rather than a lost customer.")
+                _cards(still, current_source, domain)
+    elif lost:
+        st.markdown(f"#### Disappeared since {year}")
+        _cards(lost, current_source, domain)
+    st.write("")
 
     # --- Table of all customers ---
+    def status(c):
+        if c in gone:
+            return "Gone from site"
+        return "Still mentioned" if c in still else "Lost"
+
     rows = (
-        [{"Status": "Lost", **c} for c in data["lost"]]
+        [{"Status": status(c), **c} for c in lost]
         + [{"Status": "Retained", **c} for c in data["retained"]]
         + [{"Status": "New", **c} for c in data["added"]]
     )
@@ -89,15 +140,16 @@ def render(data):
     def color(val):
         return f"color: {STATUS_COLORS.get(val, 'inherit')}; font-weight: 600"
 
-    st.dataframe(
-        df.style.map(color, subset=["Status"]),
-        width="stretch",
-        hide_index=True,
-        column_config={
-            "Logo": st.column_config.ImageColumn("Logo"),
-            "Source": st.column_config.LinkColumn("Source"),
-        },
-    )
+    with st.expander(f"All customers ({len(rows)})"):
+        st.dataframe(
+            df.style.map(color, subset=["Status"]),
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "Logo": st.column_config.ImageColumn("Logo"),
+                "Source": st.column_config.LinkColumn("Source"),
+            },
+        )
 
     st.caption("A disappeared logo does not prove a lost customer – "
                "the site may simply have been redesigned. Treat results as signals.")
