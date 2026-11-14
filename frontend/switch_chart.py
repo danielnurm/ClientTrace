@@ -18,7 +18,7 @@ STYLE = {
     stl.BOTH:                   ("🟠", "Overlap / possible trial", "#ec835a", ""),
     stl.COMPETITOR_ONLY:        ("⚫", "Competitor only", "#52514e", ""),
     stl.COMPETITOR_OURS_HIDDEN: ("◐", "Competitor seen · {p} hidden (Tag Manager)", "#52514e", "/"),
-    stl.OURS_HIDDEN:            ("◌", "{p} via Tag Manager · not visible in archive", "#7cc47c", "/"),
+    stl.CHAT_HIDDEN:            ("◌", "Chat via Tag Manager · not visible in archive", "#c3c2b7", "/"),
     stl.NONE_DETECTED:          ("⚪", "No chat detected", "#c3c2b7", ""),
     stl.NO_SNAPSHOT:            ("▨", "No archive snapshot", "#e1e0d9", "x"),
 }
@@ -78,8 +78,11 @@ def switch_text(summary: dict, product: str) -> str | None:
 
 def headline(entries: list[dict], product: str) -> str:
     """Sentence computed from the data; never states a number the data doesn't have."""
-    done = [e for e in entries if e["timeline"]["summary"].get("switch")]
+    real = [e for e in entries if not e["timeline"].get("demo")]
+    done = [e for e in real if e["timeline"]["summary"].get("switch")]
     if not done:
+        if any(e["timeline"]["summary"].get("switch") for e in entries):
+            return "No completed switches among real customers in the archived period; only the demo customer shows one."
         return "No completed switches found in the archived period."
     warned = [e["timeline"]["summary"]["warning_months"] for e in done
               if e["timeline"]["summary"].get("warning_months") is not None]

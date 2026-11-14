@@ -43,8 +43,9 @@ DEMO_SITE = "localhost_8765"  # the fake customer site of demo/switch_chat.py
 # Snapshot classes, in the order the legend shows them
 OURS_ONLY, BOTH, COMPETITOR_ONLY = "ours_only", "both", "competitor_only"
 NONE_DETECTED, NO_SNAPSHOT = "none_detected", "no_snapshot"
-OURS_HIDDEN, COMPETITOR_OURS_HIDDEN = "ours_hidden", "competitor_ours_hidden"
-CLASSES = [OURS_ONLY, BOTH, COMPETITOR_ONLY, COMPETITOR_OURS_HIDDEN, NONE_DETECTED, OURS_HIDDEN, NO_SNAPSHOT]
+CHAT_HIDDEN, COMPETITOR_OURS_HIDDEN = "chat_hidden", "competitor_ours_hidden"
+OURS_HIDDEN = CHAT_HIDDEN  # backwards-compatible name
+CLASSES = [OURS_ONLY, BOTH, COMPETITOR_ONLY, COMPETITOR_OURS_HIDDEN, NONE_DETECTED, CHAT_HIDDEN, NO_SNAPSHOT]
 OURS_SEEN = {OURS_ONLY, BOTH}
 COMPETITOR_SEEN = {BOTH, COMPETITOR_ONLY, COMPETITOR_OURS_HIDDEN}
 
@@ -71,8 +72,10 @@ def months_between(a: str, b: str) -> int:
 
 # ---------- classification ----------
 
-def classify(products: Optional[list[str]], product: str, ours_hidden: bool) -> str:
-    """Class of one month from the products seen in that month's snapshots (None = no snapshot)."""
+def classify(products: Optional[list[str]], product: str, ours_hidden: bool, rival_hidden: bool = False) -> str:
+    """Class of one month from the products seen in that month's snapshots (None = no snapshot).
+    ours_hidden / rival_hidden: that chat loads through Tag Manager today and never shows up in
+    the archive, so a month without it says nothing about whether it was there."""
     if products is None:
         return NO_SNAPSHOT
     cat = st.category_of(product)
@@ -84,7 +87,7 @@ def classify(products: Optional[list[str]], product: str, ours_hidden: bool) -> 
         return OURS_ONLY
     if rival:
         return COMPETITOR_OURS_HIDDEN if ours_hidden else COMPETITOR_ONLY
-    return OURS_HIDDEN if ours_hidden else NONE_DETECTED
+    return CHAT_HIDDEN if (ours_hidden or rival_hidden) else NONE_DETECTED
 
 
 def months_to_refine(sampled: dict[str, str], available: list[str]) -> list[str]:
@@ -115,7 +118,7 @@ def derive(months: list[dict], product: str) -> dict:
     warning = None
     if switch and first_comp and first_comp["month"] <= ours_last["month"]:
         warning = months_between(first_comp["month"], ours_last["month"])
-    hidden = any(m["class"] in (OURS_HIDDEN, COMPETITOR_OURS_HIDDEN) for m in months)
+    hidden = any(m["class"] in (CHAT_HIDDEN, COMPETITOR_OURS_HIDDEN) for m in months)
     current = seen[-1]["class"] if seen else None
     return {
         "first_competitor_seen": first_comp["month"] if first_comp else None,
@@ -195,16 +198,27 @@ def build(site: str, product: str, months: int = MONTHS, refresh: bool = False) 
     return result
 
 
+def hidden_flags(live: dict, product: str, seen: set) -> tuple[bool, bool]:
+    """(ours_hidden, rival_hidden): a chat that loads through Tag Manager today and that the
+    archive never saw, so the archive is blind to it."""
+    cat = st.category_of(product)
+    gtm_only = {p for p, where in live["found_in"].items()
+                if where == "gtm" and st.category_of(p) == cat and p not in seen}
+    return product in gtm_only, bool(gtm_only - {product})
+
+
 def assemble(site, product, window, fetched, live, ours_hidden, pages, demo=False) -> dict:
     """Months between fetched snapshots inherit the class of the previous fetched month
     when the classes on both sides agree (that's what the refinement guarantees)."""
     months, last = [], None
     known = {m: s for m, s in fetched.items() if any("error" not in x for x in s)}
+    seen = {p for snaps in known.values() for x in snaps if "error" not in x for p in x["products"]}
+    ours_hidden, rival_hidden = hidden_flags(live, product, seen)
     for m in window:
         if m in known:
             ok = [s for s in known[m] if "error" not in s]
             prods = sorted({p for s in ok for p in s["products"]})
-            last = {"month": m, "class": classify(prods, product, ours_hidden), "vendors": prods,
+            last = {"month": m, "class": classify(prods, product, ours_hidden, rival_hidden), "vendors": prods,
                     "snapshots": ok, "inferred": False}
             months.append(last)
         elif last is not None and any(k > m for k in known):
@@ -218,12 +232,23 @@ def assemble(site, product, window, fetched, live, ours_hidden, pages, demo=Fals
             "months": months, "summary": derive(months, product)}
 
 
+def reclassify(tl: dict) -> dict:
+    """Recomputes classes and summary from the cached snapshots with the current rules,
+    so a rule change never needs a new (slow) archive crawl."""
+    fetched = {m["month"]: m["snapshots"] for m in tl["months"] if m.get("snapshots") and not m.get("inferred")}
+    out = assemble(tl["site"], tl["product"], [m["month"] for m in tl["months"]], fetched, tl["live"],
+                   False, tl.get("pages", []), demo=tl.get("demo", False))
+    out["pages"], out["generated_at"] = tl.get("pages", []), tl.get("generated_at")
+    return out
+
+
 def cached(site: str) -> Optional[dict]:
     """Cached timeline only; never touches the archive."""
     try:
-        return json.loads((TIMELINE_DIR / f"{st._site_key(site)}.json").read_text(encoding="utf-8"))
+        tl = json.loads((TIMELINE_DIR / f"{st._site_key(site)}.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
+    return reclassify(tl)
 
 
 def write_demo() -> dict:

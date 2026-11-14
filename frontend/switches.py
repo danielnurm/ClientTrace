@@ -148,15 +148,13 @@ def _switch_section(customers, product):
     entries = [{"site": c["site"] + (" · demo" if c["timeline"].get("demo") else ""), "status": c["status"],
                 "timeline": c["timeline"]} for c in shown]
 
-    done = [e for e in entries if e["timeline"]["summary"].get("switch")]
-    if done:
-        st.markdown(f"**{escape(sc.headline(entries, product))}**")
-    else:
-        st.caption("No switches found in the archived period.")
+    real_switch = any(e["timeline"]["summary"].get("switch") for e in entries if not e["timeline"].get("demo"))
+    text = sc.headline(entries, product)
+    st.markdown(f"**{escape(text)}**" if real_switch else escape(text))
     hidden = [e["site"] for e in entries if e["timeline"]["summary"].get("ours_hidden")]
     if hidden:
-        st.caption(f"On {', '.join(hidden)} {product} loads through Google Tag Manager, which the archive "
-                   f"doesn't store, so those months can't show whether {product} was there.")
+        st.caption(f"On {', '.join(hidden)} a chat tool loads through Google Tag Manager, which the archive "
+                   "doesn't store, so those months can't show whether it was there.")
     if entries:
         icons = {k: v[0] for k, v in STATUSES.items()}
         st.plotly_chart(sc.figure(entries, product, icons), use_container_width=True,

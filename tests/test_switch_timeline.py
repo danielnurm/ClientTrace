@@ -27,7 +27,13 @@ class ClassifyTest(unittest.TestCase):
     def test_tag_manager_hidden_never_claims_competitor_only(self):
         # the Fennia case: Giosg loads through Tag Manager, the archive only sees Salesforce chat
         self.assertEqual(stl.classify(["Salesforce chat"], "Giosg", True), stl.COMPETITOR_OURS_HIDDEN)
-        self.assertEqual(stl.classify([], "Giosg", True), stl.OURS_HIDDEN)
+        self.assertEqual(stl.classify([], "Giosg", True), stl.CHAT_HIDDEN)
+
+    def test_competitor_hidden_by_tag_manager_is_not_nothing(self):
+        # the Elisa case: Genesys loads through Tag Manager, the archive sees no chat at all
+        self.assertEqual(stl.classify(["OneTrust"], "Giosg", False, rival_hidden=True), stl.CHAT_HIDDEN)
+        live = {"found_in": {"Genesys": "gtm", "OneTrust": "html"}}
+        self.assertEqual(stl.hidden_flags(live, "Giosg", {"OneTrust"}), (False, True))
 
 
 class MonthsTest(unittest.TestCase):
@@ -52,7 +58,7 @@ class DeriveTest(unittest.TestCase):
         self.assertEqual(d["warning_months"], 3)
 
     def test_hidden_ours_is_never_a_switch(self):
-        d = stl.derive(months(("2025-01", stl.OURS_HIDDEN, []),
+        d = stl.derive(months(("2025-01", stl.CHAT_HIDDEN, []),
                               ("2025-02", stl.COMPETITOR_OURS_HIDDEN, ["Salesforce chat"])), "Giosg")
         self.assertIsNone(d["switch"])
         self.assertIsNone(d["warning_months"])
@@ -105,6 +111,11 @@ class ChartTest(unittest.TestCase):
         self.assertEqual(sc.headline([self.switched(), quiet], "Giosg"),
                          "In 1 of 1 completed switch the competitor appeared on the site 3+ months before Giosg was removed.")
         self.assertEqual(sc.headline([quiet], "Giosg"), "No completed switches found in the archived period.")
+
+    def test_demo_switch_never_becomes_the_headline(self):
+        demo = self.switched()
+        demo["timeline"]["demo"] = True
+        self.assertIn("only the demo customer", sc.headline([demo], "Giosg"))
 
     def test_figure_rows_in_given_order(self):
         quiet = self.entry("b.fi", "healthy", ("2026-01", stl.OURS_ONLY, ["Giosg"]))
