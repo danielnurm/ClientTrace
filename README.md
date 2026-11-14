@@ -1,77 +1,17 @@
 # ClientTrace
 
-See which customers a company has quietly stopped showing on its website.
+See which of your customers are moving to a competitor, from their own websites.
 
-Give ClientTrace a company URL and a year. It reads the company's customer or
-reference page as it is today, finds the same page in the Wayback Machine for
-that year, and shows which customers have disappeared, which are still listed
-and which are new.
-
-A missing logo is not proof that a customer left. Sites get redesigned and case
-studies get rotated out. Treat the results as leads to look into, not as facts.
+ClientTrace is for customer-success and sales teams at companies that sell
+customer chat (Giosg, Boost.ai, Puzzel, ...). Give it your product and your
+customers' websites. It checks each site live, finds competitors' chat tools,
+and only raises an alarm when more evidence points the same way, because most
+competitor sightings are harmless. Every alert comes with a plain-language
+status, what to do, and links to the proof.
 
 ## How it works
 
-1. **Current customers.** The site's customer page (`/customers`, `/references`,
-   `/case-studies`, ...) is scraped with Context.dev.
-   See `backend/context_api.py`.
-2. **Historical customers.** The same page is looked up in the Wayback Machine
-   for the chosen year. See `backend/wayback.py`.
-3. **Comparison.** Names are normalized (legal suffixes like Oy/Inc, accents,
-   small spelling differences) and matched. With an OpenAI key the matching is
-   done by `gpt-4o-mini`, without one a rule-based matcher is used.
-   See `analysis/comparison.py`.
-4. **Site check.** Each customer that disappeared from the customer page is
-   searched for on the rest of the company's site with Context.dev. Every hit
-   is fetched to make sure the page is still live and names the customer. A
-   customer that's still mentioned somewhere was probably just rotated out;
-   one that's gone from the whole site is the stronger signal.
-   See `find_site_mentions` in `backend/context_api.py`.
-5. **Dashboard.** A Streamlit app with a one-line summary, evidence for each
-   lost customer (archived page and date, current page, where it's still
-   mentioned) and a table of all customers. See `app.py` and `frontend/`.
-
-If fetching the current or historical customers fails, the dashboard switches
-to demo data and shows a warning with the reason, so you always know whether
-you're looking at real results. If only the comparison fails, a simpler exact
-name match is used and a note says so.
-
-## Setup
-
-Tested with Python 3.9.
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-```
-
-Then add your keys to `.env`:
-
-| Variable              | Needed for                                   | Required |
-|-----------------------|----------------------------------------------|----------|
-| `CONTEXT_DEV_API_KEY` | scraping the current customer page           | yes      |
-| `OPENAI_API_KEY`      | AI-based name matching                       | no       |
-| `EXA_API_KEY`         | competitor search (not in the dashboard yet) | no       |
-
-The Wayback Machine doesn't need a key.
-
-## Running
-
-```bash
-streamlit run app.py
-```
-
-Open http://localhost:8501, enter a company website (for example `kone.com`)
-and pick the year to compare against.
-
-If you know the address of the customer page, enter it directly, e.g.
-`https://www.kone.com/en/references/`. It's faster and uses fewer API requests.
-
-## Competitor alerts (live)
-
-The second tab answers the question a customer-success team at a chat vendor
+ClientTrace answers the question a customer-success team at a chat vendor
 actually has: **which of our customers have started running a competitor's chat
 next to ours?** Two chat tools on one site is often a trial or a migration in
 progress, months before the customer cancels. But many such sightings are
@@ -105,7 +45,14 @@ On 37 Nordic banks and insurers a chat tool was visible on 15; the largest banks
 Tag Manager don't show, so they appear as *can't tell*.
 
 The page shows one bar for the whole customer base, which competitors show up
-on your customers' sites, and a card per customer with the evidence and links.
+on your customers' sites, **how customers switch** (which chat ran on each site,
+month by month, from the archive, with the warning time before a switch), and a
+card per customer with the evidence and links. Archive timelines are built once
+and cached:
+
+```bash
+python -m backend.switch_timeline build Giosg tokmanni.fi fennia.fi omasp.fi   # a few minutes per site
+```
 **Check now** stores every check in `data/sites/<site>_live.json`, so the next
 check shows what changed since the previous one.
 
@@ -126,8 +73,77 @@ python -m backend.site_tech watch http://localhost:8765 --interval 3   # termina
 python demo/switch_chat.py intercom                   # terminal 3: giosg | intercom | zendesk | none
 ```
 
-Or add `http://localhost:8765` to the site list in the dashboard and press
+Or keep `http://localhost:8765` in the site list in the dashboard and press
 **Check now** before and after switching.
+
+## Setup
+
+Tested with Python 3.9.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+Competitor alerts need no API keys: live checks are plain HTTP and the Wayback
+Machine is free. Keys in `.env` are only needed for:
+
+| Variable              | Needed for                                                        | Required |
+|-----------------------|-------------------------------------------------------------------|----------|
+| `CONTEXT_DEV_API_KEY` | reading a customer page (an empty customer list, or the second tab) | no       |
+| `OPENAI_API_KEY`      | AI-based name matching in the second tab                          | no       |
+| `EXA_API_KEY`         | competitor search (not in the dashboard)                          | no       |
+
+## Running
+
+```bash
+streamlit run app.py
+```
+
+Open http://localhost:8501. **Competitor alerts** opens with a demo list of
+Finnish customer sites; press **Check now**.
+
+## Why logo pages mislead (the second tab)
+
+The obvious way to spot a lost customer is to compare a company's customer or
+reference page with the same page in the Wayback Machine. ClientTrace started
+there, and the measurements are why the product checks the customer's own site
+instead:
+
+- **kone.com:** 19 references disappeared since 2023. The archive history showed
+  all of them were still on the site until spring 2026, when KONE moved its
+  references to a new site. Lost customers: **0**.
+- **zendesk.com:** 4 customers whose stories disappeared all still run Zendesk's
+  help centre today. Lost customers: **0**.
+
+The second tab keeps that comparison to show the difference (try `kone.com`
+and 2023). How it works:
+
+1. **Current customers.** The site's customer page (`/customers`, `/references`,
+   `/case-studies`, ...) is scraped with Context.dev.
+   See `backend/context_api.py`.
+2. **Historical customers.** The same page is looked up in the Wayback Machine
+   for the chosen year. See `backend/wayback.py`.
+3. **Comparison.** Names are normalized (legal suffixes like Oy/Inc, accents,
+   small spelling differences) and matched. With an OpenAI key the matching is
+   done by `gpt-4o-mini`, without one a rule-based matcher is used.
+   See `analysis/comparison.py`.
+4. **Site check.** Each customer that disappeared from the customer page is
+   searched for on the rest of the company's site with Context.dev. Every hit
+   is fetched to make sure the page is still live and names the customer. A
+   customer that's still mentioned somewhere was probably just rotated out;
+   one that's gone from the whole site is the stronger signal.
+   See `find_site_mentions` in `backend/context_api.py`.
+5. **Dashboard.** A Streamlit app with a one-line summary, evidence for each
+   lost customer (archived page and date, current page, where it's still
+   mentioned) and a table of all customers. See `app.py` and `frontend/`.
+
+If fetching the current or historical customers fails, the dashboard switches
+to demo data and shows a warning with the reason, so you always know whether
+you're looking at real results. If only the comparison fails, a simpler exact
+name match is used and a note says so.
 
 ## Caching and API usage
 
@@ -165,22 +181,27 @@ still makes one OpenAI request.
 ## Project layout
 
 ```
-app.py                     Streamlit entry point
-frontend/                  dashboard, data loading, demo data
-backend/context_api.py     current customers (Context.dev)
-backend/wayback.py         historical customers and site histories (Wayback Machine)
-backend/site_tech.py       live product detection (page + Tag Manager), supplier report
-demo/                      fake customer site for the live switch demo
-tests/                     offline unit tests: python -m unittest discover tests
-backend/competitor_search.py
-analysis/comparison.py     matching old and new customers
-analysis/ai_analysis.py    comparison + competitor evidence per customer
-data/                      cached results
+app.py                       Streamlit entry point
+frontend/switches.py         Competitor alerts view
+frontend/switch_chart.py     'How customers switch' chart (Plotly)
+frontend/                    second tab: dashboard, data loading, demo data
+backend/site_tech.py         live product detection (page + Tag Manager), supplier report
+backend/churn_watch.py       precision checks and statuses for competitor alerts
+backend/switch_timeline.py   month-by-month chat history from the Wayback Machine
+backend/context_api.py       customer pages and site search (Context.dev)
+backend/wayback.py           Wayback Machine helpers, historical customers, site histories
+analysis/                    name matching and competitor evidence (second tab)
+demo/                        fake customer site for the live switch demo
+tests/                       offline unit tests: python -m unittest discover -s tests -t .
+data/                        cached results
 ```
 
 ## Limitations
 
-- Only dedicated customer pages are checked. Logos shown on the front page
+- Competitor alerts can't see logged-in areas or tools that load only after
+  cookie consent, so *can't tell* never means *doesn't use*. On 37 Nordic banks
+  and insurers a chat tool was visible on 15.
+- The second tab only checks dedicated customer pages. Logos shown on the front page
   only are not picked up.
 - Some companies list projects or buildings instead of client companies.
   KONE's references are a good example.
