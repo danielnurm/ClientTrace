@@ -39,6 +39,17 @@ get_customer_timeline(url: str, year: int) -> dict
 # backend/context_api.py
 find_site_mentions(url: str, names: list[str]) -> dict
 # per name: {"mentioned": bool, "url", "title"}; names whose check failed are left out
+
+# backend/wayback.py
+get_site_history(domain: str, signatures: dict | None = None, from_year: int = 2021) -> dict
+# {"captures": [{"date", "url", "products"}], "products": {name: {"category", "first_seen",
+#  "last_seen", "status", "missing_since"?}}, "switches": [{"from", "to", "between", "confidence"}]}
+
+# backend/site_tech.py
+check_site(site: str) -> dict          # live: {"products", "found_in": {p: "html"|"gtm"}, "latency_ms", ...}
+site_report(site: str) -> dict         # live + archive: per product status/confidence/evidence + signals
+supplier_report(supplier_url: str, product: str, customers: list[dict] | None = None) -> dict
+# {"summary": {verdict: n}, "customers": [{"name", "domain", "verdict", "confidence", "signals", ...}]}
 ```
 
 A customer always has this format:
