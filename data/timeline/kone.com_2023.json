@@ -1,0 +1,1058 @@
+{
+  "domain": "kone.com",
+  "year": 2023,
+  "listings": [
+    "https://www.kone.com/en/references/"
+  ],
+  "snapshots": [
+    {
+      "timestamp": "20210603123120",
+      "date": "2021-06-03",
+      "names": [
+        "ALICE@Mediapolis",
+        "Bloomberg European Headquarters",
+        "Nausicaá",
+        "TD Garden",
+        "Telia Headquarters"
+      ]
+    },
+    {
+      "timestamp": "20211205132129",
+      "date": "2021-12-05",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Nausicaá"
+      ]
+    },
+    {
+      "timestamp": "20220505054448",
+      "date": "2022-05-05",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Nausicaá"
+      ]
+    },
+    {
+      "timestamp": "20221205134317",
+      "date": "2022-12-05",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20230306143812",
+      "date": "2023-03-06",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20231217111051",
+      "date": "2023-12-17",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20240615062527",
+      "date": "2024-06-15",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20241007131631",
+      "date": "2024-10-07",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20250522134733",
+      "date": "2025-05-22",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20251205091323",
+      "date": "2025-12-05",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    },
+    {
+      "timestamp": "20260517223902",
+      "date": "2026-05-17",
+      "names": [
+        "110 North Wacker",
+        "Beijing Daxing International Airport",
+        "K-Kampus",
+        "Zebrabox self-storage"
+      ]
+    }
+  ],
+  "customers": [
+    {
+      "name": "Nausicaá",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20210603123120/https://www.kone.com/en/references/nausicaa.aspx",
+      "first_seen": "2021-06-03",
+      "last_seen": "2022-05-05",
+      "missing_since": "2022-12-05",
+      "snapshots_present": 3
+    },
+    {
+      "name": "TD Garden",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20210603123120/https://www.kone.com/en/references/td-garden.aspx",
+      "first_seen": "2021-06-03",
+      "last_seen": "2021-06-03",
+      "missing_since": "2021-12-05",
+      "snapshots_present": 1
+    },
+    {
+      "name": "ALICE@Mediapolis",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20210603123120/https://www.kone.com/en/references/alice-mediapolis.aspx",
+      "first_seen": "2021-06-03",
+      "last_seen": "2021-06-03",
+      "missing_since": "2021-12-05",
+      "snapshots_present": 1
+    },
+    {
+      "name": "Telia Headquarters",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20210603123120/https://www.kone.com/en/references/telia-headquarters.aspx",
+      "first_seen": "2021-06-03",
+      "last_seen": "2021-06-03",
+      "missing_since": "2021-12-05",
+      "snapshots_present": 1
+    },
+    {
+      "name": "Bloomberg European Headquarters",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20210603123120/https://www.kone.com/en/references/engineering-the-project-of-a-lifetime.aspx",
+      "first_seen": "2021-06-03",
+      "last_seen": "2021-06-03",
+      "missing_since": "2021-12-05",
+      "snapshots_present": 1
+    },
+    {
+      "name": "110 North Wacker",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20211205132129/https://www.kone.com/en/references/110-north-wacker.aspx",
+      "first_seen": "2021-12-05",
+      "last_seen": "2026-05-17",
+      "missing_since": null,
+      "snapshots_present": 10
+    },
+    {
+      "name": "Beijing Daxing International Airport",
+      "logo_url": "https://web.archive.org/web/20211205132129im_/https://www.kone.com/en/Images/bejing-daxing-international-airport-2-450x800_tcm17-109770.jpg?v=1",
+      "source_url": "https://web.archive.org/web/20211205132129/https://www.kone.com/en/references/bejing-daxing-international-airport-china.aspx",
+      "first_seen": "2021-12-05",
+      "last_seen": "2026-05-17",
+      "missing_since": null,
+      "snapshots_present": 10
+    },
+    {
+      "name": "K-Kampus",
+      "logo_url": "",
+      "source_url": "https://web.archive.org/web/20211205132129/https://www.kone.com/en/references/k-kampus-helsinki-finland.aspx",
+      "first_seen": "2021-12-05",
+      "last_seen": "2026-05-17",
+      "missing_since": null,
+      "snapshots_present": 10
+    },
+    {
+      "name": "Zebrabox self-storage",
+      "logo_url": "https://web.archive.org/web/20221205134317im_/https://www.kone.com/en/Images/ref_zebrabox-winterthur_450x400_tcm17-118828.jpg?v=1",
+      "source_url": "https://web.archive.org/web/20221205134317/https://www.kone.com/en/references/zebrabox-self-storage-winterthur-switzerland.aspx",
+      "first_seen": "2022-12-05",
+      "last_seen": "2026-05-17",
+      "missing_since": null,
+      "snapshots_present": 8
+    }
+  ],
+  "subpages": [
+    {
+      "listing_dir": "https://www.kone.com/en/references/",
+      "section_last_archived": "2026-06-16",
+      "section_end_from": "2026-03",
+      "pages": [
+        {
+          "name": "Telia Headquarters",
+          "path": "/en/references/telia-headquarters.aspx",
+          "url": "https://www.kone.com/en/references/telia-headquarters.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2022-05-05",
+          "captures": 5,
+          "until_section_end": false
+        },
+        {
+          "name": "Makkah Clock Royal Tower",
+          "path": "/en/references/makkah-clock-royal-tower.aspx",
+          "url": "https://www.kone.com/en/references/makkah-clock-royal-tower.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2024-12-07",
+          "captures": 4,
+          "until_section_end": false
+        },
+        {
+          "name": "Iss",
+          "path": "/en/references/iss.aspx",
+          "url": "https://www.kone.com/en/references/iss.aspx",
+          "first_archived": "2024-02-24",
+          "last_archived": "2026-03-09",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Shanghai Metro City",
+          "path": "/en/references/shanghai-metro-city.aspx",
+          "url": "https://www.kone.com/en/references/shanghai-metro-city.aspx",
+          "first_archived": "2021-02-09",
+          "last_archived": "2026-03-09",
+          "captures": 14,
+          "until_section_end": true
+        },
+        {
+          "name": "CITIC Tower",
+          "path": "/en/references/citic-tower.aspx",
+          "url": "https://www.kone.com/en/references/citic-tower.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2026-03-14",
+          "captures": 16,
+          "until_section_end": true
+        },
+        {
+          "name": "International Finance Center",
+          "path": "/en/references/international-finance-center.aspx",
+          "url": "https://www.kone.com/en/references/international-finance-center.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-03-14",
+          "captures": 4,
+          "until_section_end": true
+        },
+        {
+          "name": "Länsimetro",
+          "path": "/en/references/lansimetro.aspx",
+          "url": "https://www.kone.com/en/references/lansimetro.aspx",
+          "first_archived": "2023-03-31",
+          "last_archived": "2026-03-14",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Metrotower Iii",
+          "path": "/en/references/metrotower-iii.aspx",
+          "url": "https://www.kone.com/en/references/metrotower-iii.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-03-14",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "A Dam",
+          "path": "/en/references/a-dam.aspx",
+          "url": "https://www.kone.com/en/references/a-dam.aspx",
+          "first_archived": "2022-08-15",
+          "last_archived": "2026-04-10",
+          "captures": 8,
+          "until_section_end": true
+        },
+        {
+          "name": "Harmony Of The Seas",
+          "path": "/en/references/harmony-of-the-seas.aspx",
+          "url": "https://www.kone.com/en/references/harmony-of-the-seas.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-10",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Madras Lighthouse",
+          "path": "/en/references/madras-lighthouse.aspx",
+          "url": "https://www.kone.com/en/references/madras-lighthouse.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-10",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Prorail",
+          "path": "/en/references/prorail.aspx",
+          "url": "https://www.kone.com/en/references/prorail.aspx",
+          "first_archived": "2024-02-27",
+          "last_archived": "2026-04-10",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Supersizing Seattle",
+          "path": "/en/references/supersizing-seattle.aspx",
+          "url": "https://www.kone.com/en/references/supersizing-seattle.aspx",
+          "first_archived": "2022-02-22",
+          "last_archived": "2026-04-10",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "The Elbphilharmonie",
+          "path": "/en/references/the-elbphilharmonie.aspx",
+          "url": "https://www.kone.com/en/references/the-elbphilharmonie.aspx",
+          "first_archived": "2023-03-08",
+          "last_archived": "2026-04-10",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Donau City Tower",
+          "path": "/en/references/donau-city-tower.aspx",
+          "url": "https://www.kone.com/en/references/donau-city-tower.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-11",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Edificio Bronce",
+          "path": "/en/references/edificio-bronce-madrid-spain.aspx",
+          "url": "https://www.kone.com/en/references/edificio-bronce-madrid-spain.aspx",
+          "first_archived": "2021-07-22",
+          "last_archived": "2026-04-11",
+          "captures": 14,
+          "until_section_end": true
+        },
+        {
+          "name": "Groupama Arena",
+          "path": "/en/references/groupama-arena.aspx",
+          "url": "https://www.kone.com/en/references/groupama-arena.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-04-11",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Markthal Rotterdam",
+          "path": "/en/references/markthal-rotterdam.aspx",
+          "url": "https://www.kone.com/en/references/markthal-rotterdam.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-11",
+          "captures": 4,
+          "until_section_end": true
+        },
+        {
+          "name": "Norwegian Getaway",
+          "path": "/en/references/norwegian-getaway.aspx",
+          "url": "https://www.kone.com/en/references/norwegian-getaway.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-11",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Schiphol Group",
+          "path": "/en/references/schiphol-group.aspx",
+          "url": "https://www.kone.com/en/references/schiphol-group.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-11",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "De Rotterdam",
+          "path": "/en/references/de-rotterdam.aspx",
+          "url": "https://www.kone.com/en/references/de-rotterdam.aspx",
+          "first_archived": "2024-02-24",
+          "last_archived": "2026-04-13",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Otkrytiye Arena",
+          "path": "/en/references/otkrytiye-arena.aspx",
+          "url": "https://www.kone.com/en/references/otkrytiye-arena.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-13",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Bfw Wurzburg Germany",
+          "path": "/en/references/bfw-wurzburg-germany.aspx",
+          "url": "https://www.kone.com/en/references/bfw-wurzburg-germany.aspx",
+          "first_archived": "2021-07-22",
+          "last_archived": "2026-04-14",
+          "captures": 8,
+          "until_section_end": true
+        },
+        {
+          "name": "Oasis Of The Seas",
+          "path": "/en/references/oasis-of-the-seas.aspx",
+          "url": "https://www.kone.com/en/references/oasis-of-the-seas.aspx",
+          "first_archived": "2024-02-24",
+          "last_archived": "2026-04-14",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "110 North Wacker",
+          "path": "/en/references/110-north-wacker.aspx",
+          "url": "https://www.kone.com/en/references/110-north-wacker.aspx",
+          "first_archived": "2021-08-27",
+          "last_archived": "2026-04-17",
+          "captures": 17,
+          "until_section_end": true
+        },
+        {
+          "name": "Arctia",
+          "path": "/en/references/arctia.aspx",
+          "url": "https://www.kone.com/en/references/arctia.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-17",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Beijing Daxing International Airport",
+          "path": "/en/references/bejing-daxing-international-airport-china.aspx",
+          "url": "https://www.kone.com/en/references/bejing-daxing-international-airport-china.aspx",
+          "first_archived": "2021-06-22",
+          "last_archived": "2026-04-17",
+          "captures": 17,
+          "until_section_end": true
+        },
+        {
+          "name": "China Plaza 66",
+          "path": "/en/references/china-plaza-66.aspx",
+          "url": "https://www.kone.com/en/references/china-plaza-66.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-04-17",
+          "captures": 4,
+          "until_section_end": true
+        },
+        {
+          "name": "Doha Tower",
+          "path": "/en/references/doha-tower.aspx",
+          "url": "https://www.kone.com/en/references/doha-tower.aspx",
+          "first_archived": "2024-03-04",
+          "last_archived": "2026-04-17",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Greenland Puli Center",
+          "path": "/en/references/greenland-puli-center.aspx",
+          "url": "https://www.kone.com/en/references/greenland-puli-center.aspx",
+          "first_archived": "2024-02-24",
+          "last_archived": "2026-04-17",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Princess Tower",
+          "path": "/en/references/princess-tower.aspx",
+          "url": "https://www.kone.com/en/references/princess-tower.aspx",
+          "first_archived": "2022-11-26",
+          "last_archived": "2026-04-17",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Shenzhen Baoan Airport",
+          "path": "/en/references/shenzhen-baoan-airport.aspx",
+          "url": "https://www.kone.com/en/references/shenzhen-baoan-airport.aspx",
+          "first_archived": "2024-02-27",
+          "last_archived": "2026-04-17",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Shenzhen North Railway Station",
+          "path": "/en/references/shenzhen-north-railway-station.aspx",
+          "url": "https://www.kone.com/en/references/shenzhen-north-railway-station.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-17",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Sky Tower",
+          "path": "/en/references/sky-tower.aspx",
+          "url": "https://www.kone.com/en/references/sky-tower.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2026-04-17",
+          "captures": 15,
+          "until_section_end": true
+        },
+        {
+          "name": "Tour First Paris",
+          "path": "/en/references/tour-first-paris.aspx",
+          "url": "https://www.kone.com/en/references/tour-first-paris.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-17",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Denver Museum",
+          "path": "/en/references/denver-museum.aspx",
+          "url": "https://www.kone.com/en/references/denver-museum.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-18",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Hongqiao Transport Hub",
+          "path": "/en/references/hongqiao-transport-hub.aspx",
+          "url": "https://www.kone.com/en/references/hongqiao-transport-hub.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-04-18",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Porta Nuova",
+          "path": "/en/references/porta-nuova.aspx",
+          "url": "https://www.kone.com/en/references/porta-nuova.aspx",
+          "first_archived": "2021-10-19",
+          "last_archived": "2026-04-18",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Staples Center",
+          "path": "/en/references/staples-center.aspx",
+          "url": "https://www.kone.com/en/references/staples-center.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-04-18",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Titanic Belfast",
+          "path": "/en/references/titanic-belfast.aspx",
+          "url": "https://www.kone.com/en/references/titanic-belfast.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-18",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "313 At Somerset",
+          "path": "/en/references/313-at-somerset.aspx",
+          "url": "https://www.kone.com/en/references/313-at-somerset.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-04-19",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Barrakka Lift Tower",
+          "path": "/en/references/barrakka-lift-tower.aspx",
+          "url": "https://www.kone.com/en/references/barrakka-lift-tower.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-04-19",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Brisbane",
+          "path": "/en/references/brisbane.aspx",
+          "url": "https://www.kone.com/en/references/brisbane.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-19",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Capital City",
+          "path": "/en/references/capital-city.aspx",
+          "url": "https://www.kone.com/en/references/capital-city.aspx",
+          "first_archived": "2022-10-26",
+          "last_archived": "2026-04-19",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Emporia Shopping Center",
+          "path": "/en/references/emporia-shopping-center.aspx",
+          "url": "https://www.kone.com/en/references/emporia-shopping-center.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-19",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Lucas Oil Stadium",
+          "path": "/en/references/lucas-oil-stadium.aspx",
+          "url": "https://www.kone.com/en/references/lucas-oil-stadium.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-19",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Marriott World Center",
+          "path": "/en/references/marriott-world-center.aspx",
+          "url": "https://www.kone.com/en/references/marriott-world-center.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-19",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "New Royal Adelaide Hospital",
+          "path": "/en/references/new-royal-adelaide-hospital.aspx",
+          "url": "https://www.kone.com/en/references/new-royal-adelaide-hospital.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-04-19",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "The Leadenhall Building",
+          "path": "/en/references/the-leadenhall-building.aspx",
+          "url": "https://www.kone.com/en/references/the-leadenhall-building.aspx",
+          "first_archived": "2021-10-16",
+          "last_archived": "2026-04-19",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "The Waterside Condominium",
+          "path": "/en/references/the-waterside-condominium.aspx",
+          "url": "https://www.kone.com/en/references/the-waterside-condominium.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-19",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Vienna Airport Skylink Terminal",
+          "path": "/en/references/vienna-airport-skylink-terminal.aspx",
+          "url": "https://www.kone.com/en/references/vienna-airport-skylink-terminal.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-19",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "London Underground",
+          "path": "/en/references/london-underground.aspx",
+          "url": "https://www.kone.com/en/references/london-underground.aspx",
+          "first_archived": "2024-02-27",
+          "last_archived": "2026-04-20",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Nanjing Metro Line S8",
+          "path": "/en/references/nanjing-metro-line-s8.aspx",
+          "url": "https://www.kone.com/en/references/nanjing-metro-line-s8.aspx",
+          "first_archived": "2024-03-04",
+          "last_archived": "2026-04-20",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Oslo Airport",
+          "path": "/en/references/oslo-airport.aspx",
+          "url": "https://www.kone.com/en/references/oslo-airport.aspx",
+          "first_archived": "2021-12-05",
+          "last_archived": "2026-04-20",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "Finland at Dubai Expo 2020",
+          "path": "/en/references/finland-at-dubai-expo-2020.aspx",
+          "url": "https://www.kone.com/en/references/finland-at-dubai-expo-2020.aspx",
+          "first_archived": "2021-12-01",
+          "last_archived": "2026-04-21",
+          "captures": 9,
+          "until_section_end": true
+        },
+        {
+          "name": "K-Kampus",
+          "path": "/en/references/k-kampus-helsinki-finland.aspx",
+          "url": "https://www.kone.com/en/references/k-kampus-helsinki-finland.aspx",
+          "first_archived": "2021-10-08",
+          "last_archived": "2026-04-21",
+          "captures": 16,
+          "until_section_end": true
+        },
+        {
+          "name": "Living The Chinese Dream",
+          "path": "/en/references/living-the-chinese-dream.aspx",
+          "url": "https://www.kone.com/en/references/living-the-chinese-dream.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-21",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Zebrabox self-storage",
+          "path": "/en/references/zebrabox-self-storage-winterthur-switzerland.aspx",
+          "url": "https://www.kone.com/en/references/zebrabox-self-storage-winterthur-switzerland.aspx",
+          "first_archived": "2022-11-18",
+          "last_archived": "2026-04-21",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "Headquarters Business Park",
+          "path": "/en/references/headquarters-business-park.aspx",
+          "url": "https://www.kone.com/en/references/headquarters-business-park.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Humlegården Fastigheter",
+          "path": "/en/references/humlegarden-fastigheter.aspx",
+          "url": "https://www.kone.com/en/references/humlegarden-fastigheter.aspx",
+          "first_archived": "2021-02-25",
+          "last_archived": "2026-04-22",
+          "captures": 11,
+          "until_section_end": true
+        },
+        {
+          "name": "Jem",
+          "path": "/en/references/jem.aspx",
+          "url": "https://www.kone.com/en/references/jem.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Le Royal Hotel",
+          "path": "/en/references/le-royal-hotel.aspx",
+          "url": "https://www.kone.com/en/references/le-royal-hotel.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Marina Bay Sands",
+          "path": "/en/references/marina-bay-sands.aspx",
+          "url": "https://www.kone.com/en/references/marina-bay-sands.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-22",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Nanjing Metro Line 4",
+          "path": "/en/references/nanjing-metro-line-4-china.aspx",
+          "url": "https://www.kone.com/en/references/nanjing-metro-line-4-china.aspx",
+          "first_archived": "2021-07-22",
+          "last_archived": "2026-04-22",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "Parkhotel Schonbrunn Vienna",
+          "path": "/en/references/parkhotel-schonbrunn-vienna.aspx",
+          "url": "https://www.kone.com/en/references/parkhotel-schonbrunn-vienna.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Royal Childrens Hospital",
+          "path": "/en/references/royal-childrens-hospital.aspx",
+          "url": "https://www.kone.com/en/references/royal-childrens-hospital.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-22",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Saving St Patricks Day",
+          "path": "/en/references/saving-st-patricks-day.aspx",
+          "url": "https://www.kone.com/en/references/saving-st-patricks-day.aspx",
+          "first_archived": "2024-01-01",
+          "last_archived": "2026-04-22",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Shanghai Metro Line 5 China",
+          "path": "/en/references/shanghai-metro-line-5-china.aspx",
+          "url": "https://www.kone.com/en/references/shanghai-metro-line-5-china.aspx",
+          "first_archived": "2024-01-01",
+          "last_archived": "2026-04-22",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "The Iceberg",
+          "path": "/en/references/the-iceberg.aspx",
+          "url": "https://www.kone.com/en/references/the-iceberg.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "The River",
+          "path": "/en/references/the-river.aspx",
+          "url": "https://www.kone.com/en/references/the-river.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-04-22",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "The Shard",
+          "path": "/en/references/the-shard.aspx",
+          "url": "https://www.kone.com/en/references/the-shard.aspx",
+          "first_archived": "2023-02-06",
+          "last_archived": "2026-04-22",
+          "captures": 9,
+          "until_section_end": true
+        },
+        {
+          "name": "Tribunal De Paris",
+          "path": "/en/references/tribunal-de-paris.aspx",
+          "url": "https://www.kone.com/en/references/tribunal-de-paris.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-04-22",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Westend Gate",
+          "path": "/en/references/westend-gate.aspx",
+          "url": "https://www.kone.com/en/references/westend-gate.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-04-22",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Cayan Tower",
+          "path": "/en/references/cayan-tower.aspx",
+          "url": "https://www.kone.com/en/references/cayan-tower.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-05-16",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "China Merchants Plaza",
+          "path": "/en/references/china-merchants-plaza.aspx",
+          "url": "https://www.kone.com/en/references/china-merchants-plaza.aspx",
+          "first_archived": "2024-02-24",
+          "last_archived": "2026-05-16",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Citigroup Centre",
+          "path": "/en/references/citigroup-centre.aspx",
+          "url": "https://www.kone.com/en/references/citigroup-centre.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-05-16",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "First International Financial Center",
+          "path": "/en/references/first-international-financial-center.aspx",
+          "url": "https://www.kone.com/en/references/first-international-financial-center.aspx",
+          "first_archived": "2024-02-21",
+          "last_archived": "2026-05-16",
+          "captures": 7,
+          "until_section_end": true
+        },
+        {
+          "name": "Four Seasons Hotel",
+          "path": "/en/references/four-seasons-hotel.aspx",
+          "url": "https://www.kone.com/en/references/four-seasons-hotel.aspx",
+          "first_archived": "2021-08-02",
+          "last_archived": "2026-05-16",
+          "captures": 9,
+          "until_section_end": true
+        },
+        {
+          "name": "Jeddah Tower",
+          "path": "/en/references/jeddah-tower.aspx",
+          "url": "https://www.kone.com/en/references/jeddah-tower.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2026-05-16",
+          "captures": 17,
+          "until_section_end": true
+        },
+        {
+          "name": "Lee Garden One",
+          "path": "/en/references/lee-garden-one.aspx",
+          "url": "https://www.kone.com/en/references/lee-garden-one.aspx",
+          "first_archived": "2022-06-26",
+          "last_archived": "2026-05-16",
+          "captures": 12,
+          "until_section_end": true
+        },
+        {
+          "name": "Makkah Clock Tower",
+          "path": "/en/references/makkah-clock-tower.aspx",
+          "url": "https://www.kone.com/en/references/makkah-clock-tower.aspx",
+          "first_archived": "2025-01-17",
+          "last_archived": "2026-05-16",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Mariinsky Ii",
+          "path": "/en/references/mariinsky-ii.aspx",
+          "url": "https://www.kone.com/en/references/mariinsky-ii.aspx",
+          "first_archived": "2024-02-28",
+          "last_archived": "2026-05-16",
+          "captures": 8,
+          "until_section_end": true
+        },
+        {
+          "name": "Nausicaá",
+          "path": "/en/references/nausicaa.aspx",
+          "url": "https://www.kone.com/en/references/nausicaa.aspx",
+          "first_archived": "2021-02-26",
+          "last_archived": "2026-05-16",
+          "captures": 19,
+          "until_section_end": true
+        },
+        {
+          "name": "One Bloor East",
+          "path": "/en/references/one-bloor-east.aspx",
+          "url": "https://www.kone.com/en/references/one-bloor-east.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2026-05-16",
+          "captures": 17,
+          "until_section_end": true
+        },
+        {
+          "name": "Td Garden",
+          "path": "/en/references/td-garden.aspx",
+          "url": "https://www.kone.com/en/references/td-garden.aspx",
+          "first_archived": "2021-03-02",
+          "last_archived": "2026-05-16",
+          "captures": 12,
+          "until_section_end": true
+        },
+        {
+          "name": "ALICE@Mediapolis",
+          "path": "/en/references/alice-mediapolis.aspx",
+          "url": "https://www.kone.com/en/references/alice-mediapolis.aspx",
+          "first_archived": "2021-01-20",
+          "last_archived": "2026-05-17",
+          "captures": 17,
+          "until_section_end": true
+        },
+        {
+          "name": "HUS Helsinki University Hospital",
+          "path": "/en/references/helsinki-university-hospital-finland.aspx",
+          "url": "https://www.kone.com/en/references/helsinki-university-hospital-finland.aspx",
+          "first_archived": "2021-10-08",
+          "last_archived": "2026-05-21",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "Metro De Madrid",
+          "path": "/en/references/metro-de-madrid.aspx",
+          "url": "https://www.kone.com/en/references/metro-de-madrid.aspx",
+          "first_archived": "2024-01-01",
+          "last_archived": "2026-05-21",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Phoenix International Media Center",
+          "path": "/en/references/phoenix-international-media-center.aspx",
+          "url": "https://www.kone.com/en/references/phoenix-international-media-center.aspx",
+          "first_archived": "2024-02-25",
+          "last_archived": "2026-05-21",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Stedelijk Museum",
+          "path": "/en/references/stedelijk-museum.aspx",
+          "url": "https://www.kone.com/en/references/stedelijk-museum.aspx",
+          "first_archived": "2024-02-22",
+          "last_archived": "2026-05-21",
+          "captures": 5,
+          "until_section_end": true
+        },
+        {
+          "name": "Torre Anseli",
+          "path": "/en/references/torre-anseli.aspx",
+          "url": "https://www.kone.com/en/references/torre-anseli.aspx",
+          "first_archived": "2021-10-09",
+          "last_archived": "2026-05-21",
+          "captures": 10,
+          "until_section_end": true
+        },
+        {
+          "name": "300 North Lasalle",
+          "path": "/en/references/300-north-lasalle.aspx",
+          "url": "https://www.kone.com/en/references/300-north-lasalle.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-06-08",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Growing With Green Credentials",
+          "path": "/en/references/growing-with-green-credentials.aspx",
+          "url": "https://www.kone.com/en/references/growing-with-green-credentials.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-06-16",
+          "captures": 6,
+          "until_section_end": true
+        },
+        {
+          "name": "Madison Square Garden",
+          "path": "/en/references/madison-square-garden.aspx",
+          "url": "https://www.kone.com/en/references/madison-square-garden.aspx",
+          "first_archived": "2024-02-29",
+          "last_archived": "2026-06-16",
+          "captures": 6,
+          "until_section_end": true
+        }
+      ]
+    }
+  ]
+}
