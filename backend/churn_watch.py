@@ -14,7 +14,8 @@ Per customer site (all live, plain requests, no credits):
   5. the archive history, if cached              → since when has each tool been there?
 
 Statuses (see assess()): likely_switching, possibly_trialling, worth_a_look,
-on_competitor, healthy, unknown, unreachable.
+on_competitor, healthy, unknown, unreachable; plus moving_to_us when the cached archive
+timeline shows our chat arrived after the competitor's (a migration to us, not a risk).
 
 CLI:
   python -m backend.churn_watch customers Giosg tokmanni.fi fennia.fi elisa.fi
@@ -195,7 +196,7 @@ def assess(product: str, live: dict, on_pages: dict, help: Optional[dict], discl
 
 
 STATUS_ORDER = {"likely_switching": 0, "possibly_trialling": 1, "on_competitor": 2, "worth_a_look": 3,
-                "unknown": 4, "unreachable": 5, "healthy": 6}
+                "moving_to_us": 4, "unknown": 5, "unreachable": 6, "healthy": 7}
 
 
 def check_customer(site: str, product: str, record: bool = True) -> dict:
@@ -223,6 +224,10 @@ def check_customer(site: str, product: str, record: bool = True) -> dict:
         since = {p: i.get("since") for p, i in rep["products"].items() if i.get("since")}
 
     a = assess(product, live, on_pages, help, disclosed, since)
+    tl = row.get("timeline")
+    if a["status"] in ("likely_switching", "possibly_trialling", "worth_a_look") and tl \
+            and tl["summary"].get("moving_to_us"):
+        a["status"] = "moving_to_us"  # the archive shows our chat arrived after the rival's
     a["dropped_since_last_check"] = False
     if record:
         stored = st.store_check(site, live)

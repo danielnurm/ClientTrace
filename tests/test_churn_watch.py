@@ -124,6 +124,17 @@ class CheckCustomerTest(unittest.TestCase):
         r = self.run_check(["Giosg", "Genesys"], ["Genesys"])
         self.assertEqual((r["status"], r["dropped_since_last_check"]), ("likely_switching", True))
 
+    def test_timeline_turns_overlap_into_moving_to_us(self):
+        lv = live(["Giosg", "Genesys"], {"Giosg": "html", "Genesys": "html"})
+        tl = {"summary": {"moving_to_us": True}}
+        with mock.patch.object(cw.st, "check_site", return_value=lv), \
+                mock.patch.object(cw, "_get", return_value=None), \
+                mock.patch.object(cw, "help_center", return_value=None), \
+                mock.patch.object(cw.st, "_cached_history", return_value=None), \
+                mock.patch("backend.switch_timeline.cached", return_value=tl):
+            r = cw.check_customer("x.fi", "Giosg", record=False)
+        self.assertEqual(r["status"], "moving_to_us")
+
     def test_unreachable_site_is_a_row_not_a_crash(self):
         with mock.patch.object(cw.st, "check_site", side_effect=ValueError("403")):
             self.assertEqual(cw.check_customer("x.fi", "Giosg")["status"], "unreachable")
