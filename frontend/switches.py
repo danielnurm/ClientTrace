@@ -1,28 +1,43 @@
-"""'Tool switches' tab: which of a vendor's customers still run its product, live.
+"""'Competitor alerts' tab: which of our customers have a competitor's chat tool next to ours,
+and how sure we can be. Built for a vendor's customer-success / sales team.
 
-Calls backend.site_tech.supplier_report (live homepage + GTM, cached Wayback history,
-optional Context.dev customer page / domain search) and draws the result.
+Calls backend.churn_watch.churn_report (live homepage + Tag Manager + service pages,
+privacy policy, help centre, cached archive) and draws: one status bar for the whole
+customer base, the competitors showing up, and one card per customer with the evidence.
 """
+import time
 from html import escape
 
+import altair as alt
+import pandas as pd
 import streamlit as st
 
-VERDICTS = {  # verdict → (label, color, sort order)
-    "switched_away":    ("Switched away", "#e5484d", 0),
-    "competitor_added": ("Competitor added", "#d97706", 1),
-    "runs_competitor":  ("Runs a competitor", "#d97706", 2),
-    "removed":          ("Removed", "#e5484d", 2),
-    "still_running":    ("Still running", "#30a46c", 3),
-    "won":              ("Won from competitor", "#3e63dd", 3),
-    "not_detected":     ("Not detected", "#898781", 4),
-    "error":            ("Not reachable", "#898781", 5),
+# status → (icon, label, colour, what it means, what to do). Colours: the fixed status
+# palette (good / warning / serious / critical) plus neutrals, always with icon + label.
+STATUSES = {
+    "likely_switching":   ("🔴", "Likely switching", "#d03b3b",
+                           "A competitor's chat is on the same page as ours, and another source points to it too.",
+                           "Contact the customer this week."),
+    "possibly_trialling": ("🟠", "Possibly trialling", "#ec835a",
+                           "A competitor's chat is on the same page as ours, or the privacy policy names it.",
+                           "Check in with the customer soon."),
+    "worth_a_look":       ("🟡", "Worth a look", "#fab219",
+                           "A competitor's chat is only on other pages than ours, often a different part of "
+                           "the business (e.g. the shop vs. customer service).",
+                           "Usually no action. Keep an eye on it."),
+    "on_competitor":      ("⚫", "Already on a competitor", "#52514e",
+                           "Our chat isn't on the site, a competitor's is.",
+                           "Win-back: find out when and why they moved."),
+    "healthy":            ("🟢", "Healthy", "#0ca30c",
+                           "Only our chat runs on the site.", ""),
+    "unknown":            ("⚪", "Can't tell", "#898781",
+                           "No chat tool detected. It may load only for logged-in users or after consent.",
+                           "Check the site by hand."),
+    "unreachable":        ("⚪", "Site not reachable", "#898781",
+                           "The site blocked or failed the check.", "Try again later or check by hand."),
 }
+ORDER = list(STATUSES)
 DEMO_SITES = "tokmanni.fi\nfennia.fi\nlahitapiola.fi\nelisa.fi\nhttp://localhost:8765"
-
-
-def _badge(text, color):
-    return (f'<span style="font-size:.75em;font-weight:600;padding:2px 8px;border-radius:999px;'
-            f'color:{color};border:1px solid {color}">{escape(text)}</span>')
 
 
 def _link(url, text):
@@ -31,113 +46,223 @@ def _link(url, text):
     return f'<a href="{escape(url, quote=True)}" target="_blank">{escape(text)}</a>'
 
 
-def _signal_text(s):
-    if s["type"] == "switch":
-        return f"{s['from']} → {s['to']} (between {s['between'][0]} and {s['between'][1]})"
-    return f"{s['new']} added {s['since']}, {', '.join(s['alongside'])} still loaded"
+def _chip(status):
+    icon, label, color, *_ = STATUSES[status]
+    return (f'<span style="font-size:.8em;font-weight:600;padding:2px 9px;border-radius:999px;'
+            f'border:1px solid {color};white-space:nowrap">{icon} {escape(label)}</span>')
 
 
-def _products_text(products):
+def _month(date):
+    try:
+        return pd.Timestamp(date).strftime("%b %Y")
+    except (ValueError, TypeError):
+        return date or ""
+
+
+def _pages(paths):
+    return ", ".join("home page" if p == "/" else p for p in paths)
+
+
+# ---------- charts ----------
+
+def _ink(hex_color):
+    """Label colour inside a fill: dark ink on light fills, white on dark ones."""
+    r, g, b = (int(hex_color[i:i + 2], 16) / 255 for i in (1, 3, 5))
+    return "#0b0b0b" if 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.5 else "#ffffff"
+
+
+def _status_chart(summary):
+    rows = [{"status": s, "label": f"{STATUSES[s][0]} {STATUSES[s][1]}", "n": summary.get(s, 0),
+             "meaning": STATUSES[s][3], "order": i} for i, s in enumerate(ORDER) if summary.get(s)]
+    df = pd.DataFrame(rows)
+    total = df["n"].sum()
+    df["share"] = (100 * df["n"] / total).round().astype(int).astype(str) + " %"
+    df["mid"] = df["n"].cumsum() - df["n"] / 2  # label sits in the middle of its segment
+    df["ink"] = [_ink(STATUSES[s][2]) for s in df["status"]]
+    color = alt.Color("label:N", title=None, sort=[r["label"] for r in rows],
+                      scale=alt.Scale(domain=[r["label"] for r in rows],
+                                      range=[STATUSES[r["status"]][2] for r in rows]),
+                      legend=alt.Legend(orient="bottom", direction="horizontal", columns=4))
+    base = alt.Chart(df).encode(
+        x=alt.X("n:Q", stack="zero", axis=None, scale=alt.Scale(domain=[0, total])),
+        order=alt.Order("order:Q"),
+    )
+    bar = base.mark_bar(height=28, cornerRadius=4).encode(
+        color=color,
+        tooltip=[alt.Tooltip("label:N", title="Status"), alt.Tooltip("n:Q", title="Customers"),
+                 alt.Tooltip("share:N", title="Share"), alt.Tooltip("meaning:N", title="Means")])
+    text = alt.Chart(df).mark_text(fontWeight="bold", align="center").encode(
+        x=alt.X("mid:Q", scale=alt.Scale(domain=[0, total])), text=alt.Text("n:Q"),
+        color=alt.Color("ink:N", scale=None),
+        opacity=alt.condition(f"datum.n / {total} > 0.06", alt.value(1), alt.value(0)))
+    st.altair_chart((bar + text).properties(height=70).configure_view(stroke=None), use_container_width=True)
+
+
+def _competitor_chart(customers):
+    rows = []
+    for c in customers:
+        for r in c.get("rivals", []):
+            rows.append({"competitor": r["name"], "status": c["status"], "rank": ORDER.index(c["status"]),
+                         "label": f"{STATUSES[c['status']][0]} {STATUSES[c['status']][1]}", "site": c["site"]})
+    if not rows:
+        st.caption("No competitor chat tools found on these customer sites.")
+        return
+    df = pd.DataFrame(rows)
+    order_comp = df.groupby("competitor").size().sort_values(ascending=False).index.tolist()
+    labels = [f"{STATUSES[s][0]} {STATUSES[s][1]}" for s in ORDER if s in set(df["status"])]
+    chart = alt.Chart(df).mark_bar(cornerRadius=4, height=18).encode(
+        y=alt.Y("competitor:N", sort=order_comp, title=None, axis=alt.Axis(labelLimit=200, ticks=False, domain=False)),
+        x=alt.X("count():Q", title="Customer sites", axis=alt.Axis(tickMinStep=1, format="d", grid=True)),
+        color=alt.Color("label:N", title=None, sort=labels,
+                        scale=alt.Scale(domain=labels, range=[STATUSES[s][2] for s in ORDER if s in set(df["status"])]),
+                        legend=alt.Legend(orient="bottom", direction="horizontal")),
+        order=alt.Order("rank:Q"),
+        tooltip=[alt.Tooltip("competitor:N", title="Competitor"), alt.Tooltip("label:N", title="Status"),
+                 alt.Tooltip("count():Q", title="Customer sites")],
+    )
+    st.altair_chart(chart.properties(height=34 * len(order_comp) + 50).configure_view(stroke=None),
+                    use_container_width=True)
+
+
+# ---------- customer cards ----------
+
+def _evidence(r, product):
+    """Plain-language checklist for one competitor found on the site."""
+    lines = []
+    if r["same_page"]:
+        lines.append(f"✓ On the same page as {escape(product)}: {escape(_pages(r['same_page']))}")
+    elif r["other_pages"]:
+        lines.append(f"– Only on other pages than {escape(product)}: {escape(_pages(r['other_pages']))}")
+    lines.append(f"✓ Named in the {_link(r['in_privacy_policy'], 'privacy policy')}"
+                 if r["in_privacy_policy"] else "– Not named in the privacy policy")
+    lines.append("✓ The help centre runs on it" if r["help_centre"] else "– Help centre doesn't point to it")
+    if r.get("since"):
+        lines.append(f"In the archive since {escape(_month(r['since']))}")
+    return lines
+
+
+def _card(c, product):
+    status = c["status"]
+    icon, label, color, meaning, todo = STATUSES[status]
+    head = f"<b style='font-size:1.05em'>{escape(c['site'])}</b> {_chip(status)}"
+    body = [f"<span>{escape(meaning)}</span>"]
+    if c.get("dropped_since_last_check"):
+        body.insert(0, f"<b style='color:{STATUSES['likely_switching'][2]}'>{escape(product)} disappeared "
+                       "since the last check.</b>")
+    if status == "unreachable":
+        body.append(f"<span style='opacity:.65'>{escape(c.get('error', ''))}</span>")
+    for r in c.get("rivals", []):
+        body.append(f"<b>{escape(r['name'])}</b><br>" + "<br>".join(_evidence(r, product)))
+    if todo:
+        body.append(f"<b>What to do:</b> {escape(todo)}")
+    if status != "unreachable":
+        proof = [_link(c["url"], "live site")]
+        if c.get("help_center"):
+            proof.append(_link(c["help_center"]["url"], f"help centre ({c['help_center']['platform']})"))
+        proof += [_link(u, "privacy policy") for u in dict.fromkeys(c.get("disclosed", {}).values())]
+        changes = c.get("changes")
+        if c.get("previous_check"):
+            if changes and (changes["added"] or changes["removed"]):
+                diff = [f"+{p}" for p in changes["added"]] + [f"−{p}" for p in changes["removed"]]
+                proof.append(f"<b>changed since last check:</b> {escape(' '.join(diff))}")
+            else:
+                proof.append(f"no change since {escape(c['previous_check'][:16].replace('T', ' '))}")
+        else:
+            proof.append("first check")
+        body.append("<span style='opacity:.8;font-size:.9em'>" + " · ".join(proof) + "</span>")
+    return (f"<div style='border-left:4px solid {color};padding:10px 14px;margin:10px 0;line-height:1.55'>"
+            f"{head}<div style='display:flex;flex-direction:column;gap:6px;margin-top:6px'>"
+            + "".join(f"<div>{b}</div>" for b in body) + "</div></div>")
+
+
+def _headline(summary, product):
+    n = sum(summary.values())
+    at_risk = summary.get("likely_switching", 0) + summary.get("possibly_trialling", 0)
     parts = []
-    for p, i in sorted(products.items(), key=lambda x: x[1]["category"]):
-        if i["status"] != "running":
-            continue
-        where = "page" if i["live"] == "html" else "tag manager"
-        since = f", since {i['since']}" if i.get("since") else ""
-        parts.append(f"{escape(p)} <span style='opacity:.6'>({escape(i['category'])}, {where}{since})</span>")
-    return ", ".join(parts) or "<span style='opacity:.6'>nothing detected</span>"
-
-
-def _changes_text(r):
-    ch = r.get("changes")
-    if not r.get("previous_check"):
-        return "<span style='opacity:.6'>first check</span>"
-    if not ch or not (ch["added"] or ch["removed"]):
-        return f"<span style='opacity:.6'>no change since {escape(r['previous_check'][:16].replace('T', ' '))}</span>"
-    parts = [f"{s['from']} → {s['to']}" for s in ch["switches"]]
-    if not parts:
-        parts = [f"+{p}" for p in ch["added"]] + [f"−{p}" for p in ch["removed"]]
-    txt = "; ".join(parts)
-    return f"<b style='color:#e5484d'>⚠ changed since last check: {escape(txt)}</b>"
-
-
-def _row(r, product):
-    label, color, _ = VERDICTS.get(r["verdict"], VERDICTS["error"])
-    conf = f" · {r['confidence']} confidence" if r.get("confidence") and r["verdict"] != "error" else ""
-    lines = [f"<b>{escape(r['name'])}</b> {_badge(label, color)}"
-             f"<span style='opacity:.6;font-size:.85em'>{conf}</span>"]
-    if r["verdict"] == "error":
-        lines.append(f"<span style='opacity:.6'>{escape(r.get('error', ''))[:120]}</span>")
-    else:
-        if r["verdict"] == "runs_competitor":
-            lines.append(f"<b>Runs {escape(', '.join(r.get('competitors', [])))} instead of {escape(product)}</b>"
-                         " <span style='opacity:.6'>(when it switched is unknown without archive history)</span>")
-        lines.append(f"Runs now: {_products_text(r['products'])}")
-        for s in r.get("signals", []):
-            lines.append(f"Signal: {escape(_signal_text(s))}")
-        ev = r.get("evidence") or []
-        links = [_link(u, "archived page" if "web.archive.org" in u else "live page") for u in ev]
-        hist = "" if r.get("history") else " · <span style='opacity:.6'>no archive history cached</span>"
-        lines.append(f"Evidence: {' · '.join(links)}{hist} · {r.get('latency_ms', '?')} ms")
-        lines.append(_changes_text(r))
-    return ("<div style='padding:10px 0;border-bottom:1px solid rgba(128,128,128,.2);line-height:1.6'>"
-            + "<br>".join(lines) + "</div>")
+    if at_risk:
+        parts.append(f"**{at_risk}** may be moving to a competitor")
+    if summary.get("on_competitor"):
+        k = summary["on_competitor"]
+        parts.append(f"**{k}** already {'runs' if k == 1 else 'run'} a competitor's chat")
+    if summary.get("worth_a_look"):
+        k = summary["worth_a_look"]
+        parts.append(f"**{k}** {'has' if k == 1 else 'have'} a competitor elsewhere on the site")
+    if summary.get("healthy"):
+        k = summary["healthy"]
+        parts.append(f"**{k}** {'runs' if k == 1 else 'run'} only {product}")
+    unknown = summary.get("unknown", 0) + summary.get("unreachable", 0)
+    if unknown:
+        parts.append(f"**{unknown}** couldn't be checked")
+    title = (f"### {at_risk} of {n} customers may be moving to a competitor" if at_risk
+             else f"### None of {n} customers shows signs of moving to a competitor")
+    return title + "\n" + "; ".join(parts) + "."
 
 
 def render_switches():
     try:  # imported lazily: a broken backend must not take the whole dashboard down
-        from backend.site_tech import SIGNATURES, supplier_report
+        from backend.churn_watch import churn_report
+        from backend.site_tech import SIGNATURES, resolve_customers
     except Exception as e:
-        st.error(f"Tool switch check is unavailable: {type(e).__name__}: {e}")
+        st.error(f"Competitor alerts are unavailable: {type(e).__name__}: {e}")
         return
 
-    st.caption("Did the customers move to a competitor? We read each customer's own website "
-               "live (page + Google Tag Manager) and compare it with the Wayback Machine.")
+    st.caption("Which of your customers have started running a competitor's chat next to yours? "
+               "Each customer's own website is checked live, and every alert is tested against "
+               "more evidence before it counts, because most competitor sightings are harmless.")
     chat = sorted(p for p, s in SIGNATURES.items() if s["category"] == "chat")
     with st.form("switches"):
-        c1, c2 = st.columns([3, 2])
-        supplier = c1.text_input("Supplier website", value="giosg.com")
-        product = c2.selectbox("Supplier's product", chat, index=chat.index("Giosg"))
-        sites = st.text_area("Customer sites to check, one per line. Leave empty to read them from the "
-                             "supplier's customer page (uses Context.dev credits).", value=DEMO_SITES, height=130)
+        c1, c2 = st.columns([2, 3])
+        product = c1.selectbox("Your product", chat, index=chat.index("Giosg"))
+        supplier = c2.text_input("Your website (only needed to read customers from your customer page)",
+                                 value="giosg.com")
+        sites = st.text_area("Your customers' websites, one per line. Leave empty to read them from your "
+                             "customer page (uses Context.dev credits).", value=DEMO_SITES, height=130)
         submitted = st.form_submit_button("Check now", type="primary")
 
     if submitted:
-        customers = [{"name": s.strip(), "domain": s.strip()} for s in sites.splitlines() if s.strip()] or None
-        with st.spinner("Checking the customer sites live..."):
+        lines = [s.strip() for s in sites.splitlines() if s.strip()]
+        with st.spinner("Checking each customer's website live…"):
             try:
-                st.session_state["switch_report"] = supplier_report(supplier, product, customers=customers, record=True)
+                if not lines:
+                    resolved = resolve_customers(supplier)
+                    lines = [r["domain"] for r in resolved if r.get("domain")]
+                t0 = time.monotonic()
+                rep = churn_report(lines, product, record=True)
+                rep["elapsed_s"] = time.monotonic() - t0
+                st.session_state["churn_report"] = rep
             except Exception as e:
-                st.session_state.pop("switch_report", None)
+                st.session_state.pop("churn_report", None)
                 st.error(f"Check failed: {type(e).__name__}: {e}")
 
-    rep = st.session_state.get("switch_report")
+    rep = st.session_state.get("churn_report")
     if not rep:
         return
-    s = rep["summary"]
-    n = sum(s.values())
-    lost = s.get("switched_away", 0) + s.get("removed", 0) + s.get("runs_competitor", 0)
-    st.markdown(f"### Of {n} customer sites, {s.get('still_running', 0)} still run {escape(rep['product'])}, "
-                f"{lost} dropped it and {s.get('competitor_added', 0)} added a competitor")
-    m = st.columns(4)
-    m[0].metric("Still running", s.get("still_running", 0))
-    m[1].metric("Dropped / switched", lost)
-    m[2].metric("Competitor added", s.get("competitor_added", 0))
-    m[3].metric("Checked in", f"{rep['elapsed_ms'] / 1000:.1f} s")
+    s, product = rep["summary"], rep["product"]
+    st.markdown(_headline(s, product))
+    st.caption(f"Checked live {rep['checked_at'][:16].replace('T', ' ')} UTC · "
+               f"{sum(s.values())} sites in {rep.get('elapsed_s', 0):.1f} s")
 
-    rows = sorted(rep["customers"], key=lambda r: VERDICTS.get(r["verdict"], VERDICTS["error"])[2])
-    st.markdown("".join(_row(r, rep["product"]) for r in rows), unsafe_allow_html=True)
+    st.markdown("#### Your customer base")
+    _status_chart(s)
 
-    with st.expander("How reliable is this?"):
+    st.markdown(f"#### Competitors on your customers' sites")
+    _competitor_chart(rep["customers"])
+
+    st.markdown("#### Customers, most urgent first")
+    st.markdown("".join(_card(c, product) for c in rep["customers"]), unsafe_allow_html=True)
+
+    with st.expander("How to read this, and how reliable it is"):
+        st.markdown("\n".join(f"- {STATUSES[k][0]} **{STATUSES[k][1]}**: {STATUSES[k][3]}" for k in ORDER))
         st.markdown(
-            "- **Five sources:** supplier's customer page (Context.dev), customer homepage live, its Google "
-            "Tag Manager containers live, the homepage in the Wayback Machine (one capture per quarter), "
-            "and a web search for the customer's domain.\n"
-            "- **Strict signatures:** only script hosts and loader calls count, never a product name in text.\n"
-            "- **No false switches from one odd capture:** a product counts as removed only after two "
-            "consecutive archive captures without it.\n"
-            "- **Measured on 17 Finnish sites (14.11.2026):** a chat widget was visible in the page HTML on 3, "
-            "and only inside Google Tag Manager on 1–3 more. Tag Manager containers are almost never "
-            "archived, so for those sites we see the switch from now on, not its history.\n"
-            "- **Confidence:** high = seen in both archive and live page, medium = one source, "
-            "low = two tools side by side (switch probably in progress).")
+            "\n**Why the extra checks:** a competitor's tool on a customer's site is often harmless, for "
+            "example a different tool in the online shop than in customer service. Commercial tools alert "
+            "on every sighting; by HG Insights' own figure only about one in three such signals turns out "
+            "to be a real evaluation. So an alert here only escalates when the tools share a page, and "
+            "more when a second, independent source (privacy policy or help centre) points to the same "
+            "competitor.\n\n"
+            "**What is checked:** the home page and up to two customer-service pages, tools loaded through "
+            "Google Tag Manager, the privacy or cookie policy, the help centre's hosting, and the archive "
+            "history where it's cached.\n\n"
+            "**Limits:** logged-in areas and tools that load only after cookie consent can't be seen, so "
+            "*can't tell* never means *doesn't use*. A tool loaded through Tag Manager counts on every page "
+            "that loads the same container.")

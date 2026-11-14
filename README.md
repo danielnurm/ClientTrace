@@ -69,32 +69,45 @@ and pick the year to compare against.
 If you know the address of the customer page, enter it directly, e.g.
 `https://www.kone.com/en/references/`. It's faster and uses fewer API requests.
 
-## Tool switches (live)
+## Competitor alerts (live)
 
-The second tab answers a sharper question: **did the supplier's customers move
-to a competitor?** A logo leaving a marketing page has many causes (KONE's
-"lost" references turned out to be a site redesign), but a product that runs on
-the customer's own website (chat, analytics, consent banner, A/B testing) can
-be checked directly.
+The second tab answers the question a customer-success team at a chat vendor
+actually has: **which of our customers have started running a competitor's chat
+next to ours?** Two chat tools on one site is often a trial or a migration in
+progress, months before the customer cancels. But many such sightings are
+harmless (a different tool in the online shop than in customer service), so
+every competitor found is checked before it raises an alarm.
 
-For each customer site it combines five sources:
+For each customer site, all live and without API credits:
 
-1. the supplier's customer page (Context.dev), or a list you paste
-2. the customer's homepage, live
-3. its Google Tag Manager containers, live (many sites load their chat there)
-4. its homepage in the Wayback Machine, one capture per quarter since 2021
-5. a web search for the customer's domain when the supplier doesn't link to it
+1. the home page and its Google Tag Manager containers (many sites load their chat there)
+2. up to two customer-service pages: is the competitor on the **same page** as our chat?
+3. the privacy or cookie policy: does it **name** the competitor?
+4. the help centre's hosting: does it run on the competitor?
+5. the homepage in the Wayback Machine, if cached: **since when** has each tool been there?
 
-and labels each customer *still running*, *switched away*, *competitor added*,
-*removed* or *not detected*, with a confidence level and links to the archived
-and live page. **Check now** stores every check in `data/sites/<site>_live.json`,
-so the next check shows what changed since the previous one.
+Each customer gets a plain-language status:
+
+| Status | When | What to do |
+|---|---|---|
+| 🔴 Likely switching | same page as ours **and** privacy policy or help centre points to the competitor, or our chat disappeared since the last check | contact this week |
+| 🟠 Possibly trialling | same page as ours, **or** named in the privacy policy | check in soon |
+| 🟡 Worth a look | only on other pages than ours | usually nothing |
+| ⚫ Already on a competitor | our chat is gone, a competitor's runs | win-back |
+| 🟢 Healthy | only our chat | – |
+| ⚪ Can't tell | nothing detected or the site isn't reachable | check by hand |
+
+The page shows one bar for the whole customer base, which competitors show up
+on your customers' sites, and a card per customer with the evidence and links.
+**Check now** stores every check in `data/sites/<site>_live.json`, so the next
+check shows what changed since the previous one.
 
 From the command line:
 
 ```bash
 python -m backend.site_tech check tokmanni.fi fennia.fi          # live check, ~1 s
 python -m backend.site_tech supplier giosg.com Giosg tokmanni.fi fennia.fi
+python -m backend.churn_watch customers Giosg tokmanni.fi fennia.fi elisa.fi   # with precision checks
 python -m backend.wayback fennia.fi 2021 --site-history          # archive, a few minutes
 ```
 
@@ -166,7 +179,7 @@ data/                      cached results
   KONE's references are a good example.
 - The site check only looks at the main domain (`kone.com`, `www.kone.com`).
   Mentions on other subdomains, such as distributor portals, are ignored.
-- Tool switches: products loaded through Google Tag Manager are visible live,
+- Competitor alerts: products loaded through Google Tag Manager are visible live,
   but their history isn't, because Tag Manager containers are almost never
   archived. In our test of 17 Finnish sites a chat widget was in the page HTML
   on 3 and only in Tag Manager on 1–3 more. Some sites (e.g. alko.fi) block

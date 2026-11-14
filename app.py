@@ -12,7 +12,7 @@ st.set_page_config(page_title="ClientTrace", page_icon="🔎", layout="wide")
 st.title("🔎 ClientTrace")
 st.caption("Which customers quietly left? Compare a company's customer logos over time.")
 
-tab_pages, tab_switches = st.tabs(["Customer pages", "Tool switches (live)"])
+tab_pages, tab_switches = st.tabs(["Customer pages", "Competitor alerts (live)"])
 
 with tab_pages:
     with st.form("analyze"):
