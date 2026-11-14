@@ -326,7 +326,7 @@ def _load_cache(url: str, year: int, path: Path = CACHE_PATH) -> Optional[dict]:
 
 
 def get_historical_customers(url: str, year: int) -> list[dict]:
-    """Agreed interface (README): customers found in the Wayback Machine for `year`.
+    """Agreed interface (CONTRIBUTING.md): customers found in the Wayback Machine for `year`.
     Uses data/historical.json when it already holds this domain + year."""
     cached = _load_cache(url, year)
     if cached is not None:

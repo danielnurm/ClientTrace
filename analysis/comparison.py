@@ -1,7 +1,7 @@
 """
 Compares an old and a new customer list.
 
-Accepts README customer dicts ({"name", "logo_url", "source_url"})
+Accepts customer dicts (CONTRIBUTING.md) ({"name", "logo_url", "source_url"})
 or plain names, and returns the same type it was given.
 
 OPENAI_API_KEY in .env is optional:

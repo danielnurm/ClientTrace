@@ -1,5 +1,5 @@
 """Demo data so the dashboard works before the backend is ready.
-Same format as agreed in README: {"name", "logo_url", "source_url"}.
+Same format as agreed in CONTRIBUTING.md: {"name", "logo_url", "source_url"}.
 """
 
 def _c(name, url="https://example.com/customers"):

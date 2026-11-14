@@ -1,15 +1,16 @@
 @README.md
+@CONTRIBUTING.md
 
 # Instructions for Claude
 
-The README above is the team contract. This file adds what Claude needs on top of it.
-If anything here conflicts with the README, the README wins — ask the user.
+CONTRIBUTING.md above is the team contract. This file adds what Claude needs on top of it.
+If anything here conflicts with CONTRIBUTING.md, CONTRIBUTING.md wins — ask the user.
 
 ## Hard rules
 - Never push to `main`, merge PRs, force-push, or delete branches unless the user explicitly asks in this session.
-- Never rename or change the signature/return format of the agreed functions in README.
+- Never rename or change the signature/return format of the agreed functions in CONTRIBUTING.md.
   Need a change? Stop and tell the user to agree it with the team first.
-- Only edit files owned by the user's role (see README "Roles"). Ask which role the user has
+- Only edit files owned by the user's role (see CONTRIBUTING.md "Roles"). Ask which role the user has
   if it isn't clear. Reading other roles' files is fine; editing them is not.
 - Never put API keys, tokens or URLs with secrets in code, commits, logs or PR text. Read them
   from `.env` via `python-dotenv` (`os.getenv`). Never print or commit `.env`.
@@ -33,7 +34,7 @@ If anything here conflicts with the README, the README wins — ask the user.
 ```
 app.py                     Streamlit entry: form (url, year) → run_analysis → render
 frontend/data_source.py    run_analysis(): calls roles 1–3, falls back per step on failure
-frontend/mock_data.py      demo customers (same format as README)
+frontend/mock_data.py      demo customers (same format as CONTRIBUTING.md)
 frontend/dashboard.py      render(data): metrics, chart, table
 backend/context_api.py     role 1 – get_current_customers
 backend/wayback.py         role 2 – get_historical_customers

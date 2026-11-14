@@ -1,7 +1,7 @@
 """
 Asiakaslistojen vertailu + kilpailijaevidenssi → perusteltu tilannearvio.
 
-Hyväksyy sekä merkkijonolistat että README:n customer-dictit:
+Hyväksyy sekä merkkijonolistat että CONTRIBUTING.md:n customer-dictit:
 {"name": "...", "logo_url": "...", "source_url": "..."}
 """
 

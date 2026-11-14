@@ -85,7 +85,7 @@ def scrape_page(url, html=False):
     return response.json()
 
 
-# ---------- Agreed interface (README) ----------
+# ---------- Agreed interface (CONTRIBUTING.md) ----------
 
 CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "current"
 # Customer-page paths to try, most common first. Each try costs 1 credit.
@@ -150,7 +150,7 @@ def _candidate_pages(url):
 
 
 def get_current_customers(url, refresh=False):
-    """Agreed interface (README): customers listed on the company's site today.
+    """Agreed interface (CONTRIBUTING.md): customers listed on the company's site today.
     Tries the usual customer-page paths (max MAX_SCRAPES credits) and caches the
     result in data/current/<domain>.json, so each company costs credits once.
     refresh=True ignores the cache. Returns [] if no customer page was found."""
