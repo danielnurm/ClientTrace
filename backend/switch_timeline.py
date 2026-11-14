@@ -108,6 +108,7 @@ def derive(months: list[dict], product: str) -> dict:
     first_comp = next((m for m in seen if m["class"] in COMPETITOR_SEEN), None)
     ours = [m for m in seen if m["class"] in OURS_SEEN]
     ours_last = ours[-1] if ours else None
+    ours_first = ours[0] if ours else None
     switch = None
     if ours_last:
         after = [m for m in seen if m["month"] > ours_last["month"]]
@@ -122,7 +123,11 @@ def derive(months: list[dict], product: str) -> dict:
     current = seen[-1]["class"] if seen else None
     return {
         "first_competitor_seen": first_comp["month"] if first_comp else None,
+        "ours_first_seen": ours_first["month"] if ours_first else None,
         "ours_last_seen": ours_last["month"] if ours_last else None,
+        # our product arrived after a rival that was already there: a migration to us, not a risk
+        "moving_to_us": bool(ours_first and first_comp and first_comp["class"] == COMPETITOR_ONLY
+                             and first_comp["month"] < ours_first["month"]),
         "switch": switch,
         "warning_months": warning,
         "ours_hidden": hidden,

@@ -28,6 +28,10 @@ STATUSES = {
     "on_competitor":      ("⚫", "Already on a competitor", "#52514e",
                            "Our chat isn't on the site, a competitor's is.",
                            "Win-back: find out when and why they moved."),
+    "moving_to_us":       ("🔵", "Moving to us", "#3e63dd",
+                           "Our chat was added next to a competitor's older one (seen in the archive): the "
+                           "customer is probably migrating to us, not away.",
+                           "Help them finish the move: check the onboarding."),
     "healthy":            ("🟢", "Healthy", "#0ca30c",
                            "Only our chat runs on the site.", ""),
     "unknown":            ("⚪", "Can't tell", "#898781",
@@ -37,7 +41,7 @@ STATUSES = {
                            "The site blocked or failed the check.", "Try again later or check by hand."),
 }
 ORDER = list(STATUSES)
-DEMO_SITES = "tokmanni.fi\nfennia.fi\nlahitapiola.fi\nelisa.fi\nhttp://localhost:8765"
+DEMO_SITES = "tokmanni.fi\nfennia.fi\nomasp.fi\ns-pankki.fi\nlahitapiola.fi\nelisa.fi\nhttp://localhost:8765"
 
 
 def _link(url, text):
@@ -248,6 +252,9 @@ def _headline(summary, product):
     if summary.get("worth_a_look"):
         k = summary["worth_a_look"]
         parts.append(f"**{k}** {'has' if k == 1 else 'have'} a competitor elsewhere on the site")
+    if summary.get("moving_to_us"):
+        k = summary["moving_to_us"]
+        parts.append(f"**{k}** {'is' if k == 1 else 'are'} moving to {product} from a competitor")
     if summary.get("healthy"):
         k = summary["healthy"]
         parts.append(f"**{k}** {'runs' if k == 1 else 'run'} only {product}")

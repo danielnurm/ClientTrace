@@ -57,6 +57,17 @@ class DeriveTest(unittest.TestCase):
         self.assertEqual(d["switch"], {"from": "Giosg", "to": ["Intercom"], "window": ["2025-05", "2025-06"]})
         self.assertEqual(d["warning_months"], 3)
 
+    def test_ours_added_next_to_older_rival_is_moving_to_us(self):
+        # the OmaSP case: Genesys since 2023, Giosg added in Aug 2026
+        d = stl.derive(months(("2023-12", stl.COMPETITOR_ONLY, ["Genesys"]),
+                              ("2026-08", stl.BOTH, ["Genesys", "Giosg"])), "Giosg")
+        self.assertTrue(d["moving_to_us"])
+        self.assertIsNone(d["switch"])
+
+    def test_rival_added_next_to_ours_is_not_moving_to_us(self):
+        d = stl.derive(months(("2025-01", stl.OURS_ONLY, ["Giosg"]), ("2025-06", stl.BOTH, ["Giosg", "Genesys"])), "Giosg")
+        self.assertFalse(d["moving_to_us"])
+
     def test_hidden_ours_is_never_a_switch(self):
         d = stl.derive(months(("2025-01", stl.CHAT_HIDDEN, []),
                               ("2025-02", stl.COMPETITOR_OURS_HIDDEN, ["Salesforce chat"])), "Giosg")

@@ -94,8 +94,15 @@ Each customer gets a plain-language status:
 | 🟠 Possibly trialling | same page as ours, **or** named in the privacy policy | check in soon |
 | 🟡 Worth a look | only on other pages than ours | usually nothing |
 | ⚫ Already on a competitor | our chat is gone, a competitor's runs | win-back |
+| 🔵 Moving to us | the archive shows our chat arrived after the competitor's older one | help them finish the move |
 | 🟢 Healthy | only our chat | – |
 | ⚪ Can't tell | nothing detected or the site isn't reachable | check by hand |
+
+Chat vendors recognised include Giosg, Genesys, Salesforce chat, Zendesk, Intercom and
+the Nordic Boost.ai, Puzzel, Humany and Leadoo, each signature verified on a real site.
+On 37 Nordic banks and insurers a chat tool was visible on 15; the largest banks
+(Nordea, OP, Swedbank, SEB, Handelsbanken, DNB) load their chat in a way the page and
+Tag Manager don't show, so they appear as *can't tell*.
 
 The page shows one bar for the whole customer base, which competitors show up
 on your customers' sites, and a card per customer with the evidence and links.
