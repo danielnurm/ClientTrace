@@ -1,4 +1,7 @@
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()  # API keys from .env for the backend/analysis modules
 
 from frontend.dashboard import render
 from frontend.data_source import run_analysis
@@ -28,7 +31,11 @@ if submitted:
         if not url.startswith("http"):
             url = "https://" + url
         with st.spinner("Fetching current and archived customer pages..."):
-            st.session_state["result"] = cached_analysis(url, year)
+            result = cached_analysis(url, year)
+        if result["notes"]:
+            # Something fell back → don't keep it cached, retry for real next time
+            cached_analysis.clear()
+        st.session_state["result"] = result
 
 if "result" in st.session_state:
     render(st.session_state["result"])
