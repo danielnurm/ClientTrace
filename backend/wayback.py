@@ -615,10 +615,120 @@ def get_customer_timeline(url: str, year: int, refresh: bool = False,
     return result
 
 
+# ---------- site history: which products a site ran over time ----------
+
+SITES_DIR = Path(__file__).resolve().parent.parent / "data" / "sites"
+MIN_MISSING = 2  # consecutive captures without a product before it counts as removed
+
+
+def _normalize_signatures(signatures: Optional[dict]) -> dict:
+    """Accepts {"Intercom": ["widget.intercom.io"]} or site_tech.SIGNATURES-style dicts."""
+    from backend.site_tech import SIGNATURES
+    if not signatures:
+        return SIGNATURES
+    return {name: s if isinstance(s, dict) else {"category": "other", "patterns": [p.lower() for p in s]}
+            for name, s in signatures.items()}
+
+
+def _quarterly(rows: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """First capture of each quarter."""
+    picked, seen = [], set()
+    for ts, orig in rows:
+        q = (ts[:4], (int(ts[4:6]) - 1) // 3)
+        if q not in seen:
+            seen.add(q)
+            picked.append((ts, orig))
+    return picked
+
+
+def summarize_site_history(captures: list[dict], signatures: Optional[dict] = None,
+                           min_missing: int = MIN_MISSING) -> dict:
+    """Turns dated captures [{"date", "products"}] (oldest first) into per-product spans and switches.
+
+    A product counts as removed only after `min_missing` consecutive captures
+    without it, so one odd capture (a different page variant) isn't a switch.
+    """
+    from backend.site_tech import category_of
+    sigs = _normalize_signatures(signatures)
+    ok = [c for c in captures if "error" not in c]
+    products: dict[str, dict] = {}
+    for i, c in enumerate(ok):
+        for p in c["products"]:
+            info = products.setdefault(p, {"category": category_of(p, sigs), "first_seen": c["date"]})
+            info["last_seen"] = c["date"]
+            info["_last_i"] = i
+    for p, info in products.items():
+        after = len(ok) - 1 - info.pop("_last_i")
+        if after >= min_missing:
+            info["status"] = "removed"
+            info["missing_since"] = ok[len(ok) - after]["date"]
+        elif after:
+            info["status"] = "unconfirmed"  # missing only from the newest capture(s)
+        else:
+            info["status"] = "present"
+
+    switches = []
+    for a, ia in products.items():
+        if ia["status"] != "removed":
+            continue
+        for b, ib in products.items():
+            if b != a and ib["category"] == ia["category"] and ib["status"] == "present" \
+                    and ib["first_seen"] > ia["first_seen"]:
+                switches.append({"from": a, "to": b, "category": ia["category"],
+                                 # when the old tool disappeared: last capture with it → first without
+                                 "between": [ia["last_seen"], ia["missing_since"]],
+                                 "confidence": "high"})
+    return {"products": products, "switches": switches}
+
+
+def get_site_history(domain: str, signatures: Optional[dict] = None, from_year: int = 2021,
+                     refresh: bool = False) -> dict:
+    """Homepage captures (one per quarter) from `from_year` until today, with the products in each.
+
+    Returns {"domain", "from_year", "captures": [{"date", "url", "products"}],
+             "products": {name: {"category", "first_seen", "last_seen", "status", "missing_since"?}},
+             "switches": [{"from", "to", "category", "between": [date, date], "confidence"}]}.
+    Only scripts embedded in the HTML are visible here: tags loaded through Google
+    Tag Manager aren't archived with the page (see backend.site_tech for live GTM).
+    Cached in data/sites/<domain>_history.json.
+    """
+    domain = _domain(domain)
+    cache = SITES_DIR / f"{domain}_history.json"
+    if not refresh and cache.exists():
+        data = json.loads(cache.read_text(encoding="utf-8"))
+        if data.get("from_year") == from_year:
+            return data
+
+    from backend.site_tech import detect_products
+    sigs = _normalize_signatures(signatures)
+    rows = _quarterly(_cdx_range(domain + "/", from_year, time.gmtime().tm_year))
+    captures = []
+    for ts, orig in rows:
+        cap = {"date": _date(ts), "url": _snapshot_url(ts, orig)}
+        try:
+            cap["products"] = detect_products(_fetch(ts, orig, retries=2), sigs)
+        except Exception as e:  # keep going: one failed capture is just a gap
+            cap["error"] = str(e)[:200]
+        captures.append(cap)
+
+    result = {"domain": domain, "from_year": from_year, "captures": captures,
+              **summarize_site_history(captures, sigs)}
+    SITES_DIR.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    return result
+
+
 if __name__ == "__main__":
     target = sys.argv[1] if len(sys.argv) > 1 else "kone.com"
     yr = int(sys.argv[2]) if len(sys.argv) > 2 else 2023
-    if "--timeline" in sys.argv:
+    if "--site-history" in sys.argv:
+        h = get_site_history(target, from_year=yr, refresh=True)
+        print(f"{h['domain']}: {len(h['captures'])} captures since {yr} → data/sites/{h['domain']}_history.json")
+        for p, i in h["products"].items():
+            print(f"  {p:18} {i['first_seen']} … {i['last_seen']}  {i['status']}")
+        for s in h["switches"]:
+            print(f"  SWITCH {s['from']} → {s['to']} between {s['between']}")
+    elif "--timeline" in sys.argv:
         tl = get_customer_timeline(target, yr, refresh=True)
         print(f"{tl['domain']}: {len(tl['snapshots'])} snapshots, {len(tl['customers'])} customers "
               f"→ data/timeline/{tl['domain']}_{yr}.json")

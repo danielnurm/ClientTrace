@@ -219,3 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 .vscode/
+
+# ClientTrace: per-user live check logs
+data/sites/*_live.json

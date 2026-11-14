@@ -1,0 +1,167 @@
+{
+ "domain": "elisa.fi",
+ "from_year": 2021,
+ "captures": [
+  {
+   "date": "2021-01-01",
+   "url": "https://web.archive.org/web/20210101021927/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2021-04-01",
+   "url": "https://web.archive.org/web/20210401064045/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2021-07-16",
+   "url": "https://web.archive.org/web/20210716102120/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2021-10-05",
+   "url": "https://web.archive.org/web/20211005131620/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2022-01-01",
+   "url": "https://web.archive.org/web/20220101035130/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2022-04-01",
+   "url": "https://web.archive.org/web/20220401050857/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2022-07-01",
+   "url": "https://web.archive.org/web/20220701024533/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2022-10-01",
+   "url": "https://web.archive.org/web/20221001040527/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2023-01-01",
+   "url": "https://web.archive.org/web/20230101020337/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2023-04-06",
+   "url": "https://web.archive.org/web/20230406141224/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2023-07-01",
+   "url": "https://web.archive.org/web/20230701203907/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2023-10-01",
+   "url": "https://web.archive.org/web/20231001184311/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2024-01-02",
+   "url": "https://web.archive.org/web/20240102094940/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2024-04-03",
+   "url": "https://web.archive.org/web/20240403014235/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2024-07-04",
+   "url": "https://web.archive.org/web/20240704053115/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2024-10-01",
+   "url": "https://web.archive.org/web/20241001212336/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2025-01-03",
+   "url": "https://web.archive.org/web/20250103033052/https://elisa.fi/",
+   "products": []
+  },
+  {
+   "date": "2025-04-01",
+   "url": "https://web.archive.org/web/20250401105743/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2025-07-02",
+   "url": "https://web.archive.org/web/20250702094150/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2025-10-01",
+   "url": "https://web.archive.org/web/20251001055635/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2026-01-01",
+   "url": "https://web.archive.org/web/20260101084237/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2026-04-01",
+   "url": "https://web.archive.org/web/20260401070437/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2026-07-11",
+   "url": "https://web.archive.org/web/20260711015745/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "url": "https://web.archive.org/web/20261002084800/https://elisa.fi/",
+   "products": [
+    "OneTrust"
+   ]
+  }
+ ],
+ "products": {
+  "OneTrust": {
+   "category": "consent",
+   "first_seen": "2022-07-01",
+   "last_seen": "2026-10-02",
+   "status": "present"
+  }
+ },
+ "switches": []
+}

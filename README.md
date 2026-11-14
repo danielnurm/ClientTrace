@@ -69,6 +69,46 @@ and pick the year to compare against.
 If you know the address of the customer page, enter it directly, e.g.
 `https://www.kone.com/en/references/`. It's faster and uses fewer API requests.
 
+## Tool switches (live)
+
+The second tab answers a sharper question: **did the supplier's customers move
+to a competitor?** A logo leaving a marketing page has many causes (KONE's
+"lost" references turned out to be a site redesign), but a product that runs on
+the customer's own website (chat, analytics, consent banner, A/B testing) can
+be checked directly.
+
+For each customer site it combines five sources:
+
+1. the supplier's customer page (Context.dev), or a list you paste
+2. the customer's homepage, live
+3. its Google Tag Manager containers, live (many sites load their chat there)
+4. its homepage in the Wayback Machine, one capture per quarter since 2021
+5. a web search for the customer's domain when the supplier doesn't link to it
+
+and labels each customer *still running*, *switched away*, *competitor added*,
+*removed* or *not detected*, with a confidence level and links to the archived
+and live page. **Check now** stores every check in `data/sites/<site>_live.json`,
+so the next check shows what changed since the previous one.
+
+From the command line:
+
+```bash
+python -m backend.site_tech check tokmanni.fi fennia.fi          # live check, ~1 s
+python -m backend.site_tech supplier giosg.com Giosg tokmanni.fi fennia.fi
+python -m backend.wayback fennia.fi 2021 --site-history          # archive, a few minutes
+```
+
+**Live demo of a switch.** A fake customer site whose chat you switch mid-pitch:
+
+```bash
+python -m http.server 8765 -d demo/customer_site      # terminal 1
+python -m backend.site_tech watch http://localhost:8765 --interval 3   # terminal 2
+python demo/switch_chat.py intercom                   # terminal 3: giosg | intercom | zendesk | none
+```
+
+Or add `http://localhost:8765` to the site list in the dashboard and press
+**Check now** before and after switching.
+
 ## Caching and API usage
 
 - **Current customers** are cached per company in `data/current/<domain>.json`.
@@ -90,6 +130,12 @@ If you know the address of the customer page, enter it directly, e.g.
 - **Site checks** are cached per company in `data/mentions/<domain>.json`.
   Each lost customer costs one search, plus a page fetch when a hit can't be
   verified with a plain request.
+- **Site histories** (which products a homepage ran, per quarter) are cached in
+  `data/sites/<domain>_history.json`; `tokmanni.fi`, `fennia.fi`,
+  `lahitapiola.fi` and `elisa.fi` are included. Live checks are free (plain
+  HTTP, no API) and kept locally in `data/sites/<site>_live.json` (not in git).
+  Customer domains found by search cost one Context.dev request each and are
+  cached in `data/sites/domains.json`.
 - The dashboard also keeps results in memory for an hour per URL and year.
 
 `kone.com` with 2023 is already cached in the repository, including the site
@@ -102,7 +148,10 @@ still makes one OpenAI request.
 app.py                     Streamlit entry point
 frontend/                  dashboard, data loading, demo data
 backend/context_api.py     current customers (Context.dev)
-backend/wayback.py         historical customers (Wayback Machine)
+backend/wayback.py         historical customers and site histories (Wayback Machine)
+backend/site_tech.py       live product detection (page + Tag Manager), supplier report
+demo/                      fake customer site for the live switch demo
+tests/                     offline unit tests: python -m unittest discover tests
 backend/competitor_search.py
 analysis/comparison.py     matching old and new customers
 analysis/ai_analysis.py    comparison + competitor evidence per customer
@@ -117,6 +166,11 @@ data/                      cached results
   KONE's references are a good example.
 - The site check only looks at the main domain (`kone.com`, `www.kone.com`).
   Mentions on other subdomains, such as distributor portals, are ignored.
+- Tool switches: products loaded through Google Tag Manager are visible live,
+  but their history isn't, because Tag Manager containers are almost never
+  archived. In our test of 17 Finnish sites a chat widget was in the page HTML
+  on 3 and only in Tag Manager on 1–3 more. Some sites (e.g. alko.fi) block
+  automated requests.
 - Results depend on how the page is built. Logo walls with no alt text end up
   with names guessed from the image file names.
 

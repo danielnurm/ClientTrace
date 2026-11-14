@@ -1,0 +1,199 @@
+{
+ "domain": "fennia.fi",
+ "from_year": 2021,
+ "captures": [
+  {
+   "date": "2021-01-19",
+   "url": "https://web.archive.org/web/20210119121043/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot"
+   ]
+  },
+  {
+   "date": "2021-04-11",
+   "url": "https://web.archive.org/web/20210411182506/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2021-07-08",
+   "url": "https://web.archive.org/web/20210708142210/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2021-10-11",
+   "url": "https://web.archive.org/web/20211011102827/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2022-01-16",
+   "url": "https://web.archive.org/web/20220116101826/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2022-04-06",
+   "url": "https://web.archive.org/web/20220406064036/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2022-07-01",
+   "url": "https://web.archive.org/web/20220701102451/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2022-10-03",
+   "url": "https://web.archive.org/web/20221003074736/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2023-01-03",
+   "url": "https://web.archive.org/web/20230103070337/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2023-04-05",
+   "url": "https://web.archive.org/web/20230405040858/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2023-07-01",
+   "url": "https://web.archive.org/web/20230701144403/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2023-10-01",
+   "url": "https://web.archive.org/web/20231001125724/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2024-01-04",
+   "url": "https://web.archive.org/web/20240104163128/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2024-04-04",
+   "url": "https://web.archive.org/web/20240404070010/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2024-07-02",
+   "url": "https://web.archive.org/web/20240702174311/https://www.fennia.fi/",
+   "products": [
+    "Cookiebot",
+    "Hotjar"
+   ]
+  },
+  {
+   "date": "2024-10-06",
+   "url": "https://web.archive.org/web/20241006022133/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2025-01-13",
+   "url": "https://web.archive.org/web/20250113132732/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2025-04-08",
+   "url": "https://web.archive.org/web/20250408234736/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2025-07-02",
+   "url": "https://web.archive.org/web/20250702073854/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2025-10-03",
+   "url": "https://web.archive.org/web/20251003170046/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2026-01-02",
+   "url": "https://web.archive.org/web/20260102062039/https://www.fennia.fi/",
+   "products": []
+  },
+  {
+   "date": "2026-04-11",
+   "url": "https://web.archive.org/web/20260411155722/https://www.fennia.fi/",
+   "products": [
+    "Salesforce chat"
+   ]
+  },
+  {
+   "date": "2026-07-10",
+   "url": "https://web.archive.org/web/20260710224256/https://www.fennia.fi/",
+   "products": [
+    "Salesforce chat"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "url": "https://web.archive.org/web/20261006182614/https://www.fennia.fi/",
+   "products": [
+    "Salesforce chat"
+   ]
+  }
+ ],
+ "products": {
+  "Cookiebot": {
+   "category": "consent",
+   "first_seen": "2021-01-19",
+   "last_seen": "2024-07-02",
+   "status": "removed",
+   "missing_since": "2024-10-06"
+  },
+  "Hotjar": {
+   "category": "analytics",
+   "first_seen": "2021-04-11",
+   "last_seen": "2024-07-02",
+   "status": "removed",
+   "missing_since": "2024-10-06"
+  },
+  "Salesforce chat": {
+   "category": "chat",
+   "first_seen": "2026-04-11",
+   "last_seen": "2026-10-06",
+   "status": "present"
+  }
+ },
+ "switches": []
+}
