@@ -21,9 +21,15 @@ studies get rotated out. Treat the results as leads to look into, not as facts.
    small spelling differences) and matched. With an OpenAI key the matching is
    done by `gpt-4o-mini`, without one a rule-based matcher is used.
    See `analysis/comparison.py`.
-4. **Dashboard.** A Streamlit app that shows the counts, a chart, the logos of
-   the customers that disappeared and a table with links to the sources.
-   See `app.py` and `frontend/`.
+4. **Site check.** Each customer that disappeared from the customer page is
+   searched for on the rest of the company's site with Context.dev. Every hit
+   is fetched to make sure the page is still live and names the customer. A
+   customer that's still mentioned somewhere was probably just rotated out;
+   one that's gone from the whole site is the stronger signal.
+   See `find_site_mentions` in `backend/context_api.py`.
+5. **Dashboard.** A Streamlit app with a one-line summary, evidence for each
+   lost customer (archived page and date, current page, where it's still
+   mentioned) and a table of all customers. See `app.py` and `frontend/`.
 
 If fetching the current or historical customers fails, the dashboard switches
 to demo data and shows a warning with the reason, so you always know whether
@@ -74,10 +80,13 @@ If you know the address of the customer page, enter it directly, e.g.
   ```bash
   python -m backend.wayback kone.com 2023
   ```
+- **Site checks** are cached per company in `data/mentions/<domain>.json`.
+  Each lost customer costs one search, plus a page fetch when a hit can't be
+  verified with a plain request.
 - The dashboard also keeps results in memory for an hour per URL and year.
 
-`kone.com` with 2023 is already cached in the repository, so it works without
-Context.dev or Wayback requests. If `OPENAI_API_KEY` is set, the comparison
+`kone.com` with 2023 is already cached in the repository, including the site
+checks, so it works without Context.dev or Wayback requests. If `OPENAI_API_KEY` is set, the comparison
 still makes one OpenAI request.
 
 ## Project layout
@@ -101,6 +110,8 @@ data/                      cached results
   KONE's references are a good example.
 - `data/historical.json` holds one company at a time. Fetching a new one
   replaces the previous result.
+- The site check only looks at the main domain (`kone.com`, `www.kone.com`).
+  Mentions on other subdomains, such as distributor portals, are ignored.
 - Results depend on how the page is built. Logo walls with no alt text end up
   with names guessed from the image file names.
 

@@ -69,8 +69,11 @@ Context.dev, OpenAI and Exa cost credits.
 
 - Don't call them in loops or automated tests. Use mock data or fake the API
   function in tests.
-- Each new company costs 1-4 Context.dev requests. Results are cached in
-  `data/current/`, so repeat runs are free.
+- Each new company costs 1-4 Context.dev requests for the customer page, plus
+  one search per lost customer for the site check. Results are cached in
+  `data/current/` and `data/mentions/`, so repeat runs are free.
+- The default plan allows 2 concurrent requests and answers 429 above that.
+  Context.dev calls go through `_with_retry`, which waits and retries.
 - The competitor search (`backend/competitor_search.py`) makes up to 7 requests
   per lost customer. Don't run it on long lists.
 - `try_api.py`, `try_scrape.py` and `collect_data.py` call Context.dev every
