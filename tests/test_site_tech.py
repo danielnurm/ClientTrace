@@ -25,6 +25,11 @@ class DetectTest(unittest.TestCase):
         js = r'var g=\"https:\/\/service.giosg.com\";d.src=g+\"\/live2\/\"'
         self.assertEqual(st.detect_products(js), ["Giosg"])
 
+    def test_escaped_slash_patterns_in_gtm(self):
+        # review fix: patterns with "/" must match GTM's \/ escaping too
+        js = r'src:\"https:\/\/static.zdassets.com\/ekr\/snippet.js\" www.googletagmanager.com\/gtag\/js?id=G-1'
+        self.assertEqual(st.detect_products(js), ["Google Analytics", "Zendesk"])
+
     def test_brand_name_in_text_is_not_a_hit(self):
         self.assertEqual(st.detect_products("<p>We moved from Intercom and Giosg to Zendesk</p>"), [])
 
@@ -112,6 +117,27 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(r["signals"][0]["confidence"], "high")
         self.assertEqual(r["products"]["Giosg"]["status"], "removed")
 
+    def test_dropping_one_of_two_parallel_tools_is_not_a_switch(self):
+        # review fix: Giosg and Genesys side by side since 2021, Giosg dropped in 2024
+        caps = [cap("2021-01-01", "Giosg", "Genesys"), cap("2024-01-01", "Giosg", "Genesys"),
+                cap("2024-04-01", "Genesys"), cap("2024-07-01", "Genesys")]
+        hist = {"captures": caps, **summarize_site_history(caps)}
+        r = st.site_report("x.fi", live=self.live({"Genesys": "html"}), history=hist)
+        self.assertEqual(r["signals"], [])
+        self.assertEqual(st._verdict(r, "Giosg"), ("removed", "high"))
+
+    def test_switch_to_gtm_only_tool_is_low_confidence(self):
+        caps = [cap("2024-01-01", "Giosg"), cap("2024-04-01"), cap("2024-07-01")]
+        hist = {"captures": caps, **summarize_site_history(caps)}
+        r = st.site_report("x.fi", live=self.live({"Intercom": "gtm"}), history=hist)
+        self.assertEqual((r["signals"][0]["type"], r["signals"][0]["confidence"]), ("switch", "low"))
+
+    def test_win_for_the_supplier(self):
+        caps = [cap("2024-01-01", "Intercom"), cap("2024-04-01", "Giosg"), cap("2024-07-01", "Giosg")]
+        hist = {"captures": caps, **summarize_site_history(caps)}
+        r = st.site_report("x.fi", live=self.live({"Giosg": "html"}), history=hist)
+        self.assertEqual(st._verdict(r, "Giosg"), ("won", "high"))
+
     def test_old_parallel_tools_are_not_a_signal(self):
         caps = [cap("2022-01-01", "Hotjar"), cap("2023-01-01", "Hotjar", "Microsoft Clarity")]
         hist = {"captures": caps, **summarize_site_history(caps)}
@@ -152,6 +178,28 @@ class SupplierTest(unittest.TestCase):
             r = st.supplier_report("giosg.com", "Giosg", customers=[
                 {"name": "A", "domain": "a.fi"}, {"name": "B", "domain": "b.fi"}, {"name": "C", "domain": "c.fi"}])
         self.assertEqual(r["summary"], {"still_running": 1, "not_detected": 1, "error": 1})
+
+    def test_no_domain_found_is_a_row_not_a_crash(self):
+        # review fix: find_customer_domain → None used to raise KeyError in the summary
+        with mock.patch.object(st, "find_customer_domain", return_value=None), \
+                mock.patch.object(st, "check_sites", return_value={}):
+            r = st.supplier_report("giosg.com", "Giosg", customers=[{"name": "Nobody Oy", "source_url": ""}])
+        self.assertEqual(r["summary"], {"error": 1})
+        self.assertIn("no website", r["customers"][0]["error"])
+
+    def test_social_link_is_not_used_as_domain(self):
+        with mock.patch.object(st, "find_customer_domain", return_value="real.fi") as fd, \
+                mock.patch.object(st, "check_sites", return_value={"real.fi": {"site": "real.fi", "error": "x"}}):
+            st.supplier_report("giosg.com", "Giosg",
+                               customers=[{"name": "R", "source_url": "https://www.linkedin.com/company/r"}])
+        fd.assert_called_once()
+
+    def test_cached_history_never_fetches(self):
+        # review fix: a different from_year must not start a Wayback crawl
+        with mock.patch.object(st, "HISTORY_DIR", self.tmp):
+            (self.tmp / "a.fi_history.json").write_text('{"from_year": 2021, "captures": [], "products": {}}')
+            self.assertEqual(st._cached_history("https://www.a.fi/")["from_year"], 2021)
+            self.assertIsNone(st._cached_history("b.fi"))
 
     def test_customer_link_gives_domain_without_search(self):
         live = {"tokmanni.fi": {"site": "tokmanni.fi", "error": "skipped"}}

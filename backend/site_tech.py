@@ -29,6 +29,8 @@ from urllib.parse import urlparse
 
 import requests
 
+from backend.wayback import SITES_DIR as HISTORY_DIR, _domain as _host
+
 TIMEOUT = 20
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; ClientTrace/0.1; +site-check)"}
 SITES_DIR = Path(__file__).resolve().parent.parent / "data" / "sites"
@@ -76,7 +78,7 @@ SIGNATURES: dict[str, dict] = {
 
 def detect_products(text: str, signatures: Optional[dict] = None) -> list[str]:
     """Product names whose patterns occur in `text` (HTML or a GTM container)."""
-    low = (text or "").lower()
+    low = (text or "").lower().replace("\\/", "/")  # GTM containers escape slashes as \/
     sigs = signatures or SIGNATURES
     return sorted(name for name, s in sigs.items() if any(p in low for p in s["patterns"]))
 
@@ -94,9 +96,7 @@ def _site_url(site: str) -> str:
 
 def _site_key(site: str) -> str:
     """File-safe id: 'https://www.tokmanni.fi/' → 'tokmanni.fi', 'http://localhost:8765' → 'localhost_8765'."""
-    host = urlparse(_site_url(site)).netloc.lower()
-    host = host[4:] if host.startswith("www.") else host
-    return re.sub(r"[^a-z0-9.\-]", "_", host)
+    return re.sub(r"[^a-z0-9.\-]", "_", _host(_site_url(site)))
 
 
 def check_site(site: str, signatures: Optional[dict] = None) -> dict:
@@ -280,7 +280,15 @@ def site_report(site: str, from_year: int = 2021, live: Optional[dict] = None,
         running = [p for p in names if products[p]["status"] == "running"]
         for g in gone:
             for r in running:
-                conf = "high" if products[g]["confidence"] == products[r]["confidence"] == "high" else "medium"
+                g_first, r_since = products[g]["archive"]["first_seen"], products[r]["since"]
+                if r_since and r_since <= g_first:
+                    continue  # both ran side by side from the start: consolidation, not a switch
+                if not r_since:
+                    conf = "low"  # new tool only visible live (GTM): when it arrived is unknown
+                elif products[g]["confidence"] == products[r]["confidence"] == "high":
+                    conf = "high"
+                else:
+                    conf = "medium"
                 signals.append({"type": "switch", "category": cat, "from": g, "to": r, "confidence": conf,
                                 "between": [products[g]["last_seen"], products[g].get("missing_since") or live["checked_at"][:10]]})
         # two tools in one category, one of them new in the archive → switch probably in progress
@@ -301,11 +309,6 @@ def site_report(site: str, from_year: int = 2021, live: Optional[dict] = None,
 DOMAINS_CACHE = SITES_DIR / "domains.json"
 SKIP_HOSTS = re.compile(r"linkedin|facebook|twitter|x\.com|instagram|youtube|wikipedia|crunchbase|bloomberg|"
                         r"glassdoor|finder\.fi|asiakastieto|kauppalehti|google\.", re.I)
-
-
-def _host(url: str) -> str:
-    host = urlparse(url if "//" in url else f"https://{url}").netloc.lower()
-    return host[4:] if host.startswith("www.") else host
 
 
 def _urls_in(obj) -> list[str]:
@@ -339,18 +342,21 @@ def find_customer_domain(name: str, supplier_host: str = "", search=None) -> Opt
     return domain
 
 
-def _cached_history(domain: str, from_year: int) -> Optional[dict]:
-    """Wayback history only if already cached (a fresh fetch takes minutes per site)."""
-    from backend.wayback import SITES_DIR as HIST_DIR, get_site_history
-    if (HIST_DIR / f"{_host(domain)}_history.json").exists():
-        return get_site_history(domain, from_year=from_year)
-    return None
+def _cached_history(domain: str) -> Optional[dict]:
+    """Wayback history only if already cached, whatever its from_year: never fetches
+    (a fresh crawl takes minutes per site and would block the dashboard)."""
+    try:
+        return json.loads((HISTORY_DIR / f"{_host(domain)}_history.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
 
 
 def _verdict(report: dict, product: str) -> tuple[str, str]:
     """(verdict, confidence) for one customer site and the supplier's product."""
     p = report["products"].get(product)
     for s in report["signals"]:
+        if s["type"] == "switch" and s["to"] == product:
+            return "won", s["confidence"]
         if s["type"] == "switch" and s["from"] == product:
             return "switched_away", s["confidence"]
         if s["type"] == "new_competitor" and product in s["alongside"]:
@@ -363,7 +369,7 @@ def _verdict(report: dict, product: str) -> tuple[str, str]:
 
 
 def supplier_report(supplier_url: str, product: str, customers: Optional[list[dict]] = None,
-                    from_year: int = 2021, search=None, record: bool = False) -> dict:
+                    search=None, record: bool = False) -> dict:
     """One input → full result. Combines five sources:
       1. the supplier's customer page (Context.dev, cached)  2. each customer's homepage live
       3. its GTM containers live  4. its Wayback history (if cached)  5. a web search for its domain.
@@ -383,7 +389,8 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
     for c in customers:
         domain = c.get("domain")
         src = c.get("source_url") or ""
-        if not domain and src and supplier_host not in _host(src) and "web.archive.org" not in src:
+        if not domain and src and supplier_host not in _host(src) and "web.archive.org" not in src \
+                and not SKIP_HOSTS.search(src):
             domain = _host(src)  # the supplier linked straight to the customer's site
         if not domain:
             try:
@@ -391,6 +398,10 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
             except Exception as e:
                 rows.append({"name": c["name"], "domain": None, "verdict": "error", "error": f"domain lookup: {e}"})
                 continue
+        if not domain:
+            rows.append({"name": c["name"], "domain": None, "verdict": "error",
+                         "error": "no website found for this customer"})
+            continue
         rows.append({"name": c["name"], "domain": domain})
 
     todo = [r for r in rows if r.get("domain") and "error" not in r]
@@ -400,7 +411,7 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
         if "error" in lv:
             r.update(verdict="error", error=lv["error"])
             continue
-        hist = _cached_history(r["domain"], from_year)
+        hist = _cached_history(r["domain"])
         rep = site_report(r["domain"], live=lv, history=hist or {"captures": [], "products": {}})
         verdict, conf = _verdict(rep, product)
         if record:
@@ -409,7 +420,7 @@ def supplier_report(supplier_url: str, product: str, customers: Optional[list[di
             r["previous_check"] = (stored["previous"] or {}).get("checked_at")
         info = rep["products"].get(product, {})
         r.update(verdict=verdict, confidence=conf, history=hist is not None,
-                 signals=[s for s in rep["signals"] if product in (s.get("from"), s.get("new"), *s.get("alongside", []))],
+                 signals=[s for s in rep["signals"] if product in (s.get("from"), s.get("to"), s.get("new"), *s.get("alongside", []))],
                  products={p: {k: i.get(k) for k in ("category", "status", "live", "since", "confidence")}
                            for p, i in rep["products"].items()},
                  evidence=info.get("evidence", [lv["url"]]), latency_ms=lv["latency_ms"])

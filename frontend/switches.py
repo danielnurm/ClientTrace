@@ -12,6 +12,7 @@ VERDICTS = {  # verdict → (label, color, sort order)
     "competitor_added": ("Competitor added", "#d97706", 1),
     "removed":          ("Removed", "#e5484d", 2),
     "still_running":    ("Still running", "#30a46c", 3),
+    "won":              ("Won from competitor", "#3e63dd", 3),
     "not_detected":     ("Not detected", "#898781", 4),
     "error":            ("Not reachable", "#898781", 5),
 }

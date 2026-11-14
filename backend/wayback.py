@@ -675,7 +675,8 @@ def summarize_site_history(captures: list[dict], signatures: Optional[dict] = No
             if b != a and ib["category"] == ia["category"] and ib["status"] == "present" \
                     and ib["first_seen"] > ia["first_seen"]:
                 switches.append({"from": a, "to": b, "category": ia["category"],
-                                 "between": sorted([ia["last_seen"], ib["first_seen"]]),
+                                 # when the old tool disappeared: last capture with it → first without
+                                 "between": [ia["last_seen"], ia["missing_since"]],
                                  "confidence": "high"})
     return {"products": products, "switches": switches}
 
