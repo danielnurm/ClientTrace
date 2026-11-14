@@ -61,6 +61,7 @@ DISCLOSURE_NAMES = {
     "Zendesk": r"\bzendesk\b", "Intercom": r"\bintercom\b", "HubSpot chat": r"\bhubspot\b",
     "Drift": r"\bdrift\b", "LiveChat": r"\blivechat\b", "Leadoo": r"\bleadoo\b", "Tidio": r"\btidio\b",
     "Crisp": r"\bcrisp\b", "Freshchat": r"\bfresh(chat|works)\b", "LivePerson": r"\bliveperson\b",
+    "Boost.ai": r"\bboost\.ai\b|\bboost ai\b", "Puzzel": r"\bpuzzel\b", "Humany": r"\bhumany\b",
 }
 
 

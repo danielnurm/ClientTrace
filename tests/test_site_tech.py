@@ -30,6 +30,22 @@ class DetectTest(unittest.TestCase):
         js = r'src:\"https:\/\/static.zdassets.com\/ekr\/snippet.js\" www.googletagmanager.com\/gtag\/js?id=G-1'
         self.assertEqual(st.detect_products(js), ["Google Analytics", "Zendesk"])
 
+    def test_nordic_vendors_from_real_snippets(self):
+        aktia = '<script defer="" src="https://104aktia.boost.ai/chatPanel/chatPanel.js" type="text/javascript"></script>'
+        tryg = r'"main_mia_js":"https:\/\/409trygprivate.boost.ai\/chatPanel\/chatPanel.js"'
+        danske = '<script src="https://app-cdn.puzzel.com/public/js/pzl_loader.js"></script>'
+        folksam = '<a style="display:none" href="//folksam.humany.net/sam-chattbot">Kundservice</a>'
+        omasp = r'"omasp_chat_2025":{"url":"https:\/\/omasp-genesys-prod.io:3000\/api\/widget\/provideScript"}'
+        self.assertEqual(st.detect_products(aktia), ["Boost.ai"])
+        self.assertEqual(st.detect_products(tryg), ["Boost.ai"])
+        self.assertEqual(st.detect_products(danske), ["Puzzel"])
+        self.assertEqual(st.detect_products(folksam), ["Humany"])
+        self.assertEqual(st.detect_products(omasp), ["Genesys"])
+
+    def test_chatpanel_call_alone_is_not_boost(self):
+        # saastopankki.fi / storebrand.no only call chatPanel.show(); no loader, so no claim
+        self.assertEqual(st.detect_products('<a href="javascript:chatPanel.show()">Avaa chatbot</a>'), [])
+
     def test_brand_name_in_text_is_not_a_hit(self):
         self.assertEqual(st.detect_products("<p>We moved from Intercom and Giosg to Zendesk</p>"), [])
 

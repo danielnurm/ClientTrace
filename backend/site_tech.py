@@ -44,7 +44,13 @@ SIGNATURES: dict[str, dict] = {
     # customer-service chat
     "Giosg":           {"category": "chat", "patterns": ["service.giosg.com"], "verified": True},
     "Salesforce chat": {"category": "chat", "patterns": ["embeddedservice_bootstrap", "salesforceliveagent.com"], "verified": True},
-    "Genesys":         {"category": "chat", "patterns": ["apps.mypurecloud.", "window.genesys("], "verified": True},
+    "Genesys":         {"category": "chat", "patterns": ["apps.mypurecloud.", "window.genesys(",
+                                                     "-genesys-prod."],  # self-hosted widget (omasp.fi)
+                        "verified": True},
+    # Nordic chat / AI bot vendors, each verified on real bank and insurer sites (14.11.2026)
+    "Boost.ai":        {"category": "chat", "patterns": ["boost.ai/chatpanel"], "verified": True},  # aktia.fi, tryg.no, almbrand.dk
+    "Puzzel":          {"category": "chat", "patterns": ["app-cdn.puzzel.com"], "verified": True},  # danskebank.fi/.dk, if.se, if.no
+    "Humany":          {"category": "chat", "patterns": [".humany.net"], "verified": True},         # folksam.se
     "Zendesk":         {"category": "chat", "patterns": ["static.zdassets.com/ekr", "v2.zopim.com"], "verified": True},
     "Intercom":        {"category": "chat", "patterns": ["widget.intercom.io", "js.intercomcdn.com"]},
     "HubSpot chat":    {"category": "chat", "patterns": ["js.usemessages.com"]},
