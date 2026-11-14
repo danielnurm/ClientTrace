@@ -71,7 +71,7 @@ Context.dev, OpenAI and Exa cost credits.
   function in tests.
 - Each new company costs 1-4 Context.dev requests. Results are cached in
   `data/current/`, so repeat runs are free.
-- The competitor search (`backend/competitor_search.py`) makes about 7 requests
+- The competitor search (`backend/competitor_search.py`) makes up to 7 requests
   per lost customer. Don't run it on long lists.
 - `try_api.py`, `try_scrape.py` and `collect_data.py` call Context.dev every
   time they run. They're named so `pytest` won't pick them up. Keep new
@@ -90,4 +90,6 @@ at.button[0].click().run()
 assert not at.exception
 ```
 
-`kone.com` / 2023 is cached, so this makes no API calls.
+`kone.com` / 2023 is cached, so this makes no Context.dev or Wayback requests.
+If you have `OPENAI_API_KEY` in `.env`, run it with `OPENAI_API_KEY=` in front
+of the command, otherwise the comparison makes one OpenAI request.

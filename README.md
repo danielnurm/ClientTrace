@@ -13,7 +13,7 @@ studies get rotated out. Treat the results as leads to look into, not as facts.
 ## How it works
 
 1. **Current customers.** The site's customer page (`/customers`, `/references`,
-   `/case-studies`, ...) is scraped with [Context.dev](https://context.dev).
+   `/case-studies`, ...) is scraped with Context.dev.
    See `backend/context_api.py`.
 2. **Historical customers.** The same page is looked up in the Wayback Machine
    for the chosen year. See `backend/wayback.py`.
@@ -25,13 +25,14 @@ studies get rotated out. Treat the results as leads to look into, not as facts.
    the customers that disappeared and a table with links to the sources.
    See `app.py` and `frontend/`.
 
-If one of the steps fails, the dashboard switches to demo data and shows a
-warning with the reason, so you always know whether you're looking at real
-results.
+If fetching the current or historical customers fails, the dashboard switches
+to demo data and shows a warning with the reason, so you always know whether
+you're looking at real results. If only the comparison fails, a simpler exact
+name match is used and a note says so.
 
 ## Setup
 
-Requires Python 3.9 or newer.
+Tested with Python 3.9.
 
 ```bash
 python3 -m venv .venv
@@ -42,11 +43,11 @@ cp .env.example .env
 
 Then add your keys to `.env`:
 
-| Variable              | Needed for                         | Required |
-|-----------------------|------------------------------------|----------|
-| `CONTEXT_DEV_API_KEY` | scraping the current customer page | yes      |
-| `OPENAI_API_KEY`      | AI-based name matching             | no       |
-| `EXA_API_KEY`         | competitor search                  | no       |
+| Variable              | Needed for                                   | Required |
+|-----------------------|----------------------------------------------|----------|
+| `CONTEXT_DEV_API_KEY` | scraping the current customer page           | yes      |
+| `OPENAI_API_KEY`      | AI-based name matching                       | no       |
+| `EXA_API_KEY`         | competitor search (not in the dashboard yet) | no       |
 
 The Wayback Machine doesn't need a key.
 
@@ -76,7 +77,8 @@ If you know the address of the customer page, enter it directly, e.g.
 - The dashboard also keeps results in memory for an hour per URL and year.
 
 `kone.com` with 2023 is already cached in the repository, so it works without
-any API calls.
+Context.dev or Wayback requests. If `OPENAI_API_KEY` is set, the comparison
+still makes one OpenAI request.
 
 ## Project layout
 
