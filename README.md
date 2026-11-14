@@ -1,39 +1,109 @@
 # ClientTrace
 
-Enter a company URL → see which customer logos have disappeared since 2023.
+See which customers a company has quietly stopped showing on its website.
 
-## Roles
-1. Context.dev, current customers – `backend/context_api.py`
-2. Wayback Machine, historical customers – `backend/wayback.py`
-3. Comparison + AI – `analysis/`
-4. Dashboard – `app.py`, `frontend/`
+Give ClientTrace a company URL and a year. It reads the company's customer or
+reference page as it is today, finds the same page in the Wayback Machine for
+that year, and shows which customers have disappeared, which are still listed
+and which are new.
 
-## Agreed functions (DO NOT change names or formats without asking)
-```python
-# backend/context_api.py
-get_current_customers(url: str) -> list[dict]
+A missing logo is not proof that a customer left. Sites get redesigned and case
+studies get rotated out. Treat the results as leads to look into, not as facts.
 
-# backend/wayback.py
-get_historical_customers(url: str, year: int) -> list[dict]
+## How it works
 
-# analysis/comparison.py
-compare_customers(old: list[dict], new: list[dict]) -> dict
-# returns {"lost": [...], "retained": [...], "added": [...]}
+1. **Current customers.** The site's customer page (`/customers`, `/references`,
+   `/case-studies`, ...) is scraped with Context.dev.
+   See `backend/context_api.py`.
+2. **Historical customers.** The same page is looked up in the Wayback Machine
+   for the chosen year. See `backend/wayback.py`.
+3. **Comparison.** Names are normalized (legal suffixes like Oy/Inc, accents,
+   small spelling differences) and matched. With an OpenAI key the matching is
+   done by `gpt-4o-mini`, without one a rule-based matcher is used.
+   See `analysis/comparison.py`.
+4. **Dashboard.** A Streamlit app that shows the counts, a chart, the logos of
+   the customers that disappeared and a table with links to the sources.
+   See `app.py` and `frontend/`.
+
+If fetching the current or historical customers fails, the dashboard switches
+to demo data and shows a warning with the reason, so you always know whether
+you're looking at real results. If only the comparison fails, a simpler exact
+name match is used and a note says so.
+
+## Setup
+
+Tested with Python 3.9.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
 ```
 
-A customer always has this format:
-```json
-{"name": "Nokia", "logo_url": "https://...", "source_url": "https://..."}
-```
+Then add your keys to `.env`:
 
-## Git rules
-- No direct pushes to `main`. Everyone works on their own branch.
-- Run `git pull origin main` before you start working.
-- When your part works → Pull request → someone takes a quick look → merge.
-- API keys go only in `.env`, never in the code.
+| Variable              | Needed for                                   | Required |
+|-----------------------|----------------------------------------------|----------|
+| `CONTEXT_DEV_API_KEY` | scraping the current customer page           | yes      |
+| `OPENAI_API_KEY`      | AI-based name matching                       | no       |
+| `EXA_API_KEY`         | competitor search (not in the dashboard yet) | no       |
+
+The Wayback Machine doesn't need a key.
 
 ## Running
+
 ```bash
-pip install -r requirements.txt
 streamlit run app.py
 ```
+
+Open http://localhost:8501, enter a company website (for example `kone.com`)
+and pick the year to compare against.
+
+If you know the address of the customer page, enter it directly, e.g.
+`https://www.kone.com/en/references/`. It's faster and uses fewer API requests.
+
+## Caching and API usage
+
+- **Current customers** are cached per company in `data/current/<domain>.json`.
+  A new company costs 1-4 Context.dev requests, after that it's read from the
+  file. Delete the file to fetch it again.
+- **Historical customers** are cached in `data/historical.json`. The first
+  fetch for a company can take several minutes, because the Wayback Machine
+  rate-limits requests. To fetch ahead of time:
+  ```bash
+  python -m backend.wayback kone.com 2023
+  ```
+- The dashboard also keeps results in memory for an hour per URL and year.
+
+`kone.com` with 2023 is already cached in the repository, so it works without
+Context.dev or Wayback requests. If `OPENAI_API_KEY` is set, the comparison
+still makes one OpenAI request.
+
+## Project layout
+
+```
+app.py                     Streamlit entry point
+frontend/                  dashboard, data loading, demo data
+backend/context_api.py     current customers (Context.dev)
+backend/wayback.py         historical customers (Wayback Machine)
+backend/competitor_search.py
+analysis/comparison.py     matching old and new customers
+analysis/ai_analysis.py    comparison + competitor evidence per customer
+data/                      cached results
+```
+
+## Limitations
+
+- Only dedicated customer pages are checked. Logos shown on the front page
+  only are not picked up.
+- Some companies list projects or buildings instead of client companies.
+  KONE's references are a good example.
+- `data/historical.json` holds one company at a time. Fetching a new one
+  replaces the previous result.
+- Results depend on how the page is built. Logo walls with no alt text end up
+  with names guessed from the image file names.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).

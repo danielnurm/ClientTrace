@@ -10,7 +10,7 @@ from frontend.mock_data import MOCK_NEW, MOCK_OLD
 
 
 def _as_customer(item):
-    """README customer dict (or a plain name) → clean customer dict, or None if unusable."""
+    """Customer dict (CONTRIBUTING.md) (or a plain name) → clean customer dict, or None if unusable."""
     if isinstance(item, str):
         item = {"name": item}
     if not isinstance(item, dict):
