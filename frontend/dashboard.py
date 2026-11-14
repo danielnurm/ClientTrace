@@ -1,4 +1,6 @@
 """Draws the results. Gets a ready-made dict from data_source.run_analysis."""
+from html import escape
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -10,11 +12,39 @@ STATUS_COLORS = {
 }
 
 
+def _logo_wall(customers):
+    """Grid of logos; customers without a logo get a name tile."""
+    tiles = []
+    for c in customers:
+        name = escape(c["name"])
+        logo = c.get("logo_url") or ""
+        if logo.startswith(("http://", "https://")):
+            inner = (f'<img src="{escape(logo, quote=True)}" alt="{name}" '
+                     'style="max-width:100%;max-height:48px;object-fit:contain">')
+        else:
+            inner = f'<span style="font-weight:600">{name}</span>'
+        tiles.append(
+            '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;'
+            'gap:6px;padding:12px;min-height:90px;border:1px solid rgba(128,128,128,.3);'
+            f'border-radius:8px;text-align:center" title="{name}">{inner}'
+            + (f'<small style="opacity:.7">{name}</small>' if logo else "")
+            + "</div>"
+        )
+    st.markdown(
+        '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px">'
+        + "".join(tiles) + "</div>",
+        unsafe_allow_html=True,
+    )
+
+
 def render(data):
-    if data["notes"]:
-        with st.expander("⚠️ Some parts use demo data", expanded=False):
-            for n in data["notes"]:
-                st.write("•", n)
+    if data.get("demo"):
+        st.warning(
+            "**Demo data – these results are not real.**\n\n"
+            + "\n".join(f"- {n}" for n in data["notes"])
+        )
+    elif data["notes"]:
+        st.info("\n".join(f"- {n}" for n in data["notes"]))
 
     st.subheader(f"Results: {data['url']}")
     st.caption(f"Compared {data['year']} with today")
@@ -37,6 +67,12 @@ def render(data):
     fig.update_layout(height=300, margin=dict(t=20, b=20), yaxis_title="Customers")
     st.plotly_chart(fig)
 
+    # --- Logos of disappeared customers ---
+    if data["lost"]:
+        st.subheader(f"Disappeared since {data['year']}")
+        _logo_wall(data["lost"])
+        st.write("")
+
     # --- Table of all customers ---
     rows = (
         [{"Status": "Lost", **c} for c in data["lost"]]
@@ -47,8 +83,8 @@ def render(data):
         st.info("No customers found.")
         return
 
-    df = pd.DataFrame(rows)[["Status", "name", "source_url"]]
-    df.columns = ["Status", "Customer", "Source"]
+    df = pd.DataFrame(rows)[["Status", "logo_url", "name", "source_url"]]
+    df.columns = ["Status", "Logo", "Customer", "Source"]
 
     def color(val):
         return f"color: {STATUS_COLORS.get(val, 'inherit')}; font-weight: 600"
@@ -57,7 +93,10 @@ def render(data):
         df.style.map(color, subset=["Status"]),
         width="stretch",
         hide_index=True,
-        column_config={"Source": st.column_config.LinkColumn("Source")},
+        column_config={
+            "Logo": st.column_config.ImageColumn("Logo"),
+            "Source": st.column_config.LinkColumn("Source"),
+        },
     )
 
     st.caption("A disappeared logo does not prove a lost customer – "
