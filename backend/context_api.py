@@ -91,7 +91,21 @@ CACHE_DIR = Path(__file__).resolve().parent.parent / "data" / "current"
 # Customer-page paths to try, most common first. Each try costs 1 credit.
 PROBE_PATHS = ["customers", "references", "case-studies", "en/customers", "en/references"]
 MAX_SCRAPES = 4  # credit cap per company
+CTA = re.compile(r"(?i)^(learn|read|see|view|find out)( more)?$|^(case study|read the story)$")
 SOCIAL = re.compile(r"linkedin|twitter|facebook|instagram|youtube|tiktok|github|x-logo", re.I)
+
+
+def _listing_dir(path):
+    """Directory whose sub-pages are the customers:
+    /customers/ → /customers/, /references.html → /references/, /refs/index.html → /refs/."""
+    path = path or "/"
+    if path.endswith("/"):
+        return path
+    parent, last = path.rsplit("/", 1)
+    if "." not in last:
+        return path + "/"
+    stem = last.split(".", 1)[0]
+    return parent + "/" if stem in ("index", "default") else f"{parent}/{stem}/"
 
 
 def _customers_from_html(html, page_url, own):
@@ -108,15 +122,15 @@ def _customers_from_html(html, page_url, own):
             customers.append({"name": name, "logo_url": urljoin(page_url, img["src"]),
                               "source_url": page_url})
 
-    path = urlparse(page_url).path or "/"
-    if not path.endswith("/"):
-        last = path.rsplit("/", 1)[-1]
-        path = path.rsplit("/", 1)[0] + "/" if "." in last else path + "/"
+    path = _listing_dir(urlparse(page_url).path)
     if path != "/":  # "/" would make every link on the page a "customer"
         for detail_path, link in _detail_links(page, page_url, path).items():
             img = link["img"]
-            name = _clean(link["text"]) or (_clean(img["alt"]) if img else "") \
-                or _name_from_slug(detail_path)
+            alt = _clean(re.sub(r"(?i)\blogo\b", "", img["alt"])) if img else ""
+            text = _clean(link["text"])
+            if CTA.match(text) or len(text.split()) > 6:  # "Learn more" / title + description
+                text = ""
+            name = alt or text or _name_from_slug(detail_path)
             logo = urljoin(page_url, img["src"]) if img else ""
             if own in logo.rsplit("/", 1)[-1].lower():  # company's own logo
                 logo = ""
