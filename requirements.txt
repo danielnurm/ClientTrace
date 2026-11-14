@@ -3,3 +3,7 @@ python-dotenv
 streamlit
 pandas
 plotly
+openai
+pydantic
+exa-py
+context.dev
