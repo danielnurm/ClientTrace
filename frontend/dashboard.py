@@ -38,7 +38,7 @@ def _card(c, current_source, domain):
     elif mention and mention["mentioned"]:
         lines.append("Still on site: " + _link(mention.get("url"), (mention.get("title") or "page") + " ↗"))
     elif mention:
-        lines.append(f"<strong>Not found anywhere on {escape(domain)}</strong>")
+        lines.append(f"<strong>Not found elsewhere on {escape(domain)}</strong> (site search)")
     return (
         '<div style="display:flex;flex-direction:column;gap:6px;padding:12px;'
         'border:1px solid rgba(128,128,128,.3);border-radius:8px">'
@@ -76,7 +76,7 @@ def render(data):
     st.subheader(domain)
     if checked:
         text = (f"Listed **{len(data['old'])}** customers in {year}. "
-                f"**{len(gone)}** of them are gone from the whole site, "
+                f"**{len(gone)}** of them weren't found anywhere else on the site, "
                 f"**{len(still)}** {'was' if len(still) == 1 else 'were'} dropped from the customer "
                 f"page but {'is' if len(still) == 1 else 'are'} still mentioned elsewhere, and "
                 f"**{len(data['retained'])}** {'is' if len(data['retained']) == 1 else 'are'} still listed.")
@@ -104,8 +104,8 @@ def render(data):
     if checked:
         if gone:
             st.markdown(f"#### Gone from {domain}")
-            st.caption("Removed from the customer page and not found anywhere else on the site. "
-                       "The strongest signal.")
+            st.caption("Removed from the customer page, and a search of the rest of the site "
+                       "found no live page naming them. The strongest signal.")
             _cards(gone, current_source, domain)
         if unchecked:
             st.markdown("#### Not checked")
