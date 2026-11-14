@@ -1,0 +1,539 @@
+{
+ "site": "omasp.fi",
+ "product": "Giosg",
+ "demo": false,
+ "generated_at": "2026-11-14T15:45:55+00:00",
+ "pages": [
+  "/",
+  "/konttorit/asiakaspalvelu"
+ ],
+ "live": {
+  "checked_at": "2026-11-14T15:40:54+00:00",
+  "products": [
+   "Genesys",
+   "Giosg"
+  ],
+  "found_in": {
+   "Genesys": "html",
+   "Giosg": "html"
+  }
+ },
+ "months": [
+  {
+   "month": "2023-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2023-12-03",
+     "url": "https://web.archive.org/web/20231203084402/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2023-12-08",
+     "url": "https://web.archive.org/web/20231208132759/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-03-03",
+     "url": "https://web.archive.org/web/20240303000253/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-06-01",
+     "url": "https://web.archive.org/web/20240601091810/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-08",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-09",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-09-02",
+     "url": "https://web.archive.org/web/20240902025335/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2024-09-07",
+     "url": "https://web.archive.org/web/20240907121414/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-10",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-11",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-12-03",
+     "url": "https://web.archive.org/web/20241203141307/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2024-12-12",
+     "url": "https://web.archive.org/web/20241212230647/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-03-23",
+     "url": "https://web.archive.org/web/20250323051345/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2025-06-18",
+     "url": "https://web.archive.org/web/20250618215233/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-08",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-09",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-09-02",
+     "url": "https://web.archive.org/web/20250902214711/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2025-09-08",
+     "url": "https://web.archive.org/web/20250908223911/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-10",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-11",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-12",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-12-04",
+     "url": "https://web.archive.org/web/20251204074703/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-01",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-02",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-03",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-03-06",
+     "url": "https://web.archive.org/web/20260306141136/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Genesys"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-07-09",
+     "url": "https://web.archive.org/web/20260709073709/https://www.omasp.fi/",
+     "products": [
+      "Genesys"
+     ]
+    },
+    {
+     "page": "/konttorit/asiakaspalvelu",
+     "date": "2026-07-15",
+     "url": "https://web.archive.org/web/20260715171344/https://www.omasp.fi/konttorit/asiakaspalvelu",
+     "products": [
+      "Genesys"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-08",
+   "class": "both",
+   "vendors": [
+    "Genesys",
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-08-06",
+     "url": "https://web.archive.org/web/20260806162400/https://www.omasp.fi/",
+     "products": [
+      "Genesys",
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-09",
+   "class": "both",
+   "vendors": [
+    "Genesys",
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-09-07",
+     "url": "https://web.archive.org/web/20260907030929/https://www.omasp.fi/",
+     "products": [
+      "Genesys",
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-10",
+   "class": "both",
+   "vendors": [
+    "Genesys",
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-10-22",
+     "url": "https://web.archive.org/web/20261022214939/https://www.omasp.fi/",
+     "products": [
+      "Genesys",
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-11",
+   "class": "both",
+   "vendors": [
+    "Genesys",
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-11-02",
+     "url": "https://web.archive.org/web/20261102104032/https://www.omasp.fi/",
+     "products": [
+      "Genesys",
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  }
+ ],
+ "summary": {
+  "first_competitor_seen": "2023-12",
+  "ours_last_seen": "2026-11",
+  "switch": null,
+  "warning_months": null,
+  "ours_hidden": false,
+  "changed": true,
+  "latest_archived_class": "both"
+ }
+}

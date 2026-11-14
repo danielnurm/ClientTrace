@@ -1,0 +1,618 @@
+{
+ "site": "s-pankki.fi",
+ "product": "Giosg",
+ "demo": false,
+ "generated_at": "2026-11-14T15:54:07+00:00",
+ "pages": [
+  "/",
+  "/fi/asiakaspalvelu/"
+ ],
+ "live": {
+  "checked_at": "2026-11-14T15:45:56+00:00",
+  "products": [
+   "Giosg",
+   "Optimizely",
+   "Usercentrics"
+  ],
+  "found_in": {
+   "Giosg": "html",
+   "Optimizely": "html",
+   "Usercentrics": "html"
+  }
+ },
+ "months": [
+  {
+   "month": "2023-12",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2023-12-02",
+     "url": "https://web.archive.org/web/20231202231317/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics",
+      "VWO"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2023-12-08",
+     "url": "https://web.archive.org/web/20231208173916/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics",
+      "VWO"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-01",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-02",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-03",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-03-01",
+     "url": "https://web.archive.org/web/20240301083346/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics",
+      "VWO"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-04",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-05",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics",
+    "VWO"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-06",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-06-01",
+     "url": "https://web.archive.org/web/20240601043356/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2024-06-21",
+     "url": "https://web.archive.org/web/20240621110536/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-07",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-08",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-09",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-09-01",
+     "url": "https://web.archive.org/web/20240901062043/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2024-09-17",
+     "url": "https://web.archive.org/web/20240917053103/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-10",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-11",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2024-12",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-12-01",
+     "url": "https://web.archive.org/web/20241201155942/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2024-12-21",
+     "url": "https://web.archive.org/web/20241221101921/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-01",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-02",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-03",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-03-09",
+     "url": "https://web.archive.org/web/20250309225936/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2025-03-18",
+     "url": "https://web.archive.org/web/20250318140238/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-04",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-05",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-06",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-06-04",
+     "url": "https://web.archive.org/web/20250604130139/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2025-06-13",
+     "url": "https://web.archive.org/web/20250613012444/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-07",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-08",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-09",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-10",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-11",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2025-12",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-12-03",
+     "url": "https://web.archive.org/web/20251203132541/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2025-12-21",
+     "url": "https://web.archive.org/web/20251221203856/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-01",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-02",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-03",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-03-02",
+     "url": "https://web.archive.org/web/20260302041922/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2026-03-05",
+     "url": "https://web.archive.org/web/20260305120755/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-04",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-05",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-06",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Optimizely",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-06-02",
+     "url": "https://web.archive.org/web/20260602105233/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Optimizely",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2026-06-10",
+     "url": "https://web.archive.org/web/20260610103314/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-07",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Optimizely",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-08",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Optimizely",
+    "Usercentrics"
+   ],
+   "snapshots": [],
+   "inferred": true
+  },
+  {
+   "month": "2026-09",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Optimizely",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-09-06",
+     "url": "https://web.archive.org/web/20260906213027/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Optimizely",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-10",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg",
+    "Optimizely",
+    "Usercentrics"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-10-05",
+     "url": "https://web.archive.org/web/20261005194907/https://www.s-pankki.fi/",
+     "products": [
+      "Giosg",
+      "Optimizely",
+      "Usercentrics"
+     ]
+    },
+    {
+     "page": "/fi/asiakaspalvelu/",
+     "date": "2026-10-26",
+     "url": "https://web.archive.org/web/20261026114522/https://www.s-pankki.fi/fi/asiakaspalvelu/",
+     "products": [
+      "Giosg",
+      "Usercentrics"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-11",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  }
+ ],
+ "summary": {
+  "first_competitor_seen": null,
+  "ours_last_seen": "2026-10",
+  "switch": null,
+  "warning_months": null,
+  "ours_hidden": false,
+  "changed": false,
+  "latest_archived_class": "ours_only"
+ }
+}
