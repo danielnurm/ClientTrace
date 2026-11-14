@@ -27,6 +27,20 @@ compare_customers(old: list[dict], new: list[dict]) -> dict
 
 `compare_customers` also accepts plain name lists and then returns names.
 
+Other shared functions (not part of the original agreement, extend freely):
+
+```python
+# backend/wayback.py
+get_customer_timeline(url: str, year: int) -> dict
+# half-yearly snapshots of the customer page from year-2 until today:
+# {"snapshots": [{"date", "names"}], "customers": [{..., "first_seen",
+#  "last_seen", "missing_since"}]}
+
+# backend/context_api.py
+find_site_mentions(url: str, names: list[str]) -> dict
+# per name: {"mentioned": bool, "url", "title"}; names whose check failed are left out
+```
+
 A customer always has this format:
 
 ```json
