@@ -1,0 +1,661 @@
+{
+ "site": "localhost_8765",
+ "product": "Giosg",
+ "demo": true,
+ "generated_at": "2026-11-14T15:19:16+00:00",
+ "pages": [
+  "/"
+ ],
+ "live": {
+  "checked_at": "2026-11-14T12:00:00+00:00",
+  "products": [
+   "Intercom"
+  ],
+  "found_in": {
+   "Intercom": "html"
+  }
+ },
+ "months": [
+  {
+   "month": "2023-12",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2024-01",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2024-02",
+   "class": "no_snapshot",
+   "vendors": [],
+   "snapshots": [],
+   "inferred": false
+  },
+  {
+   "month": "2024-03",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-03-15",
+     "url": "https://web.archive.org/web/20240315000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-04",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-04-15",
+     "url": "https://web.archive.org/web/20240415000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-05",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-05-15",
+     "url": "https://web.archive.org/web/20240515000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-06",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-06-15",
+     "url": "https://web.archive.org/web/20240615000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-07",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-07-15",
+     "url": "https://web.archive.org/web/20240715000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-08",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-08-15",
+     "url": "https://web.archive.org/web/20240815000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-09",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-09-15",
+     "url": "https://web.archive.org/web/20240915000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-10",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-10-15",
+     "url": "https://web.archive.org/web/20241015000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-11",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-11-15",
+     "url": "https://web.archive.org/web/20241115000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2024-12",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2024-12-15",
+     "url": "https://web.archive.org/web/20241215000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-01",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-01-15",
+     "url": "https://web.archive.org/web/20250115000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-02",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-02-15",
+     "url": "https://web.archive.org/web/20250215000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-03",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-03-15",
+     "url": "https://web.archive.org/web/20250315000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-04",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-04-15",
+     "url": "https://web.archive.org/web/20250415000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-05",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-05-15",
+     "url": "https://web.archive.org/web/20250515000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-06",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-06-15",
+     "url": "https://web.archive.org/web/20250615000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-07",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-07-15",
+     "url": "https://web.archive.org/web/20250715000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-08",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-08-15",
+     "url": "https://web.archive.org/web/20250815000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-09",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-09-15",
+     "url": "https://web.archive.org/web/20250915000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-10",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-10-15",
+     "url": "https://web.archive.org/web/20251015000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-11",
+   "class": "ours_only",
+   "vendors": [
+    "Giosg"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-11-15",
+     "url": "https://web.archive.org/web/20251115000000/http://localhost:8765/",
+     "products": [
+      "Giosg"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2025-12",
+   "class": "both",
+   "vendors": [
+    "Giosg",
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2025-12-15",
+     "url": "https://web.archive.org/web/20251215000000/http://localhost:8765/",
+     "products": [
+      "Giosg",
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-01",
+   "class": "both",
+   "vendors": [
+    "Giosg",
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-01-15",
+     "url": "https://web.archive.org/web/20260115000000/http://localhost:8765/",
+     "products": [
+      "Giosg",
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-02",
+   "class": "both",
+   "vendors": [
+    "Giosg",
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-02-15",
+     "url": "https://web.archive.org/web/20260215000000/http://localhost:8765/",
+     "products": [
+      "Giosg",
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-03",
+   "class": "both",
+   "vendors": [
+    "Giosg",
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-03-15",
+     "url": "https://web.archive.org/web/20260315000000/http://localhost:8765/",
+     "products": [
+      "Giosg",
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-04",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-04-15",
+     "url": "https://web.archive.org/web/20260415000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-05",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-05-15",
+     "url": "https://web.archive.org/web/20260515000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-06",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-06-15",
+     "url": "https://web.archive.org/web/20260615000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-07",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-07-15",
+     "url": "https://web.archive.org/web/20260715000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-08",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-08-15",
+     "url": "https://web.archive.org/web/20260815000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-09",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-09-15",
+     "url": "https://web.archive.org/web/20260915000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-10",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-10-15",
+     "url": "https://web.archive.org/web/20261015000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  },
+  {
+   "month": "2026-11",
+   "class": "competitor_only",
+   "vendors": [
+    "Intercom"
+   ],
+   "snapshots": [
+    {
+     "page": "/",
+     "date": "2026-11-15",
+     "url": "https://web.archive.org/web/20261115000000/http://localhost:8765/",
+     "products": [
+      "Intercom"
+     ]
+    }
+   ],
+   "inferred": false
+  }
+ ],
+ "summary": {
+  "first_competitor_seen": "2025-12",
+  "ours_last_seen": "2026-03",
+  "switch": {
+   "from": "Giosg",
+   "to": [
+    "Intercom"
+   ],
+   "window": [
+    "2026-03",
+    "2026-04"
+   ]
+  },
+  "warning_months": 3,
+  "ours_hidden": false,
+  "changed": true,
+  "latest_archived_class": "competitor_only"
+ }
+}
