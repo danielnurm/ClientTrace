@@ -1,0 +1,29 @@
+{
+ "domain": "lahitapiola.fi",
+ "from_year": 2021,
+ "captures": [
+  {
+   "date": "2023-12-04",
+   "url": "https://web.archive.org/web/20231204162334/https://www.lahitapiola.fi/",
+   "products": [
+    "Genesys"
+   ]
+  },
+  {
+   "date": "2024-01-02",
+   "url": "https://web.archive.org/web/20240102162436/https://www.lahitapiola.fi/",
+   "products": [
+    "Genesys"
+   ]
+  }
+ ],
+ "products": {
+  "Genesys": {
+   "category": "chat",
+   "first_seen": "2023-12-04",
+   "last_seen": "2024-01-02",
+   "status": "present"
+  }
+ },
+ "switches": []
+}
