@@ -74,7 +74,8 @@ If you know the address of the customer page, enter it directly, e.g.
 - **Current customers** are cached per company in `data/current/<domain>.json`.
   A new company costs 1-4 Context.dev requests, after that it's read from the
   file. Delete the file to fetch it again.
-- **Historical customers** are cached in `data/historical.json`. The first
+- **Historical customers** are cached per company and year in
+  `data/historical/<domain>_<year>.json`. The first
   fetch for a company can take several minutes, because the Wayback Machine
   rate-limits requests. To fetch ahead of time:
   ```bash
@@ -108,8 +109,6 @@ data/                      cached results
   only are not picked up.
 - Some companies list projects or buildings instead of client companies.
   KONE's references are a good example.
-- `data/historical.json` holds one company at a time. Fetching a new one
-  replaces the previous result.
 - The site check only looks at the main domain (`kone.com`, `www.kone.com`).
   Mentions on other subdomains, such as distributor portals, are ignored.
 - Results depend on how the page is built. Logo walls with no alt text end up
