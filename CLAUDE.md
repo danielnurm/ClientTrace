@@ -43,6 +43,11 @@ analysis/ai_analysis.py, analysis/customer_extraction.py, backend/competitor_sea
                            no agreed interface yet — ask before wiring into the dashboard
 ```
 
+## Web frontend (`web/`)
+- React + TS + Vite + Tailwind v4 against `api/main.py`. Read `web/README.md` first: its design rules apply
+  to every UI change (one bold element, colours with meaning only, no generated-looking defaults).
+- Verify with `cd web && npm run lint && npm run build` and a screenshot at desktop and mobile width.
+
 ## Code conventions
 - Every customer is exactly `{"name", "logo_url", "source_url"}` (strings; `logo_url` may be `""`).
   Return `[]` for "found nothing" — not `None`, not an exception.
