@@ -1,4 +1,5 @@
-"""HTTP API for the web frontend: the consent check, and sales leads among a competitor's customers.
+"""HTTP API for the web frontend: the search check (who receives a visitor's search term), the consent check, and
+sales leads among a competitor's customers.
 
 Run:   .venv/bin/uvicorn api.main:app --reload --port 8000
 Demo:  DEMO_MODE=1 serves the saved snapshot in data/leads_demo.json (no network at all).
@@ -6,6 +7,9 @@ Save a new snapshot (live, plain requests, no credits):
        .venv/bin/python -m api.main snapshot Giosg tokmanni.fi fennia.fi elisa.fi
 
 Endpoints:
+  GET  /api/survey                                  the saved search-check survey (data/leaks_survey.json)
+  GET  /api/site/{site}                             one site from the survey: recipients before and after consent
+  POST /api/check?site=a.fi&term=raskaustesti       live search check of any site (about a minute; not in demo mode)
   GET /api/consent?sites=a.fi,b.fi                  trackers before consent per site (cached checks; demo list by default)
   GET /api/consent/{site}                           one site's findings, evidence and first-seconds timeline
   GET /api/leads?competitor=Giosg&sites=a.fi,b.fi   leads, hottest first (sites default to the demo list)
@@ -23,13 +27,14 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 
 from backend import consent, leads
+from backend import leaks as search_leaks
 
 load_dotenv()
 
 SNAPSHOT = Path(__file__).resolve().parent.parent / "data" / "leads_demo.json"
 DEMO_SITES = ["tokmanni.fi", "fennia.fi", "elisa.fi", "lahitapiola.fi", "omasp.fi", "s-pankki.fi"]
 
-app = FastAPI(title="ClientTrace API")
+app = FastAPI(title="Firstbite API")
 
 
 def demo_mode() -> bool:
@@ -93,6 +98,38 @@ def get_consent_site(site: str) -> dict:
             raise HTTPException(404, f"{site} is not in the demo snapshot")
         return {**match, "demo": True}
     return {**get_consent(site)["sites"][0], "demo": False}
+
+
+def load_survey() -> dict:
+    try:
+        return json.loads(search_leaks.SURVEY_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        raise HTTPException(503, f"survey missing or broken ({search_leaks.SURVEY_FILE.name}): {e}")
+
+
+@app.get("/api/survey")
+def get_survey() -> dict:
+    return {**load_survey(), "demo": demo_mode()}
+
+
+@app.get("/api/site/{site}")
+def get_site(site: str) -> dict:
+    match = next((s for s in load_survey()["sites"] if s["site"] == site), None)
+    if match is None:
+        raise HTTPException(404, f"{site} is not in the survey; check it live with POST /api/check")
+    return {**match, "demo": demo_mode()}
+
+
+@app.post("/api/check")
+def post_check(site: str, term: str) -> dict:
+    if demo_mode():
+        raise HTTPException(503, "live checks need the API without DEMO_MODE=1")
+    if not site.strip() or not term.strip():
+        raise HTTPException(422, "both site and term are needed")
+    try:
+        return {**search_leaks.check_search(site.strip(), term.strip()), "demo": False}
+    except Exception as e:
+        raise HTTPException(502, f"search check failed: {type(e).__name__}: {e}")
 
 
 if __name__ == "__main__":
