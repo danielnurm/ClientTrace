@@ -11,13 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-          cache: pip
-      - run: pip install -r requirements.txt
+      # The team runs Python 3.9 (macOS system Python); runner images no longer ship it, so uv installs it.
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv --python 3.9 && uv pip install -r requirements.txt
       - name: Unit tests (offline)
-        run: python -m unittest discover -s tests -t .
+        run: .venv/bin/python -m unittest discover -s tests -t .
 
   web:
     runs-on: ubuntu-latest
