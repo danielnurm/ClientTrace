@@ -547,7 +547,7 @@ def anonymise(report: dict) -> dict:
     brands = {_squash(s.split(".")[0]) for s in names if len(s.split(".")[0]) >= 4}
     short = [s.split(".")[0] for s in names if len(s.split(".")[0]) < 4]
 
-    def mask(text: str, term: str) -> str:
+    def mask(text: str, term: str, own: str) -> str:
         # Full domains first, so two sites sharing a brand (apotekangen.se, apotekangen.dk) keep their own ids
         for site in by_length:
             text = re.sub(re.escape(site), f"{names[site][1]}.example", text, flags=re.I)
@@ -563,29 +563,31 @@ def anonymise(report: dict) -> dict:
             return _term_only(text, term)
         for site in by_length:
             brand = site.split(".")[0]
+            # A brand shared by two sites (one chain, two countries) gets this row's id, or the rows are linked
+            sid = names[own][1] if own.split(".")[0] == brand else names[site][1]
             if len(brand) >= 4:
-                text = re.sub(rf"(?<![\w-]){re.escape(brand)}(?![\w-]*\.example)", names[site][1], text, flags=re.I)
+                text = re.sub(rf"(?<![\w-]){re.escape(brand)}(?![\w-]*\.example)", sid, text, flags=re.I)
             else:  # short brands only as a domain label (vax.pet), not inside ordinary words
-                text = re.sub(rf"(?<=[./]){re.escape(brand)}(?=\.)", names[site][1], text, flags=re.I)
+                text = re.sub(rf"(?<=[./]){re.escape(brand)}(?=\.)", sid, text, flags=re.I)
         # A brand in another spelling ("Pilleri Plus" in a page title): keep only the term
         squashed = _squash(text)
         if any(b in squashed for b in brands):
             return _term_only(text, term)
         return TOKEN.sub(_id_like, text)
 
-    def scrub(value, term: str):
+    def scrub(value, term: str, own: str):
         if isinstance(value, str):
-            return mask(value, term)
+            return mask(value, term, own)
         if isinstance(value, list):
-            return [scrub(v, term) for v in value]
+            return [scrub(v, term, own) for v in value]
         if isinstance(value, dict):
-            return {k: scrub(v, term) for k, v in value.items()}
+            return {k: scrub(v, term, own) for k, v in value.items()}
         return value
 
     rows = []
     for r in report["sites"]:
         label, sid = names[r["site"]]
-        rows.append(scrub({**r, "site": sid, "label": label}, r["term"]))
+        rows.append(scrub({**r, "site": sid, "label": label}, r["term"], r["site"]))
     rows.sort(key=lambda r: (VERDICT_ORDER[r["verdict"]], r["site"]))
     summary = {**report["summary"], "own_domain": sorted(names[s][1] for s in report["summary"]["own_domain"])}
     method = {k: v for k, v in report["method"].items() if k != "regulators"}

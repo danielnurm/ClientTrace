@@ -203,6 +203,17 @@ class AnonymiseTest(unittest.TestCase):
         self.assertEqual(snippet, "…raskaustesti…")
         self.assertNotIn("pilleri", str(out).lower())
 
+    def test_shared_brand_masks_to_the_rows_own_id(self):
+        # One chain in two countries: the .se row must not carry the .dk site's id, or the two are linked
+        rec = {**_rec("apotekangen-se-prod.54proxy.com", "unknown"), "evidence": []}
+        se = {"site": "apotekangen.se", "country": "se", "kind": "pharmacy", "term": "graviditetstest",
+              "verdict": "sent_after_consent", "before": {"status": "ok", "recipients": [rec]}}
+        dk = {"site": "apotekangen.dk", "country": "dk", "kind": "pharmacy", "term": "graviditetstest",
+              "verdict": "not_sent", "before": {"status": "ok", "recipients": []}}
+        out = lk.anonymise({"method": {}, "summary": {"own_domain": []}, "sites": [se, dk]})
+        row = next(r for r in out["sites"] if r["site"] == "se-pharmacy-a")
+        self.assertEqual(row["before"]["recipients"][0]["name"], "se-pharmacy-a-se-prod.54proxy.com")
+
 
 if __name__ == "__main__":
     unittest.main()
