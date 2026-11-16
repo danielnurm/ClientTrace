@@ -1,4 +1,4 @@
-"""HTTP API for the web frontend: sales leads among a competitor's customers.
+"""HTTP API for the web frontend: the consent check, and sales leads among a competitor's customers.
 
 Run:   .venv/bin/uvicorn api.main:app --reload --port 8000
 Demo:  DEMO_MODE=1 serves the saved snapshot in data/leads_demo.json (no network at all).
@@ -6,6 +6,8 @@ Save a new snapshot (live, plain requests, no credits):
        .venv/bin/python -m api.main snapshot Giosg tokmanni.fi fennia.fi elisa.fi
 
 Endpoints:
+  GET /api/consent?sites=a.fi,b.fi                  trackers before consent per site (cached checks; demo list by default)
+  GET /api/consent/{site}                           one site's findings, evidence and first-seconds timeline
   GET /api/leads?competitor=Giosg&sites=a.fi,b.fi   leads, hottest first (sites default to the demo list)
   GET /api/leads/{site}?competitor=Giosg            one lead with its evidence and archive timeline
 """
@@ -20,7 +22,7 @@ from typing import Optional
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 
-from backend import leads
+from backend import consent, leads
 
 load_dotenv()
 
@@ -64,6 +66,33 @@ def get_lead(site: str, competitor: str = "Giosg") -> dict:
         return {**match, "demo": True}
     rep = get_leads(competitor, site)
     return {**rep["leads"][0], "demo": False}
+
+
+def load_consent_snapshot() -> dict:
+    try:
+        return json.loads(consent.DEMO_SNAPSHOT.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        raise HTTPException(503, f"consent snapshot missing or broken ({consent.DEMO_SNAPSHOT.name}): {e}")
+
+
+@app.get("/api/consent")
+def get_consent(sites: Optional[str] = None) -> dict:
+    if demo_mode() or not sites:
+        return {**load_consent_snapshot(), "demo": demo_mode() or not sites}
+    try:
+        return {**consent.consent_report(_sites(sites)), "demo": False}
+    except Exception as e:
+        raise HTTPException(502, f"consent check failed: {type(e).__name__}: {e}")
+
+
+@app.get("/api/consent/{site}")
+def get_consent_site(site: str) -> dict:
+    if demo_mode():
+        match = next((s for s in load_consent_snapshot()["sites"] if s["site"] == site), None)
+        if match is None:
+            raise HTTPException(404, f"{site} is not in the demo snapshot")
+        return {**match, "demo": True}
+    return {**get_consent(site)["sites"][0], "demo": False}
 
 
 if __name__ == "__main__":
