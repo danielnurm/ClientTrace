@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Design tokens: cool paper, slate ink, one action colour. Status colours carry meaning only. */
+@theme {
+  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #eef1f4;
+  --color-surface: #ffffff;
+  --color-ink: #17212c;
+  --color-muted: #5b6876;
+  --color-rule: #d5dce3;
+  --color-action: #1e5bb8;
+
+  /* lead statuses */
+  --color-leaving: #b4441c;
+  --color-trialling: #a86a12;
+  --color-switched: #45556a;
+  --color-weak: #7d8995;
+  --color-locked: #2f7350;
+  --color-unknown: #9aa5b1;
+
+  /* chat tape: which chat ran on the site that month */
+  --color-tape-incumbent: #8da0b8;
+  --color-tape-overlap: #e0a030;
+  --color-tape-alternative: #c2532a;
+  --color-tape-hidden: #cbd3dc;
+  --color-tape-none: #e4e8ec;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-action);
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-action);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
