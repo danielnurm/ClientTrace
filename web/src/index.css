@@ -19,6 +19,12 @@
   --color-locked: #2f7350;
   --color-unknown: #9aa5b1;
 
+  /* search check: when the term reached an ad or analytics company */
+  --color-before: #b4441c;
+  --color-after: #a86a12;
+  --color-not-sent: #2f7350;
+  --color-term: #f6dcc9;
+
   /* chat tape: which chat ran on the site that month */
   --color-tape-incumbent: #8da0b8;
   --color-tape-overlap: #e0a030;

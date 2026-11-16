@@ -46,7 +46,7 @@ export function LeadPage() {
     return (
       <Shell demo={false}>
         <Problem title={`Couldn't load ${site}`} detail={error} />
-        <p className="mt-4"><Link to="/">Back to all leads</Link></p>
+        <p className="mt-4"><Link to="/leads">Back to all leads</Link></p>
       </Shell>
     )
   if (!lead) return <Shell demo={false}><p className="text-muted">Checking {site}…</p></Shell>
@@ -54,7 +54,7 @@ export function LeadPage() {
   const months = lead.timeline?.months ?? []
   return (
     <Shell demo={lead.demo}>
-      <p className="text-sm"><Link to="/">All leads</Link></p>
+      <p className="text-sm"><Link to="/leads">All leads</Link></p>
       <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2">
         <h1 className="text-3xl font-semibold tracking-tight sm:text-[2.6rem]">{lead.site}</h1>
         <StatusMark status={lead.status} competitor={lead.competitor} />

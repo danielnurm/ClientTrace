@@ -1,6 +1,6 @@
-# ClientTrace web
+# Firstbite web
 
-React + TypeScript + Vite + Tailwind CSS v4 frontend for the lead API (`api/main.py`).
+React + TypeScript + Vite + Tailwind CSS v4 frontend for the API (`api/main.py`).
 
 ```bash
 DEMO_MODE=1 .venv/bin/uvicorn api.main:app --port 8000   # from the repo root; saved data, no network
@@ -10,17 +10,22 @@ npm run lint && npm run build                              # before every commit
 
 ## Design
 
-A seller at a chat-software company wants one thing: which of a competitor's customers are changing their
-chat right now, and the proof. The page is quiet so the proof stands out:
+A reader wants one thing: who received what I searched for on this site, and the proof. The page is quiet so the
+proof stands out:
 
-- **The chat tape** is the one bold element: one cell per month showing which chat ran on the site, from the
-  web archive. Everything else is plain text, hairline rules and a single table.
+- **The search replay** (`Replay.tsx`) is the one bold element on a site page: one lane per company, a mark for
+  every request that carried the term, 0 to 6 s after the search, before and after accepting cookies. The
+  evidence below it shows the exact field with the term highlighted. Everything else is plain text, hairline
+  rules and a single table.
+- The original sales-lead views (`/leads`, with **the chat tape** as their bold element) are kept out of the
+  main navigation.
 - **Colours** (tokens in `src/index.css`): cool grey-blue paper, slate ink, one action blue for links and focus.
-  Status and tape colours carry meaning only: red-orange leaving, amber trialling or overlap, slate switched,
-  green staying.
+  Search-check colours carry meaning only: red-orange sent before consent, amber sent after accepting, green
+  not sent, grey needed for the search or not identified. Lead and tape colours as before.
 - **Type:** Schibsted Grotesk, one family; tabular figures only where numbers line up.
-- **Copy:** plain sentences from the evidence ("Salesforce chat runs next to Giosg on the home page since
-  Apr 2026"). No LLM, so every sentence is traceable to a check.
+- **Copy:** plain sentences from the evidence ("A search for “raskaustesti” reached Google Analytics before the
+  cookie banner was answered"). "Sent the term to", never "illegal". No LLM, so every sentence is traceable to
+  a check.
 
 ## Rules (keep it from looking generated)
 

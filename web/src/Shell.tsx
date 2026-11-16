@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import type { LeadStatus } from './api'
 import { STATUS_COLOR, statusLabel } from './lib'
 
@@ -9,13 +9,21 @@ export function Shell({ demo, children }: { demo: boolean; children: ReactNode }
       <header className="flex items-center justify-between gap-4 py-6">
         <Link to="/" className="flex items-center gap-2.5 font-semibold text-ink no-underline">
           <img src="/favicon.svg" alt="" className="size-6" />
-          ClientTrace
+          Firstbite
         </Link>
-        {demo && (
-          <span className="rounded-sm border border-rule bg-surface px-2 py-1 text-xs text-muted" title="Served from a saved check (data/leads_demo.json)">
-            Saved demo data
-          </span>
-        )}
+        <nav className="flex items-center gap-5 text-sm">
+          {demo && (
+            <span className="rounded-sm border border-rule bg-surface px-2 py-1 text-xs text-muted" title="The API runs with DEMO_MODE=1: saved results, no live checks">
+              Saved data
+            </span>
+          )}
+          <NavLink to="/" end className={({ isActive }) => (isActive ? 'font-medium text-ink no-underline' : 'no-underline')}>
+            Survey
+          </NavLink>
+          <NavLink to="/check" className={({ isActive }) => (isActive ? 'font-medium text-ink no-underline' : 'no-underline')}>
+            Check a site
+          </NavLink>
+        </nav>
       </header>
       <main>{children}</main>
     </div>
