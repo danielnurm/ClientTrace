@@ -1,72 +1,83 @@
-// Types and fetch helpers for the ClientTrace API (api/main.py). The dev server proxies /api.
+// Types and fetch helpers for the Firstbite API (api/main.py). The dev server proxies /api.
 
-export type LeadStatus = 'leaving' | 'trialling' | 'switched' | 'weak' | 'locked_in' | 'unknown'
+export type Verdict = 'sent_before_consent' | 'sent_after_reject' | 'sent_after_consent' | 'not_sent' | 'unknown'
+export type PhaseStatus = 'ok' | 'blocked' | 'error' | 'no_search' | 'no_accept' | 'no_reject' | 'unstable'
+export type PhaseKey = 'before' | 'reject' | 'after'
 
-export type TapeClass =
-  | 'ours_only'
-  | 'both'
-  | 'competitor_only'
-  | 'competitor_ours_hidden'
-  | 'chat_hidden'
-  | 'none_detected'
-  | 'no_snapshot'
-
-export interface Alternative {
-  name: string
-  same_page: string[]
-  other_pages: string[]
-  in_privacy_policy: string | null
-  help_centre: boolean
-  since: string | null
-}
-
-export interface Snapshot {
-  page: string
-  date: string
+export interface Carrier {
+  ms: number
   url: string
-  products: string[]
+  field: string
+  snippet: string
 }
 
-export interface Month {
-  month: string
-  class: TapeClass
-  vendors: string[]
-  snapshots: Snapshot[]
-  inferred: boolean
+export interface Recipient {
+  name: string
+  category: string
+  own_domain: boolean
+  counted?: boolean // set by the backend (leaks.SENSITIVE); older data lacks it
+  fields: string[]
+  evidence: Carrier[]
+  first_ms: number
 }
 
-export interface Timeline {
-  product: string
-  months: Month[]
-  summary: {
-    first_competitor_seen: string | null
-    ours_first_seen: string | null
-    ours_last_seen: string | null
-    moving_to_us: boolean
-  }
+export interface Phase {
+  status: PhaseStatus
+  searched?: 'url' | 'typed' | 'guessed'
+  answered_via?: 'button' | 'text' | 'api'
+  error?: string | null
+  recipients: Recipient[]
+  seen_once: string[]
 }
 
-export interface Lead {
+export interface SiteCheck {
   site: string
-  url: string | null
-  status: LeadStatus
-  competitor: string
-  competitor_running: boolean
-  competitor_pages: string[]
-  switching_to: string | null
-  alternatives: Alternative[]
-  dropped_since_last_check: boolean
-  help_center: { platform: string; url: string } | null
-  products: string[]
-  timeline: Timeline | null
-  error: string | null
+  label?: string
+  term: string
+  country?: string
+  kind?: 'pharmacy' | 'clinic'
+  checked_at: string
+  browser?: string
+  before: Phase
+  after: Phase
+  reject?: Phase
+  verdict: Verdict
+  wait_ms?: number // the survey's recording window, sent with one site
 }
 
-export interface LeadReport {
-  competitor: string
+export interface Company {
+  name: string
+  category: string
+  before: number
+  after: number
+  reject?: number
+  total: number
+}
+
+export interface Method {
+  selection: string
+  terms: string
+  phases: string
+  runs: number
+  wait_ms: number
   checked_at: string
-  summary: Partial<Record<LeadStatus, number>>
-  leads: Lead[]
+  browser?: string
+  run_from?: string
+  user_agent?: string
+  answered_via?: string
+  anonymised?: string
+}
+
+export interface Survey {
+  method: Method
+  summary: {
+    sites: number
+    verdicts: Partial<Record<Verdict, number>>
+    own_domain: string[]
+    companies: Company[]
+    after_reject?: { checked: number; sent: number }
+  }
+  sites: SiteCheck[]
   demo: boolean
 }
 
@@ -75,7 +86,7 @@ async function get<T>(path: string): Promise<T> {
   try {
     res = await fetch(path)
   } catch {
-    throw new Error('The ClientTrace API is not running. Start it with: DEMO_MODE=1 uvicorn api.main:app --port 8000')
+    throw new Error('The Firstbite API is not running. Start it with: DEMO_MODE=1 uvicorn api.main:app --port 8000')
   }
   if (!res.ok) {
     const body = await res.json().catch(() => null)
@@ -84,5 +95,5 @@ async function get<T>(path: string): Promise<T> {
   return res.json() as Promise<T>
 }
 
-export const fetchLeads = () => get<LeadReport>('/api/leads')
-export const fetchLead = (site: string) => get<Lead & { demo: boolean }>(`/api/leads/${encodeURIComponent(site)}`)
+export const fetchSurvey = () => get<Survey>('/api/survey')
+export const fetchSite = (site: string) => get<SiteCheck & { demo: boolean }>(`/api/site/${encodeURIComponent(site)}`)

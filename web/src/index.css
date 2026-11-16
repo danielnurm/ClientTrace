@@ -1,52 +1,93 @@
 @import "tailwindcss";
 
-/* Design tokens: cool paper, slate ink, one action colour. Status colours carry meaning only. */
+/* apple.com product-page look with a security tool's proof: system SF type, white / light grey / black sections,
+   mono for every piece of evidence. Colour carries meaning only (Apple system colours): the dots and marks. */
 @theme {
-  --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
 
-  --color-paper: #eef1f4;
-  --color-surface: #ffffff;
-  --color-ink: #17212c;
-  --color-muted: #5b6876;
-  --color-rule: #d5dce3;
-  --color-action: #1e5bb8;
+  --color-light: #f5f5f7;
+  --color-ink: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-muted-dark: #86868b;
+  --color-rule: #d2d2d7;
+  --color-rule-dark: #2c2c2e;
+  --color-panel: #0b0b0c;
+  --color-link: #0066cc;
+  --color-link-dark: #2997ff;
 
-  /* lead statuses */
-  --color-leaving: #b4441c;
-  --color-trialling: #a86a12;
-  --color-switched: #45556a;
-  --color-weak: #7d8995;
-  --color-locked: #2f7350;
-  --color-unknown: #9aa5b1;
-
-  /* chat tape: which chat ran on the site that month */
-  --color-tape-incumbent: #8da0b8;
-  --color-tape-overlap: #e0a030;
-  --color-tape-alternative: #c2532a;
-  --color-tape-hidden: #cbd3dc;
-  --color-tape-none: #e4e8ec;
+  /* when the search term reached an ad or analytics company */
+  --color-before: #ff3b30;
+  --color-reject: #ff375f;
+  --color-after: #ff9f0a;
+  --color-not-sent: #30d158;
+  --color-unknown: #8e8e93;
+  --color-weak: #48484a;
 }
 
 @layer base {
   html {
-    background: var(--color-paper);
+    background: #fff;
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
   }
   a {
-    color: var(--color-action);
-    text-underline-offset: 3px;
+    color: var(--color-link);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .dark a {
+    color: var(--color-link-dark);
   }
   :focus-visible {
-    outline: 2px solid var(--color-action);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 2px solid var(--color-link);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      animation: none !important;
-    }
+}
+
+/* Sections fade up once as they scroll into view (Reveal in Shell.tsx). */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 800ms ease, transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Request-log lines arrive in the order and (scaled) time they really happened. */
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+.is-in .arrive {
+  animation: arrive 420ms ease-out both;
+}
+.arrive {
+  opacity: 0;
+}
+.is-in .arrive,
+.static .arrive {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .arrive,
+  .is-in .arrive {
+    opacity: 1;
+    animation: none;
   }
 }

@@ -1,104 +1,115 @@
-"""HTTP API for the web frontend: the consent check, and sales leads among a competitor's customers.
+"""HTTP API for the web frontend: who receives what a visitor searches for on a site.
 
 Run:   .venv/bin/uvicorn api.main:app --reload --port 8000
-Demo:  DEMO_MODE=1 serves the saved snapshot in data/leads_demo.json (no network at all).
-Save a new snapshot (live, plain requests, no credits):
-       .venv/bin/python -m api.main snapshot Giosg tokmanni.fi fennia.fi elisa.fi
+Demo:  DEMO_MODE=1 serves the saved, anonymised survey only (no network at all).
+Live:  ALLOW_LIVE=1 enables POST /api/check, which opens a real browser on the given site. Off by default:
+       run it only on your own machine.
 
 Endpoints:
-  GET /api/consent?sites=a.fi,b.fi                  trackers before consent per site (cached checks; demo list by default)
-  GET /api/consent/{site}                           one site's findings, evidence and first-seconds timeline
-  GET /api/leads?competitor=Giosg&sites=a.fi,b.fi   leads, hottest first (sites default to the demo list)
-  GET /api/leads/{site}?competitor=Giosg            one lead with its evidence and archive timeline
+  GET  /api/survey                                  the saved survey (data/leaks_survey.json, anonymised)
+  GET  /api/site/{id}                               one surveyed site: recipients before consent, after accept/reject
+  POST /api/check?site=a.fi&term=raskaustesti       live check of one public site (about two minutes)
 """
 from __future__ import annotations
 
+import ipaddress
 import json
+import logging
 import os
-import sys
-from pathlib import Path
-from typing import Optional
+import socket
+import threading
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 
-from backend import consent, leads
+from backend import leaks as search_leaks
 
 load_dotenv()
-
-SNAPSHOT = Path(__file__).resolve().parent.parent / "data" / "leads_demo.json"
-DEMO_SITES = ["tokmanni.fi", "fennia.fi", "elisa.fi", "lahitapiola.fi", "omasp.fi", "s-pankki.fi"]
-
-app = FastAPI(title="ClientTrace API")
+log = logging.getLogger("firstbite")
+app = FastAPI(title="Firstbite API")
+LIVE_SLOT = threading.Lock()
 
 
 def demo_mode() -> bool:
     return os.getenv("DEMO_MODE") == "1"
 
 
-def load_snapshot() -> dict:
+def live_allowed() -> bool:
+    return os.getenv("ALLOW_LIVE") == "1" and not demo_mode()
+
+
+def _is_ip(host: str) -> bool:
     try:
-        return json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+        ipaddress.ip_address(host)
+        return True
+    except ValueError:
+        return False
+
+
+def public_host(site: str) -> str:
+    """The bare host of `site` if it's a public internet name, else ValueError. Blocks what a browser on the
+    server must never be pointed at: localhost, private and link-local ranges (cloud metadata at 169.254.169.254),
+    bare IPs and non-https URLs."""
+    site = site.strip().lower()
+    parts = urlsplit(site if "//" in site else f"https://{site}")
+    if parts.scheme != "https":
+        raise ValueError("only https sites can be checked")
+    host = parts.hostname or ""
+    if not host or "." not in host or host.endswith((".local", ".internal", ".localhost")):
+        raise ValueError("not a public site name")
+    if _is_ip(host):
+        raise ValueError("give a site name, not an IP address")
+    try:
+        addrs = {info[4][0] for info in socket.getaddrinfo(host, 443, proto=socket.IPPROTO_TCP)}
+    except socket.gaierror:
+        raise ValueError("the site name doesn't resolve")
+    if any(not ipaddress.ip_address(a).is_global for a in addrs):
+        raise ValueError("the site resolves to a private or reserved address")
+    return host
+
+
+def load_survey() -> dict:
+    try:
+        return json.loads(search_leaks.SURVEY_FILE.read_text(encoding="utf-8"))
     except (OSError, ValueError) as e:
-        raise HTTPException(503, f"demo snapshot missing or broken ({SNAPSHOT.name}): {e}")
+        log.error("survey unreadable: %s", e)
+        raise HTTPException(503, "the saved survey is missing or broken")
 
 
-def _sites(sites: Optional[str]) -> list[str]:
-    return [s.strip() for s in sites.split(",") if s.strip()] if sites else DEMO_SITES
+@app.get("/api/survey")
+def get_survey() -> dict:
+    return {**load_survey(), "demo": demo_mode(), "live": live_allowed()}
 
 
-@app.get("/api/leads")
-def get_leads(competitor: str = "Giosg", sites: Optional[str] = None) -> dict:
-    if demo_mode():
-        return {**load_snapshot(), "demo": True}
+@app.get("/api/site/{site_id}")
+def get_site(site_id: str) -> dict:
+    survey = load_survey()
+    match = next((s for s in survey["sites"] if s["site"] == site_id), None)
+    if match is None:
+        raise HTTPException(404, "not in the survey")
+    return {**match, "wait_ms": survey.get("method", {}).get("wait_ms"), "demo": demo_mode()}
+
+
+@app.post("/api/check")
+def post_check(site: str, term: str) -> dict:
+    if not live_allowed():
+        raise HTTPException(403, "live checks are off; run the API with ALLOW_LIVE=1 on your own machine")
+    term = term.strip()
+    if not term or len(term) > 60:
+        raise HTTPException(422, "give a search term of 1-60 characters")
     try:
-        return {**leads.find_leads(competitor, _sites(sites)), "demo": False}
-    except Exception as e:
-        raise HTTPException(502, f"lead check failed: {type(e).__name__}: {e}")
-
-
-@app.get("/api/leads/{site}")
-def get_lead(site: str, competitor: str = "Giosg") -> dict:
-    if demo_mode():
-        match = next((l for l in load_snapshot()["leads"] if l["site"] == site), None)
-        if match is None:
-            raise HTTPException(404, f"{site} is not in the demo snapshot")
-        return {**match, "demo": True}
-    rep = get_leads(competitor, site)
-    return {**rep["leads"][0], "demo": False}
-
-
-def load_consent_snapshot() -> dict:
+        host = public_host(site)
+    except ValueError as e:
+        raise HTTPException(422, str(e))
+    # One browser at a time: a check runs ~2 minutes and a few parallel ones would exhaust the machine
+    if not LIVE_SLOT.acquire(blocking=False):
+        raise HTTPException(429, "a check is already running; try again when it's done")
     try:
-        return json.loads(consent.DEMO_SNAPSHOT.read_text(encoding="utf-8"))
-    except (OSError, ValueError) as e:
-        raise HTTPException(503, f"consent snapshot missing or broken ({consent.DEMO_SNAPSHOT.name}): {e}")
-
-
-@app.get("/api/consent")
-def get_consent(sites: Optional[str] = None) -> dict:
-    if demo_mode() or not sites:
-        return {**load_consent_snapshot(), "demo": demo_mode() or not sites}
-    try:
-        return {**consent.consent_report(_sites(sites)), "demo": False}
-    except Exception as e:
-        raise HTTPException(502, f"consent check failed: {type(e).__name__}: {e}")
-
-
-@app.get("/api/consent/{site}")
-def get_consent_site(site: str) -> dict:
-    if demo_mode():
-        match = next((s for s in load_consent_snapshot()["sites"] if s["site"] == site), None)
-        if match is None:
-            raise HTTPException(404, f"{site} is not in the demo snapshot")
-        return {**match, "demo": True}
-    return {**get_consent(site)["sites"][0], "demo": False}
-
-
-if __name__ == "__main__":
-    args = sys.argv[1:]
-    if args[:1] != ["snapshot"] or len(args) < 3:
-        sys.exit("usage: python -m api.main snapshot <competitor product> <site> [site ...]")
-    rep = leads.find_leads(args[1], args[2:])
-    SNAPSHOT.write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"Saved {len(rep['leads'])} leads to {SNAPSHOT}: {rep['summary']}")
+        # The browser opens exactly the host checked above and blocks any non-public address it meets later
+        return {**search_leaks.check_search(host, term), "demo": False}
+    except Exception:
+        log.exception("search check failed for %s", host)
+        raise HTTPException(502, "the check failed; see the API log")
+    finally:
+        LIVE_SLOT.release()
