@@ -36,7 +36,8 @@ the site each month, from the archive), what the live check found, and links to 
 ![Lead detail for omasp.fi: Genesys for three years, then Giosg arriving next to it in August 2026](docs/screenshots/lead-detail.png)
 
 On the six demo sites (Giosg customers in Finland): fennia.fi is trialling Salesforce chat next to Giosg
-since April 2026, elisa.fi and lahitapiola.fi have switched to Genesys, and three run only Giosg.
+since April 2026, elisa.fi and lahitapiola.fi have switched to Genesys, and three stay on Giosg
+(omasp.fi only moved to it in August 2026).
 
 ## Run it
 
