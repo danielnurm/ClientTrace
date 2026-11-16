@@ -59,6 +59,18 @@ class LiveCheckTest(unittest.TestCase):
         self.assertEqual(e.exception.status_code, 502)
         self.assertNotIn("boom", e.exception.detail)
 
+    def test_one_live_check_at_a_time(self):
+        with mock.patch.dict(os.environ, LIVE), _resolves_to("93.184.216.34"), \
+                mock.patch.object(main.search_leaks, "check_search") as live:
+            self.assertTrue(main.LIVE_SLOT.acquire(blocking=False))  # a check is running
+            try:
+                with self.assertRaises(HTTPException) as e:
+                    main.post_check("a.fi", "x")
+            finally:
+                main.LIVE_SLOT.release()
+        self.assertEqual(e.exception.status_code, 429)
+        live.assert_not_called()
+
     def test_term_length(self):
         with mock.patch.dict(os.environ, LIVE):
             for term in ("", "   ", "x" * 61):

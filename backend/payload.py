@@ -31,6 +31,14 @@ def _variants(term: str) -> set[str]:
     return {t, t.replace(" ", "-"), t.replace(" ", "_")}
 
 
+def _json_or_none(body: str):
+    """The parsed body, or None when it only looks like JSON."""
+    try:
+        return json.loads(body)
+    except ValueError:
+        return None
+
+
 def _json_fields(obj, prefix: str = "") -> Iterator[tuple[str, str]]:
     if isinstance(obj, dict):
         for k, v in obj.items():
@@ -51,11 +59,11 @@ def fields(url: str, body: str = "") -> Iterator[tuple[str, str]]:
     if not body:
         return
     if body[:1] in "[{":
-        try:
-            yield from _json_fields(json.loads(body))
+        parsed = _json_or_none(body)
+        if parsed is not None:
+            yield from _json_fields(parsed)
             return
-        except ValueError:
-            pass  # not JSON after all: fall through to form or raw text
+        # not JSON after all: fall through to form or raw text
     lines = body.splitlines()
     if all("=" in ln for ln in lines if ln):
         for ln in lines:  # GA4 batches one hit per line, each a query string

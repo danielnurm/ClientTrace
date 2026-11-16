@@ -17,6 +17,7 @@ import json
 import logging
 import os
 import socket
+import threading
 from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
@@ -27,6 +28,7 @@ from backend import leaks as search_leaks
 load_dotenv()
 log = logging.getLogger("firstbite")
 app = FastAPI(title="Firstbite API")
+LIVE_SLOT = threading.Lock()
 
 
 def demo_mode() -> bool:
@@ -82,10 +84,11 @@ def get_survey() -> dict:
 
 @app.get("/api/site/{site_id}")
 def get_site(site_id: str) -> dict:
-    match = next((s for s in load_survey()["sites"] if s["site"] == site_id), None)
+    survey = load_survey()
+    match = next((s for s in survey["sites"] if s["site"] == site_id), None)
     if match is None:
         raise HTTPException(404, "not in the survey")
-    return {**match, "demo": demo_mode()}
+    return {**match, "wait_ms": survey.get("method", {}).get("wait_ms"), "demo": demo_mode()}
 
 
 @app.post("/api/check")
@@ -99,8 +102,14 @@ def post_check(site: str, term: str) -> dict:
         host = public_host(site)
     except ValueError as e:
         raise HTTPException(422, str(e))
+    # One browser at a time: a check runs ~2 minutes and a few parallel ones would exhaust the machine
+    if not LIVE_SLOT.acquire(blocking=False):
+        raise HTTPException(429, "a check is already running; try again when it's done")
     try:
+        # The browser opens exactly the host checked above and blocks any non-public address it meets later
         return {**search_leaks.check_search(host, term), "demo": False}
     except Exception:
         log.exception("search check failed for %s", host)
         raise HTTPException(502, "the check failed; see the API log")
+    finally:
+        LIVE_SLOT.release()

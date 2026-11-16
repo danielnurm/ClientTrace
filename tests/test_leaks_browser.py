@@ -46,11 +46,12 @@ class SearchCheckInBrowserTest(unittest.TestCase):
 
     def check(self, mode: str) -> dict:
         url = f"http://127.0.0.1:{self.server.server_port}/{mode}/"
-        return lk.check_search("127.0.0.1", "raskaustesti", runs=1, base_url=url)
+        return lk.check_search("127.0.0.1", "raskaustesti", runs=1, base_url=url, allow_private=True)
 
     def test_verdict_per_behaviour(self):
+        # dead-search: the form only reloads the home page, so "nothing sent" would be a false all-clear
         expected = {"leak": "sent_before_consent", "clean": "sent_after_consent",
-                    "ignores-reject": "sent_after_reject"}
+                    "ignores-reject": "sent_after_reject", "dead-search": "unknown"}
         for mode, verdict in expected.items():
             with self.subTest(mode=mode):
                 row = self.check(mode)
@@ -63,6 +64,13 @@ class SearchCheckInBrowserTest(unittest.TestCase):
         self.assertIn("raskaustesti", rec["evidence"][0]["snippet"])
         self.assertEqual(row["after"]["answered_via"], "button")
         self.assertTrue(row["browser"].startswith("Chromium "))
+        self.assertTrue(rec["counted"])
+
+    def test_guard_blocks_private_addresses_in_the_browser(self):
+        url = f"http://127.0.0.1:{self.server.server_port}/leak/"
+        row = lk.check_search("127.0.0.1", "raskaustesti", runs=1, base_url=url)  # guard on, as in production
+        self.assertEqual(row["before"]["status"], "error", row["before"])
+        self.assertEqual(row["verdict"], "unknown")
 
 
 if __name__ == "__main__":

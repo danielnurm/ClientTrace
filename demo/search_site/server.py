@@ -4,6 +4,7 @@ offline. Three behaviours, one per path:
   /leak/            sends every search to the "tracker", banner or not
   /clean/           sends it only after the visitor accepts cookies
   /ignores-reject/  sends it after accept and after reject alike
+  /dead-search/     its search form only reloads the home page: no search runs, nothing is sent
 
 The tracker lives on http://localhost:<port>/g/collect (the shape of a Google Analytics hit) while the shop is
 served on http://127.0.0.1:<port>/, so the browser treats them as two different sites.
@@ -19,7 +20,7 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
-MODES = ("leak", "clean", "ignores-reject")
+MODES = ("leak", "clean", "ignores-reject", "dead-search")
 
 HOME = """<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Demo Pharmacy</title></head><body>
 <h1>Demo Pharmacy</h1>
@@ -50,6 +51,8 @@ class Handler(BaseHTTPRequestHandler):
         mode, _, page = parts.path.strip("/").partition("/")
         if mode not in MODES:
             return self._send(404, "not found")
+        if mode == "dead-search":  # the form points at the home page, which ignores the query
+            return self._send(200, HOME.replace('action="search"', 'action="home"'))
         if page == "search":
             term = parse_qs(parts.query).get("q", [""])[0]
             safe = term.replace("<", "&lt;").replace(">", "&gt;")
