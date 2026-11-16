@@ -1,12 +1,5 @@
 requests
 python-dotenv
-streamlit
-pandas
-plotly
-openai
-pydantic
-exa-py
-context.dev
 fastapi
 uvicorn
 playwright

@@ -1,123 +1,45 @@
 # Contributing
 
-## Roles
+## Layout
 
-Each part has an owner. Ask the owner before changing their files.
+| Part | Files |
+|---|---|
+| Search check (browser, phases, verdicts, survey, anonymisation) | `backend/leaks.py` |
+| Finding the term in a request | `backend/payload.py` |
+| Who a request goes to (tracker and company list) | `backend/trackers.py` |
+| API | `api/main.py` |
+| Web app | `web/` (design rules in `web/README.md`) |
+| Fake pharmacy for tests and demos | `demo/search_site/server.py` |
 
-1. Current customers (Context.dev) – `backend/context_api.py`
-2. Historical customers (Wayback Machine) – `backend/wayback.py`
-3. Comparison + AI – `analysis/`
-4. Dashboard – `app.py`, `frontend/`
+## Data rules
 
-## Agreed functions
-
-Do not change names or formats without asking the team first.
-
-```python
-# backend/context_api.py
-get_current_customers(url: str) -> list[dict]
-
-# backend/wayback.py
-get_historical_customers(url: str, year: int) -> list[dict]
-
-# analysis/comparison.py
-compare_customers(old: list[dict], new: list[dict]) -> dict
-# returns {"lost": [...], "retained": [...], "added": [...]}
-```
-
-`compare_customers` also accepts plain name lists and then returns names.
-
-Other shared functions (not part of the original agreement, extend freely):
-
-```python
-# backend/wayback.py
-get_customer_timeline(url: str, year: int) -> dict
-# half-yearly snapshots of the customer page from year-2 until today:
-# {"snapshots": [{"date", "names"}], "customers": [{..., "first_seen",
-#  "last_seen", "missing_since"}]}
-
-# backend/context_api.py
-find_site_mentions(url: str, names: list[str]) -> dict
-# per name: {"mentioned": bool, "url", "title"}; names whose check failed are left out
-
-# backend/wayback.py
-get_site_history(domain: str, signatures: dict | None = None, from_year: int = 2021) -> dict
-# {"captures": [{"date", "url", "products"}], "products": {name: {"category", "first_seen",
-#  "last_seen", "status", "missing_since"?}}, "switches": [{"from", "to", "between", "confidence"}]}
-
-# backend/site_tech.py
-check_site(site: str) -> dict          # live: {"products", "found_in": {p: "html"|"gtm"}, "latency_ms", ...}
-site_report(site: str) -> dict         # live + archive: per product status/confidence/evidence + signals
-supplier_report(supplier_url: str, product: str, customers: list[dict] | None = None) -> dict
-# {"summary": {verdict: n}, "customers": [{"name", "domain", "verdict", "confidence", "signals", ...}]}
-```
-
-A customer always has this format:
-
-```json
-{"name": "Nokia", "logo_url": "https://...", "source_url": "https://..."}
-```
-
-`logo_url` can be an empty string if there's no logo.
+- **Never commit a surveyed site's name.** Named results live only in `data/leaks/` (gitignored). The published
+  `data/leaks_survey.json` is written by `anonymise()`. Before committing data, check that no domain or brand from
+  `data/leaks/sites_named.json` appears in it (the anonymise test shows how).
+- Wording describes what was observed ("sent the term to", "before the cookie banner was answered"), never
+  legal conclusions.
+- Live checks only from your own machine (`ALLOW_LIVE=1`), one site at a time, no more than three sites in parallel
+  in a survey.
 
 ## Conventions
 
-- Return `[]` when nothing was found, not `None` and not an exception.
-- Raise a clear exception when something actually fails (missing key, network
-  error). The dashboard catches it and shows the reason.
-- Always pass a `timeout=` to network calls.
-- Modules must be importable without side effects: no network calls and no
-  Streamlit calls at import time. Put demo code under
-  `if __name__ == "__main__":`.
-- Backend and analysis code doesn't import `streamlit`.
-- Use English for code, comments and commit messages.
+- Network calls always pass a `timeout=`. Failures are reported (status `error`, `blocked`), never retried around
+  a bot wall.
+- Modules import without side effects: no network or browser at import time.
+- A new test counts only after it has been seen failing once on broken behaviour.
+- English for code, comments and commit messages; Conventional Commits (`feat:`, `fix:`, `docs:`).
 
 ## Git workflow
 
-- No direct pushes to `main`. Everyone works on their own branch.
-- Run `git pull origin main` before you start working.
-- When your part works, open a pull request. Someone takes a quick look, then
-  merge.
+- No direct pushes to `main`. Work on a branch and open a pull request; squash-merge when CI is green.
 - Keep commits small, one change per commit.
 
-## API keys
+## Testing
 
-API keys go only in `.env`, never in the code, commits or PR descriptions.
-`.env` is in `.gitignore`. `.env.example` lists the variables without values.
-
-If a key leaks, revoke it in the provider's dashboard right away and create a
-new one.
-
-## API usage
-
-Context.dev, OpenAI and Exa cost credits.
-
-- Don't call them in loops or automated tests. Use mock data or fake the API
-  function in tests.
-- Each new company costs 1-4 Context.dev requests for the customer page, plus
-  one search per lost customer for the site check. Results are cached in
-  `data/current/` and `data/mentions/`, so repeat runs are free.
-- The default plan allows 2 concurrent requests and answers 429 above that.
-  Context.dev calls go through `_with_retry`, which waits and retries.
-- The competitor search (`backend/competitor_search.py`) makes up to 7 requests
-  per lost customer. Don't run it on long lists.
-- `try_api.py`, `try_scrape.py` and `collect_data.py` call Context.dev every
-  time they run. They're named so `pytest` won't pick them up. Keep new
-  scripts like these out of `test_*.py`.
-
-## Testing the dashboard
-
-Run it headless without a browser:
-
-```python
-from streamlit.testing.v1 import AppTest
-
-at = AppTest.from_file("app.py", default_timeout=60).run()
-at.text_input[0].input("kone.com")
-at.button[0].click().run()
-assert not at.exception
+```bash
+.venv/bin/python -m unittest discover -s tests -t .   # unit tests + the browser test against the fake pharmacy
+cd web && npm run lint && npm run build
 ```
 
-`kone.com` / 2023 is cached, so this makes no Context.dev or Wayback requests.
-If you have `OPENAI_API_KEY` in `.env`, run it with `OPENAI_API_KEY=` in front
-of the command, otherwise the comparison makes one OpenAI request.
+The browser test needs Playwright's Chromium (`.venv/bin/python -m playwright install chromium`); without it the
+test is skipped locally, while CI sets `REQUIRE_BROWSER=1` so it must run there.
