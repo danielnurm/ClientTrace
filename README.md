@@ -105,6 +105,14 @@ streamlit run app.py
 Open http://localhost:8501. **Competitor alerts** opens with a demo list of
 Finnish customer sites; press **Check now**.
 
+**Web API (for the new frontend):** sales leads among a competitor's customers.
+
+```bash
+DEMO_MODE=1 uvicorn api.main:app --port 8000      # saved snapshot, no network
+uvicorn api.main:app --port 8000                  # live checks, plain HTTP, no credits
+curl "localhost:8000/api/leads?competitor=Giosg&sites=fennia.fi,elisa.fi"
+```
+
 ## Why logo pages mislead (the second tab)
 
 The obvious way to spot a lost customer is to compare a company's customer or
