@@ -33,7 +33,7 @@ function Hero({ s }: { s: SurveyData }) {
   )
 }
 
-function Showcase({ site }: { site: SiteCheck }) {
+function Showcase({ site, spanMs }: { site: SiteCheck; spanMs: number }) {
   const first = logLines(site.before).find((l) => l.counted)
   return (
     <Reveal className="dark bg-black px-4 py-24 text-white">
@@ -45,7 +45,8 @@ function Showcase({ site }: { site: SiteCheck }) {
         </p>
       </div>
       <div className="mx-auto mt-12 max-w-[56rem]">
-        <NetworkLog phase={site.before} term={site.term} color="var(--color-before)" title={`Network · ${site.site}.example · search “${site.term}”`} />
+        <NetworkLog phase={site.before} term={site.term} color="var(--color-before)" spanMs={spanMs}
+          title={`Network · ${site.site}.example · search “${site.term}”`} />
       </div>
       <p className="mt-8 text-center text-lg">
         <Link to={`/site/${site.site}`}>See every phase for this site ›</Link>
@@ -201,7 +202,7 @@ export function Survey() {
   return (
     <Shell demo={survey.demo}>
       <Hero s={survey} />
-      {showcase && <Showcase site={showcase} />}
+      {showcase && <Showcase site={showcase} spanMs={survey.method.wait_ms} />}
       <Stats s={survey} />
       <Companies s={survey} />
       <Sites s={survey} />

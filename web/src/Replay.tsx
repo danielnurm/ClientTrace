@@ -1,8 +1,8 @@
 import type { Phase, SiteCheck } from './api'
 import { counted, logLines, PHASE_PROBLEM, PHASES, phaseOf } from './search'
 
-const SPAN_MS = 6000 // what the check records after the search starts (WAIT_MS in backend/leaks.py)
-const PLAYBACK_MS = 3000 // the log replays those 6 s in 3 s
+const DEFAULT_SPAN_MS = 6000 // fallback when the API doesn't send the survey's wait_ms
+const PLAYBACK = 0.5 // the log replays the recording at twice the real speed
 
 /** The search term marked inside a request, so the reader sees exactly where it travelled. */
 export function Highlight({ text, term }: { text: string; term: string }) {
@@ -25,7 +25,13 @@ export function Highlight({ text, term }: { text: string; term: string }) {
 }
 
 /** A dark network-panel window: one line per request that carried the term, arriving in real time order. */
-export function NetworkLog({ phase, term, color, title }: { phase: Phase | undefined; term: string; color: string; title: string }) {
+export function NetworkLog({ phase, term, color, title, spanMs = DEFAULT_SPAN_MS }: {
+  phase: Phase | undefined
+  term: string
+  color: string
+  title: string
+  spanMs?: number
+}) {
   const lines = logLines(phase)
   return (
     <div className="overflow-hidden rounded-2xl border border-rule-dark bg-panel text-left shadow-2xl shadow-black/40">
@@ -47,7 +53,7 @@ export function NetworkLog({ phase, term, color, title }: { phase: Phase | undef
             <li
               key={i}
               className="arrive grid grid-cols-[4.2rem_1fr] gap-x-3 px-4 py-2.5 sm:grid-cols-[4.5rem_11rem_1fr]"
-              style={{ animationDelay: `${(Math.min(l.ms, SPAN_MS) / SPAN_MS) * PLAYBACK_MS}ms` }}
+              style={{ animationDelay: `${Math.min(l.ms, spanMs) * PLAYBACK}ms` }}
             >
               <span className="tabular-nums text-muted-dark">{(l.ms / 1000).toFixed(3)}s</span>
               <span className="flex items-center gap-2 truncate font-semibold text-white">
@@ -69,6 +75,8 @@ export function NetworkLog({ phase, term, color, title }: { phase: Phase | undef
 
 /** Timeline lanes: when each company received the term, per phase, from the moment the search started. */
 export function Lanes({ check }: { check: SiteCheck }) {
+  const span = check.wait_ms ?? DEFAULT_SPAN_MS
+  const ticks = Array.from({ length: Math.floor(span / 1000) + 1 }, (_, s) => s)
   return (
     <div className="space-y-10">
       {PHASES.map(({ key, title, color }) => {
@@ -89,7 +97,7 @@ export function Lanes({ check }: { check: SiteCheck }) {
                     <svg viewBox="0 0 600 14" preserveAspectRatio="none" className="h-3.5 w-full" aria-label={`${r.name}: first at ${(r.first_ms / 1000).toFixed(1)} s`}>
                       <line x1="0" x2="600" y1="7" y2="7" stroke="var(--color-rule-dark)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
                       {[...new Set(r.evidence.map((e) => e.ms))].map((ms) => (
-                        <rect key={ms} x={(Math.min(Math.max(ms, 0), SPAN_MS) / SPAN_MS) * 596} y="0" width="4" height="14" rx="2"
+                        <rect key={ms} x={(Math.min(Math.max(ms, 0), span) / span) * 596} y="0" width="4" height="14" rx="2"
                           fill={counted(r) ? color : 'var(--color-weak)'} />
                       ))}
                     </svg>
@@ -103,7 +111,7 @@ export function Lanes({ check }: { check: SiteCheck }) {
       <div className="grid grid-cols-[8.5rem_1fr] gap-3 sm:grid-cols-[12rem_1fr]" aria-hidden>
         <span />
         <div className="flex justify-between text-xs tabular-nums text-muted-dark">
-          {[0, 1, 2, 3, 4, 5, 6].map((s) => <span key={s}>{s} s</span>)}
+          {ticks.map((s) => <span key={s}>{s} s</span>)}
         </div>
       </div>
     </div>

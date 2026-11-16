@@ -50,7 +50,7 @@ export function SitePage() {
             const phase = phaseOf(check, key)
             return (
               <Reveal key={key}>
-                <NetworkLog phase={phase} term={check.term} color={color} title={title} />
+                <NetworkLog phase={phase} term={check.term} color={color} title={title} spanMs={check.wait_ms} />
                 {phase && phase.seen_once.length > 0 && (
                   <p className="mt-2 text-sm text-muted-dark">Seen in only one run, not counted: {phase.seen_once.join(', ')}.</p>
                 )}

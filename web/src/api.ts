@@ -15,6 +15,7 @@ export interface Recipient {
   name: string
   category: string
   own_domain: boolean
+  counted?: boolean // set by the backend (leaks.SENSITIVE); older data lacks it
   fields: string[]
   evidence: Carrier[]
   first_ms: number
@@ -41,6 +42,7 @@ export interface SiteCheck {
   after: Phase
   reject?: Phase
   verdict: Verdict
+  wait_ms?: number // the survey's recording window, sent with one site
 }
 
 export interface Company {

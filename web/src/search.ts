@@ -27,9 +27,9 @@ export const PHASES: { key: PhaseKey; title: string; color: string }[] = [
 
 export const phaseOf = (c: SiteCheck, key: PhaseKey): Phase | undefined => c[key]
 
-// The same split as SENSITIVE in backend/leaks.py: these don't need the term to run the search
+// The backend marks each recipient (leaks.SENSITIVE); this list is only the fallback for data saved before that
 const COUNTED = new Set(['advertising', 'analytics', 'session recording', 'marketing', 'personalisation'])
-export const counted = (r: Recipient) => COUNTED.has(r.category)
+export const counted = (r: Recipient) => r.counted ?? COUNTED.has(r.category)
 
 export const PHASE_PROBLEM: Record<Exclude<Phase['status'], 'ok'>, string> = {
   blocked: 'The site showed our browser a bot check or a blank page instead of the shop.',
