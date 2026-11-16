@@ -55,5 +55,29 @@ class LiveModeTest(unittest.TestCase):
         self.assertIn("boom", e.exception.detail)
 
 
+CONSENT = {"summary": {"clean": 1}, "sites": [{"site": "yle.fi", "verdict": "tracks_before_consent"}]}
+
+
+class ConsentApiTest(unittest.TestCase):
+    def test_demo_mode_serves_the_snapshot(self):
+        with mock.patch.dict(os.environ, {"DEMO_MODE": "1"}), \
+                mock.patch.object(main, "load_consent_snapshot", return_value=CONSENT), \
+                mock.patch.object(main.consent, "consent_report") as live:
+            self.assertTrue(main.get_consent("a.fi")["demo"])
+            self.assertEqual(main.get_consent_site("yle.fi")["verdict"], "tracks_before_consent")
+        live.assert_not_called()
+
+    def test_no_sites_means_the_saved_list(self):
+        with mock.patch.dict(os.environ, {"DEMO_MODE": ""}), \
+                mock.patch.object(main, "load_consent_snapshot", return_value=CONSENT):
+            self.assertEqual(main.get_consent()["sites"][0]["site"], "yle.fi")
+
+    def test_live_sites_are_checked(self):
+        with mock.patch.dict(os.environ, {"DEMO_MODE": ""}), \
+                mock.patch.object(main.consent, "consent_report", return_value={"sites": []}) as live:
+            main.get_consent("a.fi, b.fi")
+        live.assert_called_once_with(["a.fi", "b.fi"])
+
+
 if __name__ == "__main__":
     unittest.main()
