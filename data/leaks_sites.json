@@ -1,0 +1,221 @@
+{
+ "method": {
+  "selection": "Hand-picked: the large online pharmacies and private clinic chains we know of in Finland, Sweden, Norway, Denmark, Germany and the UK. Sites whose home page didn't answer a plain request at all were left out. Corrections and additions are welcome as GitHub issues.",
+  "terms": "Pharmacies: 'pregnancy test' in the site's language. Clinics: 'depression'. Both are ordinary searches about health.",
+  "phases": "before: the cookie banner is never touched. after: its accept button is clicked first.",
+  "regulators": {
+   "fi": "https://fimea.fi",
+   "se": "https://www.lakemedelsverket.se",
+   "no": "https://www.dmp.no",
+   "dk": "https://laegemiddelstyrelsen.dk",
+   "de": "https://www.bfarm.de",
+   "uk": "https://www.pharmacyregulation.org"
+  }
+ },
+ "sites": [
+  {
+   "site": "yliopistonapteekki.fi",
+   "country": "fi",
+   "kind": "pharmacy",
+   "term": "raskaustesti"
+  },
+  {
+   "site": "apteekki360.fi",
+   "country": "fi",
+   "kind": "pharmacy",
+   "term": "raskaustesti"
+  },
+  {
+   "site": "apotea.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apoteket.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "kronansapotek.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apohem.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "meds.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apotekhjartat.se",
+   "country": "se",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apotek1.no",
+   "country": "no",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "vitusapotek.no",
+   "country": "no",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "boots.no",
+   "country": "no",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "farmasiet.no",
+   "country": "no",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apopro.dk",
+   "country": "dk",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "webapoteket.dk",
+   "country": "dk",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "matas.dk",
+   "country": "dk",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "apoteket.dk",
+   "country": "dk",
+   "kind": "pharmacy",
+   "term": "graviditetstest"
+  },
+  {
+   "site": "shop-apotheke.com",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "docmorris.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "medpex.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "aponeo.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "mycare.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "sanicare.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "apotal.de",
+   "country": "de",
+   "kind": "pharmacy",
+   "term": "schwangerschaftstest"
+  },
+  {
+   "site": "boots.com",
+   "country": "uk",
+   "kind": "pharmacy",
+   "term": "pregnancy test"
+  },
+  {
+   "site": "superdrug.com",
+   "country": "uk",
+   "kind": "pharmacy",
+   "term": "pregnancy test"
+  },
+  {
+   "site": "pharmacy2u.co.uk",
+   "country": "uk",
+   "kind": "pharmacy",
+   "term": "pregnancy test"
+  },
+  {
+   "site": "lloydspharmacy.com",
+   "country": "uk",
+   "kind": "pharmacy",
+   "term": "pregnancy test"
+  },
+  {
+   "site": "terveystalo.com",
+   "country": "fi",
+   "kind": "clinic",
+   "term": "masennus"
+  },
+  {
+   "site": "mehilainen.fi",
+   "country": "fi",
+   "kind": "clinic",
+   "term": "masennus"
+  },
+  {
+   "site": "pihlajalinna.fi",
+   "country": "fi",
+   "kind": "clinic",
+   "term": "masennus"
+  },
+  {
+   "site": "aava.fi",
+   "country": "fi",
+   "kind": "clinic",
+   "term": "masennus"
+  },
+  {
+   "site": "kry.se",
+   "country": "se",
+   "kind": "clinic",
+   "term": "depression"
+  },
+  {
+   "site": "capio.se",
+   "country": "se",
+   "kind": "clinic",
+   "term": "depression"
+  },
+  {
+   "site": "doktor24.se",
+   "country": "se",
+   "kind": "clinic",
+   "term": "depression"
+  }
+ ]
+}
