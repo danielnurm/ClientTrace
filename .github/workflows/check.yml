@@ -1,0 +1,34 @@
+# Runs the Python tests and the web frontend checks on every push to main and every PR.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The team runs Python 3.9 (macOS system Python); runner images no longer ship it, so uv installs it.
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv --python 3.9 && uv pip install -r requirements.txt
+      - name: Unit tests (offline)
+        run: .venv/bin/python -m unittest discover -s tests -t .
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
