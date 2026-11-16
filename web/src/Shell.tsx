@@ -1,41 +1,74 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import type { LeadStatus } from './api'
-import { STATUS_COLOR, statusLabel } from './lib'
+import type { Verdict } from './api'
+import { VERDICT_COLOR, VERDICT_LABEL } from './search'
 
 export function Shell({ demo, children }: { demo: boolean; children: ReactNode }) {
   return (
-    <div className="mx-auto max-w-[72rem] px-4 pb-16 sm:px-8">
-      <header className="flex items-center justify-between gap-4 py-6">
-        <Link to="/" className="flex items-center gap-2.5 font-semibold text-ink no-underline">
-          <img src="/favicon.svg" alt="" className="size-6" />
-          ClientTrace
-        </Link>
-        {demo && (
-          <span className="rounded-sm border border-rule bg-surface px-2 py-1 text-xs text-muted" title="Served from a saved check (data/leads_demo.json)">
-            Saved demo data
-          </span>
-        )}
+    <div className="min-h-screen">
+      <header className="sticky top-0 z-10 border-b border-black/10 bg-white/80 backdrop-blur-xl backdrop-saturate-150">
+        <div className="mx-auto flex h-12 max-w-[64rem] items-center justify-between px-4 text-sm sm:px-6">
+          <Link to="/" className="flex items-center gap-2 font-semibold text-ink hover:no-underline">
+            <img src="/favicon.svg" alt="" className="size-5" />
+            Firstbite
+          </Link>
+          {demo && (
+            <span className="text-xs text-muted" title="The API runs with DEMO_MODE=1: saved results, no live checks">
+              Saved survey
+            </span>
+          )}
+        </div>
       </header>
       <main>{children}</main>
+      <footer className="bg-light">
+        <div className="mx-auto max-w-[64rem] border-t border-rule px-4 py-6 text-xs text-muted sm:px-6">
+          Firstbite. Built at Junction 2026, MIT licensed.{' '}
+          <a href="https://github.com/danielnurm/firstbite">Source on GitHub</a>
+        </div>
+      </footer>
     </div>
   )
 }
 
-export function StatusMark({ status, competitor }: { status: LeadStatus; competitor: string }) {
+/** A full-width section that fades up once when it scrolls into view. */
+export function Reveal({ className = '', children }: { className?: string; children: ReactNode }) {
+  const ref = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.classList.add('is-in')
+          io.disconnect()
+        }
+      },
+      { threshold: 0.15 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   return (
-    <span className="flex items-center gap-2 text-sm font-medium" style={{ color: STATUS_COLOR[status] }}>
-      <span className="size-2.5 shrink-0 rounded-full" style={{ background: STATUS_COLOR[status] }} />
-      {statusLabel(status, competitor)}
+    <section ref={ref} className={`reveal ${className}`}>
+      {children}
+    </section>
+  )
+}
+
+export function VerdictPill({ verdict }: { verdict: Verdict }) {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-current/15 px-3 py-1 text-sm font-medium">
+      <span className="size-2 shrink-0 rounded-full" style={{ background: VERDICT_COLOR[verdict] }} />
+      {VERDICT_LABEL[verdict]}
     </span>
   )
 }
 
 export function Problem({ title, detail }: { title: string; detail: string }) {
   return (
-    <div className="max-w-[60ch] rounded-md border border-rule bg-surface p-6">
-      <h1 className="text-xl font-semibold">{title}</h1>
-      <p className="mt-2 text-muted">{detail}</p>
+    <div className="mx-auto max-w-[40rem] px-4 py-24 text-center">
+      <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+      <p className="mt-3 text-muted">{detail}</p>
     </div>
   )
 }
