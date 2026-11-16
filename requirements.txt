@@ -7,3 +7,5 @@ openai
 pydantic
 exa-py
 context.dev
+fastapi
+uvicorn
