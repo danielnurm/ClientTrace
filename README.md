@@ -117,3 +117,5 @@ site. The logo comparison is still in the Streamlit dashboard's second tab.
 - **Juho Vartiainen:** customer-name matching and AI analysis for the logo comparison.
 
 Built with Claude Code. Contributions: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+License: MIT, see [LICENSE](LICENSE).
