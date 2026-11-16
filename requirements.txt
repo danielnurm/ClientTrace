@@ -9,3 +9,4 @@ exa-py
 context.dev
 fastapi
 uvicorn
+playwright
