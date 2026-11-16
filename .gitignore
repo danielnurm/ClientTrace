@@ -225,3 +225,4 @@ data/sites/*_live.json
 
 # consent checks (re-run with python -m backend.consent check)
 data/consent/
+data/leaks/

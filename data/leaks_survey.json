@@ -1,0 +1,5999 @@
+{
+ "method": {
+  "selection": "Hand-picked: the large online pharmacies and private clinic chains we know of in Finland, Sweden, Norway, Denmark, Germany and the UK. Sites whose home page didn't answer a plain request at all were left out. Corrections and additions are welcome as GitHub issues.",
+  "terms": "Pharmacies: 'pregnancy test' in the site's language. Clinics: 'depression'. Both are ordinary searches about health.",
+  "phases": "before: the cookie banner is never touched. after: its accept button is clicked first. reject: its reject button is clicked first. Each phase runs in a fresh browser with no cookies.",
+  "answered_via": "How the banner was answered, per site: 'button' (the consent tool's known button), 'text' (a button found by its label) or 'api' (the consent tool's own accept/reject call, used only when no button could be clicked).",
+  "user_agent": "Headless Chromium with its user agent changed from 'HeadlessChrome' to 'Chrome', so sites behave as they do for a visitor's Chrome: some consent tools treat headless browsers differently. One visit per phase and run, no more than three sites at a time.",
+  "runs": 2,
+  "wait_ms": 6000,
+  "browser": "Chromium 148.0.7778.96",
+  "run_from": "FI",
+  "checked_at": "2026-11-16T19:29:44+00:00",
+  "anonymised": "Sites are labelled by type and country on purpose: the point is the pattern, not any one company."
+ },
+ "summary": {
+  "sites": 34,
+  "verdicts": {
+   "sent_before_consent": 10,
+   "sent_after_reject": 2,
+   "sent_after_consent": 10,
+   "not_sent": 7,
+   "unknown": 5
+  },
+  "own_domain": [
+   "de-pharmacy-a",
+   "de-pharmacy-c",
+   "de-pharmacy-e",
+   "de-pharmacy-g",
+   "dk-pharmacy-c",
+   "se-clinic-b",
+   "se-pharmacy-a",
+   "se-pharmacy-c",
+   "se-pharmacy-d",
+   "se-pharmacy-e"
+  ],
+  "companies": [
+   {
+    "name": "Google Analytics",
+    "category": "analytics",
+    "before": 6,
+    "after": 16,
+    "reject": 4,
+    "total": 18
+   },
+   {
+    "name": "Google Ads",
+    "category": "advertising",
+    "before": 5,
+    "after": 14,
+    "reject": 2,
+    "total": 16
+   },
+   {
+    "name": "Microsoft Ads",
+    "category": "advertising",
+    "before": 0,
+    "after": 8,
+    "reject": 0,
+    "total": 8
+   },
+   {
+    "name": "AB Tasty",
+    "category": "personalisation",
+    "before": 0,
+    "after": 3,
+    "reject": 0,
+    "total": 3
+   },
+   {
+    "name": "Emarsys",
+    "category": "marketing",
+    "before": 1,
+    "after": 2,
+    "reject": 0,
+    "total": 2
+   },
+   {
+    "name": "Contentsquare",
+    "category": "session recording",
+    "before": 0,
+    "after": 2,
+    "reject": 0,
+    "total": 2
+   },
+   {
+    "name": "Meta Pixel",
+    "category": "advertising",
+    "before": 0,
+    "after": 2,
+    "reject": 0,
+    "total": 2
+   },
+   {
+    "name": "TikTok Pixel",
+    "category": "advertising",
+    "before": 0,
+    "after": 2,
+    "reject": 0,
+    "total": 2
+   },
+   {
+    "name": "Brevo",
+    "category": "marketing",
+    "before": 1,
+    "after": 1,
+    "reject": 1,
+    "total": 1
+   },
+   {
+    "name": "Exactag",
+    "category": "advertising",
+    "before": 1,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "Rebuy",
+    "category": "personalisation",
+    "before": 1,
+    "after": 1,
+    "reject": 1,
+    "total": 1
+   },
+   {
+    "name": "Adform",
+    "category": "advertising",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "CrossEngage",
+    "category": "marketing",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "Frosmo",
+    "category": "personalisation",
+    "before": 0,
+    "after": 1,
+    "reject": 1,
+    "total": 1
+   },
+   {
+    "name": "Kameleoon",
+    "category": "personalisation",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "Nosto",
+    "category": "personalisation",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "Sleeknote",
+    "category": "marketing",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "Snap Pixel",
+    "category": "advertising",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   },
+   {
+    "name": "TVSquared",
+    "category": "advertising",
+    "before": 0,
+    "after": 1,
+    "reject": 0,
+    "total": 1
+   }
+  ],
+  "after_reject": {
+   "checked": 24,
+   "sent": 7
+  }
+ },
+ "sites": [
+  {
+   "site": "de-pharmacy-a",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:21:58+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "consentmanager",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "h"
+      ],
+      "evidence": [
+       {
+        "ms": 555,
+        "url": "https://c.delivery.consentmanager.net/delivery/cmp.php",
+        "field": "h",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 555
+     },
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 770,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 770,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1319,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 770
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 770,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 770,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 770,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 770
+     },
+     {
+      "name": "Emarsys",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "q"
+      ],
+      "evidence": [
+       {
+        "ms": 778,
+        "url": "https://recommender.scarabresearch.com/merchants/…/",
+        "field": "q",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 778
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 949,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 952,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 955,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       }
+      ],
+      "first_ms": 949
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1008,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/suche/?q=schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 1008,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…328_,_13511191_,_16933745_,_02225878_)k(schwangerschaftstest)c(_10260_,_26512_)nc(true"
+       }
+      ],
+      "first_ms": 1008
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "consentmanager",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "h"
+      ],
+      "evidence": [
+       {
+        "ms": 722,
+        "url": "https://c.delivery.consentmanager.net/delivery/cmp.php",
+        "field": "h",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 722
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "tl",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 841,
+        "url": "https://bat.bing.com/action/0",
+        "field": "tl",
+        "snippet": "Suchergebnisse zu schwangerschaftstest"
+       },
+       {
+        "ms": 841,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 841
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl",
+       "dt",
+       "ep.search_term",
+       "pr1",
+       "pr2",
+       "pr3",
+       "pr4",
+       "pr5",
+       "pr6",
+       "pr7",
+       "pr8",
+       "pr9",
+       "pr10",
+       "pr11",
+       "pr12",
+       "pr13",
+       "pr14",
+       "pr15",
+       "pr16",
+       "pr17",
+       "pr18",
+       "pr19",
+       "pr20",
+       "pr21",
+       "pr22",
+       "pr23",
+       "pr24",
+       "pr25",
+       "pr26",
+       "pr27",
+       "pr28",
+       "pr29",
+       "pr30",
+       "ep.item_list_name"
+      ],
+      "evidence": [
+       {
+        "ms": 871,
+        "url": "https://tmsc.de-pharmacy-a.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 871,
+        "url": "https://tmsc.de-pharmacy-a.example/…",
+        "field": "dt",
+        "snippet": "Suchergebnisse zu schwangerschaftstest"
+       },
+       {
+        "ms": 871,
+        "url": "https://tmsc.de-pharmacy-a.example/…",
+        "field": "ep.search_term",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 871
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dt",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 875,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dt",
+        "snippet": "Suchergebnisse zu schwangerschaftstest"
+       },
+       {
+        "ms": 875,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 875
+     },
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 904,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 904,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1201,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 904
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 905,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 905,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 905,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 905
+     },
+     {
+      "name": "collect.trbo.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 927,
+        "url": "https://collect.trbo.com/i/os.php",
+        "field": "dl",
+        "snippet": "…st\":\"Suchergebnis|Ihre Suche nach &quot;schwangerschaftstest&quot;\",\"product_listing_ids\":\"00746538|…"
+       }
+      ],
+      "first_ms": 927
+     },
+     {
+      "name": "api-v4.trbo.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "g",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 954,
+        "url": "https://api-v4.trbo.com/v3/r.php",
+        "field": "g",
+        "snippet": "…\":1,\"p\":\"https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest\",\"t\":1794856947,\"sh\":\"12915\",\"u\":\"4c2af…"
+       },
+       {
+        "ms": 954,
+        "url": "https://api-v4.trbo.com/v3/r.php",
+        "field": "dl",
+        "snippet": "…st\":\"Suchergebnis|Ihre Suche nach &quot;schwangerschaftstest&quot;\",\"product_listing_ids\":\"00746538|…"
+       }
+      ],
+      "first_ms": 954
+     },
+     {
+      "name": "Emarsys",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "q"
+      ],
+      "evidence": [
+       {
+        "ms": 972,
+        "url": "https://recommender.scarabresearch.com/merchants/…/",
+        "field": "q",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 972
+     },
+     {
+      "name": "wt.rqtrk.eu",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 977,
+        "url": "https://wt.rqtrk.eu/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 977
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1085,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/suche/?q=schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 1085,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…328_,_13511191_,_16933745_,_02225878_)k(schwangerschaftstest)c(_10260_,_26512_)nc(false"
+       }
+      ],
+      "first_ms": 1085
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 1092,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…e=ac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 1095,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…e=ac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 1097,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…e=ac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       }
+      ],
+      "first_ms": 1092
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "consentmanager",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "h"
+      ],
+      "evidence": [
+       {
+        "ms": 784,
+        "url": "https://c.delivery.consentmanager.net/delivery/cmp.php",
+        "field": "h",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 784
+     },
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 918,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 918,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1464,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 918
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 918,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 918,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 918,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 918
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 1109,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 1112,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 1115,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…ncac&url=https://www.de-pharmacy-a.example/suche/?q=schwangerschaftstest&ksid=…&pt=search…"
+       }
+      ],
+      "first_ms": 1109
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1167,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/suche/?q=schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 1167,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…328_,_13511191_,_16933745_,_02225878_)k(schwangerschaftstest)c(_10260_,_26512_)nc(true"
+       }
+      ],
+      "first_ms": 1167
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_before_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (A)"
+  },
+  {
+   "site": "de-pharmacy-c",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:21:30+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Exactag",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "items"
+      ],
+      "evidence": [
+       {
+        "ms": 852,
+        "url": "https://m.exactag.com/pi.aspx",
+        "field": "items",
+        "snippet": "…de-pharmacy-c.example\",\"site\":\"/search\",\"search\":\"?query=schwangerschaftstest\",\"protocol\":\"https:\",\"campaign\":\"889b18…"
+       }
+      ],
+      "first_ms": 852
+     },
+     {
+      "name": "consentmanager",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "h"
+      ],
+      "evidence": [
+       {
+        "ms": 857,
+        "url": "https://delivery.consentmanager.net/delivery/cmp.php",
+        "field": "h",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 857
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Exactag",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "items"
+      ],
+      "evidence": [
+       {
+        "ms": 901,
+        "url": "https://m.exactag.com/pi.aspx",
+        "field": "items",
+        "snippet": "…de-pharmacy-c.example\",\"site\":\"/search\",\"search\":\"?query=schwangerschaftstest\",\"protocol\":\"https:\",\"campaign\":\"889b18…"
+       }
+      ],
+      "first_ms": 901
+     },
+     {
+      "name": "usemaxserver.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "loc"
+      ],
+      "evidence": [
+       {
+        "ms": 930,
+        "url": "https://www.usemaxserver.de/d.php",
+        "field": "loc",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 930
+     },
+     {
+      "name": "consentmanager",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "h"
+      ],
+      "evidence": [
+       {
+        "ms": 943,
+        "url": "https://delivery.consentmanager.net/delivery/cmp.php",
+        "field": "h",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 943
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1019,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       },
+       {
+        "ms": 1386,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/696235560/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       },
+       {
+        "ms": 1386,
+        "url": "https://www.google.com/rmkt/collect/696235560/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1019
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl",
+       "ep.search_term",
+       "ep.searchTerm",
+       "pr1",
+       "pr2",
+       "pr3",
+       "pr4",
+       "pr5",
+       "pr6",
+       "pr7",
+       "pr8"
+      ],
+      "evidence": [
+       {
+        "ms": 1103,
+        "url": "https://measure.de-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       },
+       {
+        "ms": 1103,
+        "url": "https://measure.de-pharmacy-c.example/…",
+        "field": "ep.search_term",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 1103,
+        "url": "https://measure.de-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1103
+     },
+     {
+      "name": "trc.taboola.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "data"
+      ],
+      "evidence": [
+       {
+        "ms": 1117,
+        "url": "https://trc.taboola.com/1789859/trc/3/json",
+        "field": "data",
+        "snippet": "…l,\"cb\":\"TFASC.trkCallback\",\"qs\":\"?query=schwangerschaftstest\",\"r\":[{\"li\":\"rbox-tracking\",\"s\":0,\"uim\"…"
+       }
+      ],
+      "first_ms": 1117
+     },
+     {
+      "name": "alb.reddit.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "m.products",
+       "pm"
+      ],
+      "evidence": [
+       {
+        "ms": 1123,
+        "url": "https://alb.reddit.com/rp",
+        "field": "m.products",
+        "snippet": "…M3GY49\",\"name\":\"HIXO ultraempfindlicher Schwangerschaftstest 10 miu/ml 20 St\",\"category\":\"Arzneimitt…"
+       },
+       {
+        "ms": 1123,
+        "url": "https://alb.reddit.com/rp",
+        "field": "pm",
+        "snippet": "…ng\",\"description\":\"Ihr Suchergebnis für schwangerschaftstest | Online Apotheke de-pharmacy-c\",\"keywords\"…"
+       },
+       {
+        "ms": 1123,
+        "url": "https://alb.reddit.com/rp",
+        "field": "m.products",
+        "snippet": "…M3GY49\",\"name\":\"HIXO ultraempfindlicher Schwangerschaftstest 10 miu/ml 20 St\",\"category\":\"Arzneimitt…"
+       }
+      ],
+      "first_ms": 1123
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1126,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1126
+     },
+     {
+      "name": "TikTok Pixel",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "context.page.url",
+       "auto_collected_properties.content_data.open_graph",
+       "auto_collected_properties.content_data.meta"
+      ],
+      "evidence": [
+       {
+        "ms": 1156,
+        "url": "https://analytics.tiktok.com/api/v2/pixel",
+        "field": "context.page.url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       },
+       {
+        "ms": 1157,
+        "url": "https://analytics.tiktok.com/api/v2/pixel",
+        "field": "context.page.url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       },
+       {
+        "ms": 1387,
+        "url": "https://analytics.tiktok.com/api/v2/pixel/act",
+        "field": "context.page.url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1156
+     },
+     {
+      "name": "AB Tasty",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1942,
+        "url": "https://ariane.abtasty.com/",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1942
+     },
+     {
+      "name": "trc-events.taboola.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "item-url"
+      ],
+      "evidence": [
+       {
+        "ms": 5671,
+        "url": "https://trc-events.taboola.com/1789859/log/3/unip",
+        "field": "item-url",
+        "snippet": "https://www.de-pharmacy-c.example/search?query=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 5671
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "sent_before_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (C)"
+  },
+  {
+   "site": "de-pharmacy-g",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:21:20+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "api.sae.systems",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "context.searchTerm"
+      ],
+      "evidence": [
+       {
+        "ms": 1560,
+        "url": "https://api.sae.systems/rma/api/v1/d",
+        "field": "context.searchTerm",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1560
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1721,
+        "url": "https://www.de-pharmacy-g.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1721
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "api.sae.systems",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "context.searchTerm"
+      ],
+      "evidence": [
+       {
+        "ms": 1335,
+        "url": "https://api.sae.systems/rma/api/v1/d",
+        "field": "context.searchTerm",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1335
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "url",
+       "path"
+      ],
+      "evidence": [
+       {
+        "ms": 1446,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1568,
+        "url": "https://www.google.com/rmkt/collect/1026608549/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1568,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1026608549/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1446
+     },
+     {
+      "name": "Meta Pixel",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1446,
+        "url": "https://www.facebook.com/tr",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1446
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1466,
+        "url": "https://www.de-pharmacy-g.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1466
+     },
+     {
+      "name": "TVSquared",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1492,
+        "url": "https://collector-56014.tvsquared.com/tv2track.php",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1492
+     },
+     {
+      "name": "Contentsquare",
+      "category": "session recording",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1513,
+        "url": "https://c.contentsquare.net/pageview",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1513
+     },
+     {
+      "name": "CrossEngage",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "context.location",
+       "context.page.search",
+       "context.page.url"
+      ],
+      "evidence": [
+       {
+        "ms": 1518,
+        "url": "https://trk-api.crossengage.io/api/v1/…/track",
+        "field": "context.location",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1518,
+        "url": "https://trk-api.crossengage.io/api/v1/…/track",
+        "field": "context.page.search",
+        "snippet": "?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1518,
+        "url": "https://trk-api.crossengage.io/api/v1/…/track",
+        "field": "context.page.url",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1518
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1521,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1521
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "api.sae.systems",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "context.searchTerm"
+      ],
+      "evidence": [
+       {
+        "ms": 1236,
+        "url": "https://api.sae.systems/rma/api/v1/d",
+        "field": "context.searchTerm",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1236
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1378,
+        "url": "https://www.de-pharmacy-g.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-g.example/?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1378
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_before_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (G)"
+  },
+  {
+   "site": "dk-pharmacy-a",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:19:07+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1421,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1421
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 3954,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 3954
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 697,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       },
+       {
+        "ms": 759,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/848096704/",
+        "field": "url",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       },
+       {
+        "ms": 760,
+        "url": "https://www.google.com/rmkt/collect/848096704/",
+        "field": "url",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 697
+     },
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1401,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1401
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 4315,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 4315
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1154,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1154
+     },
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 2012,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "https://dk-pharmacy-a.example/soeg?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2012
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_before_consent",
+   "country": "dk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Denmark (A)"
+  },
+  {
+   "site": "dk-pharmacy-c",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:20:05+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 697,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.dk-pharmacy-c.example/?s=graviditetstest"
+       },
+       {
+        "ms": 697,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.dk-pharmacy-c.example/?s=graviditetstest"
+       },
+       {
+        "ms": 697,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "ep.search_term",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 697
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "ep.search_term",
+       "dl",
+       "dt",
+       "ep.clean_path",
+       "ep.page_category",
+       "ep.search_query"
+      ],
+      "evidence": [
+       {
+        "ms": 986,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "ep.search_term",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 2079,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       },
+       {
+        "ms": 2079,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dt",
+        "snippet": "Køb graviditetstest - 99,7% sikker & svar efter 3 minutter"
+       }
+      ],
+      "first_ms": 986
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dt",
+       "dl",
+       "path",
+       "url",
+       "tiba",
+       "data",
+       "ep.ecomm_category"
+      ],
+      "evidence": [
+       {
+        "ms": 2052,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dt",
+        "snippet": "Køb graviditetstest - 99,7% sikker & svar efter 3 minutter"
+       },
+       {
+        "ms": 2052,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       },
+       {
+        "ms": 2090,
+        "url": "https://ad.doubleclick.net/activity;src=11299373;type=ecomm0;cat=produ0;rcb=9;ord=9306653848146;npa=0;auiddc=2059563212.1794856838;u1=undefined;u2=B%C3%B8rn%20%",
+        "field": "path",
+        "snippet": "…& Forældre / Graviditet & efterfødsel / Graviditetstest;gdid=dY2FjZD;uaa=x86;uab=64;uafvl=Chrom…"
+       }
+      ],
+      "first_ms": 2052
+     },
+     {
+      "name": "adservice.google.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "path"
+      ],
+      "evidence": [
+       {
+        "ms": 2204,
+        "url": "https://adservice.google.com/ddm/fls/z/dc_pre=…;src=11299373;type=ecomm0;cat=produ0;rcb=9;ord=9306653848146;npa=0;auiddc=*;u1=undefined",
+        "field": "path",
+        "snippet": "…& Forældre / Graviditet & efterfødsel / Graviditetstest;gdid=dY2FjZD;uaa=x86;uab=64;uafvl=Chrom…"
+       },
+       {
+        "ms": 2788,
+        "url": "https://adservice.google.com/ddm/fls/z/dc_pre=CLuLi-SajZgDFYjCxAEdQFwXNA;src=11299373;type=pv-gt0;cat=allpa0;rcb=9;ord=1060798695999;npa=0;auiddc=*;u1=undefined",
+        "field": "path",
+        "snippet": "…& Forældre / Graviditet & efterfødsel / Graviditetstest;gdid=dY2FjZD;uaa=x86;uab=64;uafvl=Chrom…"
+       }
+      ],
+      "first_ms": 2204
+     },
+     {
+      "name": "cloudflareinsights.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "location"
+      ],
+      "evidence": [
+       {
+        "ms": 2530,
+        "url": "https://cloudflareinsights.com/cdn-cgi/rum",
+        "field": "location",
+        "snippet": "…dk-pharmacy-c.example/…"
+       }
+      ],
+      "first_ms": 2530
+     },
+     {
+      "name": "Snap Pixel",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "pl",
+       "ctx.url",
+       "req[1].md.md[2].tagData.itemListElement.2.item.@id",
+       "req[1].md.md[2].tagData.itemListElement.2.item.name",
+       "req[1].md.md[3].tagData.itemListElement.1.item.name",
+       "req[1].md.md[3].tagData.itemListElement.2.item.name",
+       "req[1].md.md[3].tagData.itemListElement.3.item.name",
+       "req[1].md.md[3].tagData.itemListElement.4.item.name",
+       "req[1].md.md[3].tagData.itemListElement.5.item.name",
+       "req[1].md.md[3].tagData.itemListElement.6.item.name",
+       "req[1].md.md[3].tagData.itemListElement.6.item.url",
+       "req[1].md.md[3].tagData.itemListElement.7.item.name",
+       "req[1].md.md[3].tagData.itemListElement.8.item.name",
+       "req[1].md.md[3].tagData.itemListElement.8.item.url",
+       "req[1].md.md[3].tagData.itemListElement.9.item.name",
+       "req[1].md.md[3].tagData.itemListElement.9.item.url",
+       "req[1].md.md[3].tagData.itemListElement.10.item.name",
+       "req[1].md.md[3].tagData.itemListElement.10.item.url",
+       "req[1].md.md[3].tagData.itemListElement.11.item.name",
+       "req[1].md.md[3].tagData.itemListElement.11.item.url",
+       "req[1].md.md[3].tagData.itemListElement.12.item.name",
+       "req[1].md.md[3].tagData.itemListElement.12.item.url",
+       "req[1].md.md[3].tagData.itemListElement.13.item.name",
+       "req[1].md.md[3].tagData.itemListElement.13.item.url",
+       "req[1].md.md[3].tagData.itemListElement.14.item.name",
+       "req[1].md.md[3].tagData.itemListElement.14.item.url",
+       "req[1].md.md[3].tagData.itemListElement.15.item.name",
+       "req[1].md.md[3].tagData.itemListElement.15.item.url",
+       "req[1].md.md[3].tagData.itemListElement.16.item.name",
+       "req[1].md.md[3].tagData.itemListElement.16.item.url",
+       "req[1].md.md[3].tagData.itemListElement.18.item.name",
+       "req[1].md.md[3].tagData.itemListElement.18.item.url",
+       "req[1].md.md[3].tagData.itemListElement.19.item.name",
+       "req[1].md.md[3].tagData.itemListElement.19.item.url",
+       "req[1].md.md[3].tagData.itemListElement.20.item.name",
+       "req[1].md.md[3].tagData.itemListElement.20.item.url",
+       "req[1].md.md[3].tagData.itemListElement.21.item.name",
+       "req[1].md.md[3].tagData.itemListElement.22.item.name",
+       "req[1].md.md[3].tagData.itemListElement.23.item.name",
+       "req[1].md.md[3].tagData.itemListElement.23.item.url",
+       "req[1].md.md[3].tagData.itemListElement.24.item.name",
+       "req[1].md.md[3].tagData.itemListElement.24.item.url",
+       "req[1].md.md[8].tagData.meta:keywords",
+       "req[1].md.md[9].tagData.meta:description",
+       "req[1].md.md[12].tagData.title",
+       "req[1].md.md[13].tagData.canonicalUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 2715,
+        "url": "https://tr.snapchat.com/p",
+        "field": "pl",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       },
+       {
+        "ms": 3118,
+        "url": "https://tr.snapchat.com/p",
+        "field": "ctx.url",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       },
+       {
+        "ms": 3118,
+        "url": "https://tr.snapchat.com/p",
+        "field": "req[1].md.md[2].tagData.itemListElement.2.item.@id",
+        "snippet": "…dk-pharmacy-c.example/…"
+       }
+      ],
+      "first_ms": 2715
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "tl",
+       "kw",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 2731,
+        "url": "https://bat.bing.com/action/0",
+        "field": "tl",
+        "snippet": "Køb graviditetstest - 99,7% sikker & svar efter 3 minutter"
+       },
+       {
+        "ms": 2731,
+        "url": "https://bat.bing.com/action/0",
+        "field": "kw",
+        "snippet": "dk-pharmacy-c,graviditetstest"
+       },
+       {
+        "ms": 2731,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       }
+      ],
+      "first_ms": 2731
+     },
+     {
+      "name": "Meta Pixel",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "body"
+      ],
+      "evidence": [
+       {
+        "ms": 2748,
+        "url": "https://www.facebook.com/tr/",
+        "field": "body",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest\r\n------Web…"
+       }
+      ],
+      "first_ms": 2748
+     },
+     {
+      "name": "ct.pinterest.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ad"
+      ],
+      "evidence": [
+       {
+        "ms": 2750,
+        "url": "https://ct.pinterest.com/v3/",
+        "field": "ad",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest\",\"ref\":\"ht…"
+       }
+      ],
+      "first_ms": 2750
+     },
+     {
+      "name": "tr6.snapchat.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ctx.url"
+      ],
+      "evidence": [
+       {
+        "ms": 2913,
+        "url": "https://tr6.snapchat.com/p",
+        "field": "ctx.url",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       }
+      ],
+      "first_ms": 2913
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "ep.search_term",
+       "dl",
+       "dt",
+       "ep.clean_path",
+       "ep.page_category",
+       "ep.search_query"
+      ],
+      "evidence": [
+       {
+        "ms": 1048,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "ep.search_term",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 1378,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "…dk-pharmacy-c.example/…?search-query=graviditetstest"
+       },
+       {
+        "ms": 1378,
+        "url": "https://gtm-wj5nrrn.dk-pharmacy-c.example/…",
+        "field": "dt",
+        "snippet": "Køb graviditetstest - 99,7% sikker & svar efter 3 minutter"
+       }
+      ],
+      "first_ms": 1048
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "api"
+   },
+   "verdict": "sent_before_consent",
+   "country": "dk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Denmark (C)"
+  },
+  {
+   "site": "fi-pharmacy-a",
+   "term": "raskaustesti",
+   "checked_at": "2026-11-16T19:15:11+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1035,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…el-244056389@35/sandbox/modern/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 1035
+     },
+     {
+      "name": "Rebuy",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1047,
+        "url": "https://rebuyengine.com/api/v1/custom/id/203872",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 1047
+     },
+     {
+      "name": "Brevo",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "ma_url",
+       "ma_title",
+       "sib_name"
+      ],
+      "evidence": [
+       {
+        "ms": 1086,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1086,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_title",
+        "snippet": "…raskaustesti…"
+       },
+       {
+        "ms": 1086,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "sib_name",
+        "snippet": "…raskaustesti…"
+       }
+      ],
+      "first_ms": 1086
+     },
+     {
+      "name": "ei.9gti.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "searchQuery"
+      ],
+      "evidence": [
+       {
+        "ms": 1562,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1562,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "searchQuery",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 1562
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "tiba",
+       "dt",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 821,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/933914598/",
+        "field": "url",
+        "snippet": "…el-244056389@35/sandbox/modern/search?q=raskaustesti"
+       },
+       {
+        "ms": 821,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/933914598/",
+        "field": "tiba",
+        "snippet": "…raskaustesti…"
+       },
+       {
+        "ms": 821,
+        "url": "https://www.google.com/rmkt/collect/933914598/",
+        "field": "url",
+        "snippet": "…el-244056389@35/sandbox/modern/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 821
+     },
+     {
+      "name": "TikTok Pixel",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "context.page.url"
+      ],
+      "evidence": [
+       {
+        "ms": 883,
+        "url": "https://analytics.tiktok.com/api/v2/pixel",
+        "field": "context.page.url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 883,
+        "url": "https://analytics.tiktok.com/api/v2/pixel",
+        "field": "context.page.url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 883
+     },
+     {
+      "name": "Rebuy",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 981,
+        "url": "https://rebuyengine.com/api/v1/custom/id/203872",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1259,
+        "url": "https://rebuyengine.com/api/v1/custom/id/203872",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 981
+     },
+     {
+      "name": "Brevo",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "ma_url",
+       "ma_title",
+       "sib_name"
+      ],
+      "evidence": [
+       {
+        "ms": 1042,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1042,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_title",
+        "snippet": "…raskaustesti…"
+       },
+       {
+        "ms": 1042,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "sib_name",
+        "snippet": "…raskaustesti…"
+       }
+      ],
+      "first_ms": 1042
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "dt",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 1439,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1439,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dt",
+        "snippet": "…raskaustesti…"
+       },
+       {
+        "ms": 1439,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "ep.search_term",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 1439
+     },
+     {
+      "name": "googleadservices.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "tiba"
+      ],
+      "evidence": [
+       {
+        "ms": 1472,
+        "url": "https://www.googleadservices.com/ccm/conversion/933914598/",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1472,
+        "url": "https://www.googleadservices.com/ccm/conversion/933914598/",
+        "field": "tiba",
+        "snippet": "…raskaustesti…"
+       }
+      ],
+      "first_ms": 1472
+     },
+     {
+      "name": "ei.9gti.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "searchQuery"
+      ],
+      "evidence": [
+       {
+        "ms": 1538,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1538,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "searchQuery",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 1538
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 811,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…el-244056389@35/sandbox/modern/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 811
+     },
+     {
+      "name": "Rebuy",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 963,
+        "url": "https://rebuyengine.com/api/v1/custom/id/203872",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       }
+      ],
+      "first_ms": 963
+     },
+     {
+      "name": "Brevo",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "ma_url",
+       "ma_title",
+       "sib_name"
+      ],
+      "evidence": [
+       {
+        "ms": 1081,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1081,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "ma_title",
+        "snippet": "…raskaustesti…"
+       },
+       {
+        "ms": 1081,
+        "url": "https://in-automate.brevo.com/p",
+        "field": "sib_name",
+        "snippet": "…raskaustesti…"
+       }
+      ],
+      "first_ms": 1081
+     },
+     {
+      "name": "ei.9gti.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "searchQuery"
+      ],
+      "evidence": [
+       {
+        "ms": 1566,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "url",
+        "snippet": "https://fi-pharmacy-a.example/search?q=raskaustesti"
+       },
+       {
+        "ms": 1566,
+        "url": "https://ei.9gti.com/public/t",
+        "field": "searchQuery",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 1566
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "verdict": "sent_before_consent",
+   "country": "fi",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Finland (A)"
+  },
+  {
+   "site": "no-pharmacy-a",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:17:44+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "pr2",
+       "dl",
+       "ep.chat_label"
+      ],
+      "evidence": [
+       {
+        "ms": 727,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "pr2",
+        "snippet": "nmMetode graviditetstest tidlig 2 stk~id999915~pr199.9~brMetode~…"
+       },
+       {
+        "ms": 1664,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       },
+       {
+        "ms": 2562,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "ep.chat_label",
+        "snippet": "…242ac12000a:https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       }
+      ],
+      "first_ms": 727
+     },
+     {
+      "name": "Algolia",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "requests[0].query",
+       "requests[1].query"
+      ],
+      "evidence": [
+       {
+        "ms": 872,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].query",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 872,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[1].query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 872
+     },
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "title",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1299,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "title",
+        "snippet": "…graviditetstest…"
+       },
+       {
+        "ms": 1299,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "url",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       },
+       {
+        "ms": 1918,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "title",
+        "snippet": "…graviditetstest…"
+       }
+      ],
+      "first_ms": 1299
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "title",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 310,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "title",
+        "snippet": "…graviditetstest…"
+       },
+       {
+        "ms": 310,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "url",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       }
+      ],
+      "first_ms": 310
+     },
+     {
+      "name": "Algolia",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "requests[0].query",
+       "requests[1].query"
+      ],
+      "evidence": [
+       {
+        "ms": 331,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].query",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 453,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].query",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 453,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[1].query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 331
+     },
+     {
+      "name": "Kameleoon",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "href",
+       "title",
+       "canonicalHref"
+      ],
+      "evidence": [
+       {
+        "ms": 784,
+        "url": "https://eu-data.kameleoon.io/visit/events",
+        "field": "href",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       },
+       {
+        "ms": 784,
+        "url": "https://eu-data.kameleoon.io/visit/events",
+        "field": "title",
+        "snippet": "…graviditetstest…"
+       },
+       {
+        "ms": 784,
+        "url": "https://eu-data.kameleoon.io/visit/events",
+        "field": "canonicalHref",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest"
+       }
+      ],
+      "first_ms": 784
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1239,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       }
+      ],
+      "first_ms": 1239
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Algolia",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "requests[0].query",
+       "requests[1].query"
+      ],
+      "evidence": [
+       {
+        "ms": 423,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].query",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 527,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].query",
+        "snippet": "graviditetstest"
+       },
+       {
+        "ms": 527,
+        "url": "https://49dptqdhk9-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[1].query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 423
+     },
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "title",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 514,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "title",
+        "snippet": "…graviditetstest…"
+       },
+       {
+        "ms": 514,
+        "url": "https://service.giosg.com/api/v5/public/trace/",
+        "field": "url",
+        "snippet": "https://www.no-pharmacy-a.example/soek/graviditetstest?searchTerm=graviditetstest&sortMethod=0…"
+       }
+      ],
+      "first_ms": 514
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "pr1",
+       "pr2",
+       "pr3",
+       "pr4",
+       "pr5",
+       "pr6",
+       "pr7",
+       "pr8",
+       "pr9",
+       "pr10",
+       "pr11",
+       "pr12",
+       "pr13",
+       "pr14",
+       "pr15",
+       "pr16",
+       "pr17",
+       "pr18",
+       "ep.item_list_id",
+       "ep.item_list_name",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1326,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "pr1",
+        "snippet": "nmClearblue Digital ultratidlig graviditetstest 2 stk~id968816~pr259.9~brClearblue~caCl…"
+       },
+       {
+        "ms": 1326,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "pr2",
+        "snippet": "nmMetode Test tidlig graviditetstest strimler 25 stk~id927920~pr329.9~brMeto…"
+       },
+       {
+        "ms": 1326,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "pr3",
+        "snippet": "nmClearblue digital graviditetstest med ukeindikator 2 stk~id897990~pr319.9…"
+       }
+      ],
+      "first_ms": 1326
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_before_consent",
+   "country": "no",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Norway (A)"
+  },
+  {
+   "site": "no-pharmacy-d",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:17:58+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 2526,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-d.example/search?text=graviditetstest"
+       },
+       {
+        "ms": 2526,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-d.example/search?text=graviditetstest"
+       }
+      ],
+      "first_ms": 2526
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "dt"
+      ],
+      "evidence": [
+       {
+        "ms": 2526,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-d.example/search?text=graviditetstest"
+       },
+       {
+        "ms": 2526,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dt",
+        "snippet": "Søk - graviditetstest | no-pharmacy-d"
+       }
+      ],
+      "first_ms": 2526
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "no_accept",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "sent_before_consent",
+   "country": "no",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Norway (D)"
+  },
+  {
+   "site": "se-clinic-b",
+   "term": "depression",
+   "checked_at": "2026-11-16T19:28:10+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [
+     {
+      "name": "iteratehq.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "browser.url"
+      ],
+      "evidence": [
+       {
+        "ms": 592,
+        "url": "https://iteratehq.com/api/v1/surveys/embed",
+        "field": "browser.url",
+        "snippet": "https://se-clinic-b.example/?s=depression"
+       }
+      ],
+      "first_ms": 592
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl",
+       "dt"
+      ],
+      "evidence": [
+       {
+        "ms": 1083,
+        "url": "https://tagging.se-clinic-b.example/…",
+        "field": "dl",
+        "snippet": "https://se-clinic-b.example/?s=depression"
+       },
+       {
+        "ms": 1083,
+        "url": "https://tagging.se-clinic-b.example/…",
+        "field": "dt",
+        "snippet": "Sökresultat för ”depression” | se-clinic-b"
+       },
+       {
+        "ms": 1083,
+        "url": "https://tagging.se-clinic-b.example/…",
+        "field": "dl",
+        "snippet": "https://se-clinic-b.example/?s=depression"
+       }
+      ],
+      "first_ms": 1083
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1083,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://se-clinic-b.example/?s=depression"
+       }
+      ],
+      "first_ms": 1083
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "no_accept",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "sent_before_consent",
+   "country": "se",
+   "kind": "clinic",
+   "label": "Private clinic, Sweden (B)"
+  },
+  {
+   "site": "uk-pharmacy-b",
+   "term": "pregnancy test",
+   "checked_at": "2026-11-16T19:24:21+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Algolia",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "requests[0].params"
+      ],
+      "evidence": [
+       {
+        "ms": 668,
+        "url": "https://3tdgto0tjo-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].params",
+        "snippet": "…itsPerPage=12&clickAnalytics=true&query=pregnancy test&maxValuesPerFacet=10&highlightPreTag=<s…"
+       }
+      ],
+      "first_ms": 668
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 786,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       }
+      ],
+      "first_ms": 786
+     },
+     {
+      "name": "lantern.roeye.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "landingpage"
+      ],
+      "evidence": [
+       {
+        "ms": 828,
+        "url": "https://lantern.roeye.com/track.php",
+        "field": "landingpage",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       }
+      ],
+      "first_ms": 828
+     },
+     {
+      "name": "cdn.shopify.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "path"
+      ],
+      "evidence": [
+       {
+        "ms": 922,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….webp",
+        "field": "path",
+        "snippet": "…57/1046/0991/files/….webp"
+       },
+       {
+        "ms": 922,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….jpg",
+        "field": "path",
+        "snippet": "…57/1046/0991/files/….jpg"
+       },
+       {
+        "ms": 926,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….jpg",
+        "field": "path",
+        "snippet": "…991/files/….jpg"
+       }
+      ],
+      "first_ms": 922
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "dt"
+      ],
+      "evidence": [
+       {
+        "ms": 1257,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       },
+       {
+        "ms": 1257,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dt",
+        "snippet": "Search: 203 results found for \"pregnancy test\" – uk-pharmacy-b"
+       }
+      ],
+      "first_ms": 1257
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Algolia",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "requests[0].params"
+      ],
+      "evidence": [
+       {
+        "ms": 274,
+        "url": "https://3tdgto0tjo-dsn.algolia.net/1/indexes/*/queries",
+        "field": "requests[0].params",
+        "snippet": "…itsPerPage=12&clickAnalytics=true&query=pregnancy test&maxValuesPerFacet=10&highlightPreTag=<s…"
+       }
+      ],
+      "first_ms": 274
+     },
+     {
+      "name": "cdn.shopify.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "path"
+      ],
+      "evidence": [
+       {
+        "ms": 447,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….webp",
+        "field": "path",
+        "snippet": "…57/1046/0991/files/….webp"
+       },
+       {
+        "ms": 448,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….jpg",
+        "field": "path",
+        "snippet": "…57/1046/0991/files/….jpg"
+       },
+       {
+        "ms": 457,
+        "url": "https://cdn.shopify.com/s/files/1/0257/1046/0991/files/….jpg",
+        "field": "path",
+        "snippet": "…991/files/….jpg"
+       }
+      ],
+      "first_ms": 447
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "dt",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 518,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       },
+       {
+        "ms": 518,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dt",
+        "snippet": "Search: 203 results found for \"pregnancy test\" – uk-pharmacy-b"
+       },
+       {
+        "ms": 518,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "ep.search_term",
+        "snippet": "pregnancy test"
+       }
+      ],
+      "first_ms": 518
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dt",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 552,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dt",
+        "snippet": "Search: 203 results found for \"pregnancy test\" – uk-pharmacy-b"
+       },
+       {
+        "ms": 552,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       }
+      ],
+      "first_ms": 552
+     },
+     {
+      "name": "lantern.roeye.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "landingpage"
+      ],
+      "evidence": [
+       {
+        "ms": 618,
+        "url": "https://lantern.roeye.com/track.php",
+        "field": "landingpage",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       }
+      ],
+      "first_ms": 618
+     },
+     {
+      "name": "merchant-center-analytics.goog",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "dt",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 5512,
+        "url": "https://www.merchant-center-analytics.goog/mc/collect",
+        "field": "dt",
+        "snippet": "Search: 203 results found for \"pregnancy test\" – uk-pharmacy-b"
+       },
+       {
+        "ms": 5512,
+        "url": "https://www.merchant-center-analytics.goog/mc/collect",
+        "field": "dl",
+        "snippet": "https://uk-pharmacy-b.example/search?q=pregnancy test"
+       }
+      ],
+      "first_ms": 5512
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "sent_before_consent",
+   "country": "uk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, United Kingdom (B)"
+  },
+  {
+   "site": "dk-pharmacy-d",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:19:59+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1987,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1987
+     },
+     {
+      "name": "dk-pharmacy-d.echat1.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "pageUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 2209,
+        "url": "https://dk-pharmacy-d.echat1.com/server/api/chat/…/available/",
+        "field": "pageUrl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2209
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 2028,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2028
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 2050,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 2086,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 2108,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2050
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 2132,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/956146794/",
+        "field": "url",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 2132,
+        "url": "https://www.google.com/rmkt/collect/956146794/",
+        "field": "url",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 2181,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2132
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 2256,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2256
+     },
+     {
+      "name": "dk-pharmacy-d.echat1.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "pageUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 2271,
+        "url": "https://dk-pharmacy-d.echat1.com/server/api/chat/…/available/",
+        "field": "pageUrl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2271
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 1907,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 1964,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       },
+       {
+        "ms": 2005,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1907
+     },
+     {
+      "name": "Trustpilot",
+      "category": "reviews",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1943,
+        "url": "https://widget.trustpilot.com/stats/TrustboxImpression",
+        "field": "url",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 1943
+     },
+     {
+      "name": "dk-pharmacy-d.echat1.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "pageUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 2168,
+        "url": "https://dk-pharmacy-d.echat1.com/server/api/chat/…/available/",
+        "field": "pageUrl",
+        "snippet": "…ttps://www.dk-pharmacy-d.example/search?search=graviditetstest"
+       }
+      ],
+      "first_ms": 2168
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_reject",
+   "country": "dk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Denmark (D)"
+  },
+  {
+   "site": "fi-pharmacy-b",
+   "term": "raskaustesti",
+   "checked_at": "2026-11-16T19:15:11+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Klevu",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "recordQueries[0].settings.query.term",
+       "recordQueries[2].settings.query.term",
+       "klevu_term"
+      ],
+      "evidence": [
+       {
+        "ms": 209,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 209,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[2].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 234,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 209
+     },
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "title"
+      ],
+      "evidence": [
+       {
+        "ms": 308,
+        "url": "https://service.giosg.com/api/v5/orgs/2489/…/",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 476,
+        "url": "https://service.giosg.com/bar/visitor/chat",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 534,
+        "url": "https://service.giosg.com/api/v5/orgs/…/visitor-settings",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       }
+      ],
+      "first_ms": 308
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Klevu",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "recordQueries[0].settings.query.term",
+       "recordQueries[2].settings.query.term",
+       "klevu_term"
+      ],
+      "evidence": [
+       {
+        "ms": 185,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 185,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[2].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 201,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 185
+     },
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "title"
+      ],
+      "evidence": [
+       {
+        "ms": 253,
+        "url": "https://service.giosg.com/api/v5/orgs/2489/…/",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 496,
+        "url": "https://service.giosg.com/bar/visitor/chat",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 564,
+        "url": "https://service.giosg.com/api/v5/orgs/…/visitor-settings",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       }
+      ],
+      "first_ms": 253
+     },
+     {
+      "name": "Frosmo",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "payload"
+      ],
+      "evidence": [
+       {
+        "ms": 424,
+        "url": "https://fi1.frosmo.com/trackingApi",
+        "field": "payload",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti\",\"positionId\":3333,\"messageId\":11728,\"r…"
+       },
+       {
+        "ms": 424,
+        "url": "https://fi1.frosmo.com/trackingApi",
+        "field": "payload",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti\",\"positionId\":4940,\"messageId\":10384,\"r…"
+       }
+      ],
+      "first_ms": 424
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Klevu",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "recordQueries[0].settings.query.term",
+       "recordQueries[2].settings.query.term",
+       "klevu_term"
+      ],
+      "evidence": [
+       {
+        "ms": 198,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 198,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[2].settings.query.term",
+        "snippet": "raskaustesti"
+       },
+       {
+        "ms": 217,
+        "url": "https://eucs35v2.ksearchnet.com/cs/v2/search",
+        "field": "recordQueries[0].settings.query.term",
+        "snippet": "raskaustesti"
+       }
+      ],
+      "first_ms": 198
+     },
+     {
+      "name": "Giosg",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "title"
+      ],
+      "evidence": [
+       {
+        "ms": 329,
+        "url": "https://service.giosg.com/api/v5/orgs/2489/…/",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 463,
+        "url": "https://service.giosg.com/bar/visitor/chat",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       },
+       {
+        "ms": 520,
+        "url": "https://service.giosg.com/api/v5/orgs/…/visitor-settings",
+        "field": "url",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti"
+       }
+      ],
+      "first_ms": 329
+     },
+     {
+      "name": "Frosmo",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "payload"
+      ],
+      "evidence": [
+       {
+        "ms": 464,
+        "url": "https://fi1.frosmo.com/trackingApi",
+        "field": "payload",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti\",\"positionId\":3333,\"messageId\":11728,\"r…"
+       },
+       {
+        "ms": 464,
+        "url": "https://fi1.frosmo.com/trackingApi",
+        "field": "payload",
+        "snippet": "…www.fi-pharmacy-b.example/sivustohaku?q=raskaustesti\",\"positionId\":4940,\"messageId\":10384,\"r…"
+       }
+      ],
+      "first_ms": 464
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_reject",
+   "country": "fi",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Finland (B)"
+  },
+  {
+   "site": "de-pharmacy-b",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:23:11+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 2893,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 2893,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 3505,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2893
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 2893,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 2893,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2893,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2893
+     },
+     {
+      "name": "etracker.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "et_source_url"
+      ],
+      "evidence": [
+       {
+        "ms": 2930,
+        "url": "https://www.etracker.de/cntcc",
+        "field": "et_source_url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2930
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 3092,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…=ncac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 3094,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…=ncac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 3096,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…=ncac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       }
+      ],
+      "first_ms": 3092
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 3138,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/search/schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 3138,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…_)p2(_00746538_,_20108395_,_17165254_)k(schwangerschaftstest)c(_30966_,_31788_)nc(true"
+       }
+      ],
+      "first_ms": 3138
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "ep.form_destination",
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 2155,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "ep.form_destination",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2310,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2404,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2155
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 2269,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2295,
+        "url": "https://pagead2.googlesyndication.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2404,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2269
+     },
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 2351,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 2351,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2607,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2351
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 2351,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 2351,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       },
+       {
+        "ms": 2351,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2351
+     },
+     {
+      "name": "etracker.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "et_source_url"
+      ],
+      "evidence": [
+       {
+        "ms": 2404,
+        "url": "https://www.etracker.de/cntcc",
+        "field": "et_source_url",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2404
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 2418,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://shop.de-pharmacy-b.example/search/schwangerschaftstest"
+       }
+      ],
+      "first_ms": 2418
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 2488,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/search/schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 2488,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…_)p2(_00746538_,_20108395_,_17165254_)k(schwangerschaftstest)c(_30966_,_31788_)nc(false"
+       }
+      ],
+      "first_ms": 2488
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 2534,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…pe=ac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 2537,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…pe=ac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       },
+       {
+        "ms": 2539,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…pe=ac&url=https://shop.de-pharmacy-b.example/search/schwangerschaftstest&ksid=…&pt=search…"
+       }
+      ],
+      "first_ms": 2534
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "sent_after_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (B)"
+  },
+  {
+   "site": "de-pharmacy-e",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:22:33+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 717,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       },
+       {
+        "ms": 807,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1070798169/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       },
+       {
+        "ms": 807,
+        "url": "https://www.google.com/rmkt/collect/1070798169/",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 717
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 735,
+        "url": "https://sgtm.de-pharmacy-e.example/…",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 735
+     },
+     {
+      "name": "t2.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 771,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 771,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       },
+       {
+        "ms": 1248,
+        "url": "https://t2.kctag.net/live/json",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 771
+     },
+     {
+      "name": "kasl.kctag.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "kw_search",
+       "url",
+       "kw"
+      ],
+      "evidence": [
+       {
+        "ms": 772,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "kw_search",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 772,
+        "url": "https://kasl.kctag.net/t/live/e",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       },
+       {
+        "ms": 772,
+        "url": "https://kasl.kctag.net/s",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 772
+     },
+     {
+      "name": "Microsoft Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "kw",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 863,
+        "url": "https://bat.bing.com/action/0",
+        "field": "kw",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 863,
+        "url": "https://bat.bing.com/action/0",
+        "field": "p",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 863
+     },
+     {
+      "name": "tm727.container.webgains.link",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "macroData[searchTerm]",
+       "macroData[pageUrl]"
+      ],
+      "evidence": [
+       {
+        "ms": 961,
+        "url": "https://tm727.container.webgains.link/tm/a/container/eval/dabf955ab1.js",
+        "field": "macroData[searchTerm]",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 961,
+        "url": "https://tm727.container.webgains.link/tm/a/container/eval/dabf955ab1.js",
+        "field": "macroData[pageUrl]",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 961
+     },
+     {
+      "name": "pcdn.kairion.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "clickurl"
+      ],
+      "evidence": [
+       {
+        "ms": 1075,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…type=ac&url=https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest&ksid=5M0jWMLVwzr…"
+       },
+       {
+        "ms": 1078,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…type=ac&url=https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest&ksid=5M0jWMLVwzr…"
+       },
+       {
+        "ms": 1081,
+        "url": "https://pcdn.kairion.de/onaare/….html",
+        "field": "clickurl",
+        "snippet": "…type=ac&url=https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest&ksid=5M0jWMLVwzr…"
+       }
+      ],
+      "first_ms": 1075
+     },
+     {
+      "name": "Emarsys",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 1127,
+        "url": "https://webchannel-content.eservice.emarsys.net/customer/785819479/campaigns",
+        "field": "url",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1127
+     },
+     {
+      "name": "aproxy.ksgct.de",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "ro",
+       "p"
+      ],
+      "evidence": [
+       {
+        "ms": 1132,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "ro",
+        "snippet": "/suche/schwangerschaftstest?q=schwangerschaftstest_URL_END"
+       },
+       {
+        "ms": 1132,
+        "url": "https://aproxy.ksgct.de/s",
+        "field": "p",
+        "snippet": "…619_,_04900002_,_10931254_,_19557969_)k(schwangerschaftstest)c(___categories_,_familie-kinderwunsch_…"
+       }
+      ],
+      "first_ms": 1132
+     },
+     {
+      "name": "ad.ad-srv.net",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "query"
+      ],
+      "evidence": [
+       {
+        "ms": 1468,
+        "url": "https://ad.ad-srv.net/retarget",
+        "field": "query",
+        "snippet": "schwangerschaftstest"
+       },
+       {
+        "ms": 1722,
+        "url": "https://ad.ad-srv.net/retarget",
+        "field": "query",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 1468
+     },
+     {
+      "name": "sslwidget.criteo.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "fu"
+      ],
+      "evidence": [
+       {
+        "ms": 5936,
+        "url": "https://sslwidget.criteo.com/event",
+        "field": "fu",
+        "snippet": "https://www.de-pharmacy-e.example/suche/schwangerschaftstest?q=schwangerschaftstest"
+       }
+      ],
+      "first_ms": 5936
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "verdict": "sent_after_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (E)"
+  },
+  {
+   "site": "de-pharmacy-f",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:22:43+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "ep.search_term"
+      ],
+      "evidence": [
+       {
+        "ms": 459,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-f.example/search/result?q=schwangerschaftstest"
+       },
+       {
+        "ms": 5456,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.de-pharmacy-f.example/search/result?q=schwangerschaftstest"
+       },
+       {
+        "ms": 5456,
+        "url": "https://region1.analytics.google.com/g/collect",
+        "field": "ep.search_term",
+        "snippet": "schwangerschaftstest"
+       }
+      ],
+      "first_ms": 459
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (F)"
+  },
+  {
+   "site": "fi-clinic-d",
+   "term": "masennus",
+   "checked_at": "2026-11-16T19:25:25+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Adform",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "loc"
+      ],
+      "evidence": [
+       {
+        "ms": 523,
+        "url": "https://track.adform.net/Serving/TrackPoint/",
+        "field": "loc",
+        "snippet": "…tps://www.fi-clinic-d.example/fi/haku?query=masennus"
+       }
+      ],
+      "first_ms": 523
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 568,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…tps://www.fi-clinic-d.example/fi/haku?query=masennus"
+       },
+       {
+        "ms": 611,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…tps://www.fi-clinic-d.example/fi/haku?query=masennus"
+       }
+      ],
+      "first_ms": 568
+     },
+     {
+      "name": "Sleeknote",
+      "category": "marketing",
+      "own_domain": false,
+      "fields": [
+       "body"
+      ],
+      "evidence": [
+       {
+        "ms": 781,
+        "url": "https://analytics.sleeknote.com/",
+        "field": "body",
+        "snippet": "…tps://www.fi-clinic-d.example/fi/haku?query=masennus\r\n------WebKitFormBoundary83nZQA3OFBA7Gs…"
+       }
+      ],
+      "first_ms": 781
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "fi",
+   "kind": "clinic",
+   "label": "Private clinic, Finland (D)"
+  },
+  {
+   "site": "no-pharmacy-b",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:18:46+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "New Relic",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "ins[0].documentUrl",
+       "ins[1].documentUrl",
+       "ins[2].documentUrl",
+       "ins[3].documentUrl",
+       "ins[4].documentUrl",
+       "ins[5].documentUrl",
+       "ins[6].documentUrl",
+       "ins[7].documentUrl",
+       "ins[8].documentUrl",
+       "ins[9].documentUrl",
+       "ins[10].documentUrl",
+       "ins[11].documentUrl",
+       "ins[12].documentUrl",
+       "ins[13].documentUrl",
+       "ins[14].documentUrl",
+       "ins[15].documentUrl",
+       "ins[16].documentUrl",
+       "ins[17].documentUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 331,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[0].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 331,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[1].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 331,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[2].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 331
+     },
+     {
+      "name": "uk-pharmacy-a-no-prod.54proxy.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "query"
+      ],
+      "evidence": [
+       {
+        "ms": 440,
+        "url": "https://uk-pharmacy-a-no-prod.54proxy.com/search",
+        "field": "query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 440
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "New Relic",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "ins[0].documentUrl",
+       "ins[1].documentUrl",
+       "ins[2].documentUrl",
+       "ins[3].documentUrl",
+       "ins[4].documentUrl",
+       "ins[5].documentUrl",
+       "ins[6].documentUrl",
+       "ins[7].documentUrl",
+       "ins[8].documentUrl",
+       "ins[9].documentUrl",
+       "ins[10].documentUrl",
+       "ins[11].documentUrl",
+       "ins[12].documentUrl",
+       "ins[13].documentUrl",
+       "ins[14].documentUrl",
+       "ins[15].documentUrl",
+       "ins[16].documentUrl",
+       "ins[17].documentUrl",
+       "ins[18].documentUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 426,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[0].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 426,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[1].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 426,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[2].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 426
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "ep.search_term",
+       "dt",
+       "pr1",
+       "pr2",
+       "pr3",
+       "pr4",
+       "pr5",
+       "pr6",
+       "pr7",
+       "pr8",
+       "pr9",
+       "pr10",
+       "pr11",
+       "pr12",
+       "pr13",
+       "pr14",
+       "pr15",
+       "pr16",
+       "pr17",
+       "pr18",
+       "pr19",
+       "pr20",
+       "pr21",
+       "pr22",
+       "pr23",
+       "ep.item_list_id",
+       "ep.item_list_name"
+      ],
+      "evidence": [
+       {
+        "ms": 565,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 873,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "dl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 873,
+        "url": "https://region1.google-analytics.com/g/collect",
+        "field": "ep.search_term",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 565
+     },
+     {
+      "name": "uk-pharmacy-a-no-prod.54proxy.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "query"
+      ],
+      "evidence": [
+       {
+        "ms": 579,
+        "url": "https://uk-pharmacy-a-no-prod.54proxy.com/search",
+        "field": "query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 579
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "New Relic",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "ins[0].documentUrl",
+       "ins[1].documentUrl",
+       "ins[2].documentUrl",
+       "ins[3].documentUrl",
+       "ins[4].documentUrl",
+       "ins[5].documentUrl",
+       "ins[6].documentUrl",
+       "ins[7].documentUrl",
+       "ins[8].documentUrl",
+       "ins[9].documentUrl",
+       "ins[10].documentUrl",
+       "ins[11].documentUrl",
+       "ins[12].documentUrl",
+       "ins[13].documentUrl",
+       "ins[14].documentUrl",
+       "ins[15].documentUrl",
+       "ins[16].documentUrl",
+       "ins[17].documentUrl",
+       "ins[18].documentUrl"
+      ],
+      "evidence": [
+       {
+        "ms": 338,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[0].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 338,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[1].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       },
+       {
+        "ms": 338,
+        "url": "https://bam.eu01.nr-data.net/ins/1/…",
+        "field": "ins[2].documentUrl",
+        "snippet": "https://www.no-pharmacy-b.example/search/result/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 338
+     },
+     {
+      "name": "uk-pharmacy-a-no-prod.54proxy.com",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "query"
+      ],
+      "evidence": [
+       {
+        "ms": 460,
+        "url": "https://uk-pharmacy-a-no-prod.54proxy.com/search",
+        "field": "query",
+        "snippet": "graviditetstest"
+       }
+      ],
+      "first_ms": 460
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "no",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Norway (B)"
+  },
+  {
+   "site": "se-clinic-c",
+   "term": "depression",
+   "checked_at": "2026-11-16T19:26:47+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [
+     {
+      "name": "Usercentrics",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "r"
+      ],
+      "evidence": [
+       {
+        "ms": 272,
+        "url": "https://uct.service.usercentrics.eu/uct",
+        "field": "r",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       },
+       {
+        "ms": 275,
+        "url": "https://uct.service.usercentrics.eu/uct",
+        "field": "r",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 272
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 270,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       },
+       {
+        "ms": 312,
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/863772054/",
+        "field": "url",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       },
+       {
+        "ms": 312,
+        "url": "https://www.google.com/rmkt/collect/863772054/",
+        "field": "url",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 270
+     },
+     {
+      "name": "Usercentrics",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "r"
+      ],
+      "evidence": [
+       {
+        "ms": 277,
+        "url": "https://uct.service.usercentrics.eu/uct",
+        "field": "r",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 277
+     },
+     {
+      "name": "…",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "data[0].url"
+      ],
+      "evidence": [
+       {
+        "ms": 280,
+        "url": "…",
+        "field": "data[0].url",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 280
+     },
+     {
+      "name": "browser-intake-datadoghq.eu",
+      "category": "other company",
+      "own_domain": false,
+      "fields": [
+       "{\"type\":\"action\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\"},\"application\":{\"id\":\"…\"},\"date\":1794857241563,\"source\":\"browser\",\"view\":{\"in_foreground\":true,\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"action\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\"},\"application\":{\"id\":\"…\"},\"date\":1794857241563,\"source\":\"browser\",\"view\":{\"in_foreground\":true,\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241339,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241471,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"view\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false,\"start_session_replay_recording_manually\":true},\"sdk_name\":\"rum\",\"page_states\":[{\"state\":\"active\",\"start\":0}],\"document_version\":1},\"application\":{\"id\":\"…\"},\"date\":1794857241339,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241472,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241488,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241490,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241498,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241539,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241569,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241584,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241589,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241580,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241601,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241604,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241609,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241610,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "dl",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241628,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "url",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241625,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241631,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241634,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241640,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241637,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241613,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241652,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241658,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241657,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241660,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241663,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+       "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241660,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q"
+      ],
+      "evidence": [
+       {
+        "ms": 317,
+        "url": "https://browser-intake-datadoghq.eu/api/v2/rum",
+        "field": "{\"type\":\"action\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\"},\"application\":{\"id\":\"…\"},\"date\":1794857241563,\"source\":\"browser\",\"view\":{\"in_foreground\":true,\"url\":\"https://www.se-clinic-c.example/sok/?q",
+        "snippet": "depression\",\"referrer\":\"\",\"id\":\"……"
+       },
+       {
+        "ms": 317,
+        "url": "https://browser-intake-datadoghq.eu/api/v2/rum",
+        "field": "{\"type\":\"action\",\"_dd\":{\"format_version\":2,\"drift\":0,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\"},\"application\":{\"id\":\"…\"},\"date\":1794857241563,\"source\":\"browser\",\"view\":{\"in_foreground\":true,\"url\":\"https://www.se-clinic-c.example/sok/?q",
+        "snippet": "depression\",\"referrer\":\"\",\"id\":\"……"
+       },
+       {
+        "ms": 317,
+        "url": "https://browser-intake-datadoghq.eu/api/v2/rum",
+        "field": "{\"type\":\"resource\",\"_dd\":{\"format_version\":2,\"drift\":-1,\"configuration\":{\"session_sample_rate\":100,\"session_replay_sample_rate\":0,\"profiling_sample_rate\":0,\"trace_sample_rate\":100,\"beta_encode_cookie_options\":false},\"sdk_name\":\"rum\",\"discarded\":false},\"application\":{\"id\":\"…\"},\"date\":1794857241339,\"source\":\"browser\",\"view\":{\"url\":\"https://www.se-clinic-c.example/sok/?q",
+        "snippet": "depression\",\"referrer\":\"\",\"id\":\"……"
+       }
+      ],
+      "first_ms": 317
+     },
+     {
+      "name": "AB Tasty",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 754,
+        "url": "https://ariane.abtasty.com/",
+        "field": "dl",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 754
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "api"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [
+     {
+      "name": "Usercentrics",
+      "category": "consent tool",
+      "own_domain": false,
+      "fields": [
+       "r"
+      ],
+      "evidence": [
+       {
+        "ms": 259,
+        "url": "https://uct.service.usercentrics.eu/uct",
+        "field": "r",
+        "snippet": "https://www.se-clinic-c.example/sok/?q=depression"
+       }
+      ],
+      "first_ms": 259
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "verdict": "sent_after_consent",
+   "country": "se",
+   "kind": "clinic",
+   "label": "Private clinic, Sweden (C)"
+  },
+  {
+   "site": "se-pharmacy-a",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:16:32+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[8].data.baseData.name",
+       "[8].data.baseData.url",
+       "[9].data.baseData.name",
+       "[9].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 478,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[8].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       },
+       {
+        "ms": 478,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[8].data.baseData.url",
+        "snippet": "https://www.se-pharmacy-a.example/sok?q=graviditetstest"
+       },
+       {
+        "ms": 478,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[9].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       }
+      ],
+      "first_ms": 478
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[10].data.baseData.name",
+       "[10].data.baseData.url",
+       "[11].data.baseData.name",
+       "[11].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 535,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[10].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       },
+       {
+        "ms": 535,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[10].data.baseData.url",
+        "snippet": "https://www.se-pharmacy-a.example/sok?q=graviditetstest"
+       },
+       {
+        "ms": 535,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[11].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       }
+      ],
+      "first_ms": 535
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl",
+       "dt"
+      ],
+      "evidence": [
+       {
+        "ms": 552,
+        "url": "https://gtms.se-pharmacy-a.example/…",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-a.example/sok?q=graviditetstest"
+       },
+       {
+        "ms": 552,
+        "url": "https://gtms.se-pharmacy-a.example/…",
+        "field": "dt",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       }
+      ],
+      "first_ms": 552
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[8].data.baseData.name",
+       "[8].data.baseData.url",
+       "[9].data.baseData.name",
+       "[9].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 567,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[8].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       },
+       {
+        "ms": 567,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[8].data.baseData.url",
+        "snippet": "https://www.se-pharmacy-a.example/sok?q=graviditetstest"
+       },
+       {
+        "ms": 567,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[9].data.baseData.name",
+        "snippet": "graviditetstest | se-pharmacy-a"
+       }
+      ],
+      "first_ms": 567
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (A)"
+  },
+  {
+   "site": "se-pharmacy-c",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:15:35+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 573,
+        "url": "https://metrics.se-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-c.example/?q=graviditetstest"
+       },
+       {
+        "ms": 922,
+        "url": "https://metrics.se-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-c.example/?q=graviditetstest"
+       },
+       {
+        "ms": 1275,
+        "url": "https://metrics.se-pharmacy-c.example/…",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-c.example/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 573
+     },
+     {
+      "name": "Contentsquare",
+      "category": "session recording",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 647,
+        "url": "https://ca.contentsquare.net/pageview",
+        "field": "url",
+        "snippet": "https://www.se-pharmacy-c.example/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 647
+     },
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "path"
+      ],
+      "evidence": [
+       {
+        "ms": 648,
+        "url": "https://ad.doubleclick.net/activity;src=10210956;type=apote1;cat=phd-p0;ord=386375374;gtm=…;dc",
+        "field": "path",
+        "snippet": "…15s0te;~oref=https://www.se-pharmacy-c.example/?q=graviditetstest"
+       },
+       {
+        "ms": 810,
+        "url": "https://www.google.com/gmp/conversion/_dc_unique_id=4711470942757704180;_dc_ptd=…;_dc_time=",
+        "field": "path",
+        "snippet": "…15s0te;~oref=https://www.se-pharmacy-c.example/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 648
+     },
+     {
+      "name": "Nosto",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "message"
+      ],
+      "evidence": [
+       {
+        "ms": 911,
+        "url": "https://connect.eu.nosto.com/ev1",
+        "field": "message",
+        "snippet": "{\"url\":\"https://www.se-pharmacy-c.example/?q=graviditetstest\",\"response_mode\":\"JSON_ORIGINAL\",\"page_…"
+       },
+       {
+        "ms": 1240,
+        "url": "https://connect.eu.nosto.com/ev1",
+        "field": "message",
+        "snippet": "{\"url\":\"https://www.se-pharmacy-c.example/?q=graviditetstest\",\"response_mode\":\"JSON_ORIGINAL\",\"page_…"
+       }
+      ],
+      "first_ms": 911
+     },
+     {
+      "name": "AB Tasty",
+      "category": "personalisation",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 1156,
+        "url": "https://ariane.abtasty.com/",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-c.example/?q=graviditetstest"
+       }
+      ],
+      "first_ms": 1156
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (C)"
+  },
+  {
+   "site": "se-pharmacy-d",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:17:33+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 697,
+        "url": "https://metrics.se-pharmacy-d.example/…",
+        "field": "dl",
+        "snippet": "https://www.se-pharmacy-d.example/search?q=graviditetstest"
+       }
+      ],
+      "first_ms": 697
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (D)"
+  },
+  {
+   "site": "se-pharmacy-e",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:16:24+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Zendesk",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "pageView.referrer"
+      ],
+      "evidence": [
+       {
+        "ms": 360,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "url",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       },
+       {
+        "ms": 360,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "pageView.referrer",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       }
+      ],
+      "first_ms": 360
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Google Ads",
+      "category": "advertising",
+      "own_domain": false,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 328,
+        "url": "https://www.google.com/ccm/collect",
+        "field": "dl",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       }
+      ],
+      "first_ms": 328
+     },
+     {
+      "name": "Google Analytics",
+      "category": "analytics",
+      "own_domain": true,
+      "fields": [
+       "dl"
+      ],
+      "evidence": [
+       {
+        "ms": 348,
+        "url": "https://www.se-pharmacy-e.example/…",
+        "field": "dl",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       }
+      ],
+      "first_ms": 348
+     },
+     {
+      "name": "Zendesk",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "pageView.referrer"
+      ],
+      "evidence": [
+       {
+        "ms": 434,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "url",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       },
+       {
+        "ms": 434,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "pageView.referrer",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       }
+      ],
+      "first_ms": 434
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Zendesk",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url",
+       "pageView.referrer"
+      ],
+      "evidence": [
+       {
+        "ms": 350,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "url",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       },
+       {
+        "ms": 350,
+        "url": "https://se-pharmacy-e.zendesk.com/frontendevents/pv",
+        "field": "pageView.referrer",
+        "snippet": "…ps://www.se-pharmacy-e.example/?search-field=graviditetstest"
+       }
+      ],
+      "first_ms": 350
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "sent_after_consent",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (E)"
+  },
+  {
+   "site": "dk-pharmacy-b",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:20:24+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Monsido",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "b"
+      ],
+      "evidence": [
+       {
+        "ms": 135,
+        "url": "https://tracking.monsido.com/",
+        "field": "b",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 135
+     },
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[1].data.baseData.url",
+       "[2].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 214,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[1].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       },
+       {
+        "ms": 214,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[2].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 214
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "LiveChat",
+      "category": "chat",
+      "own_domain": false,
+      "fields": [
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 123,
+        "url": "https://api-fra.livechatinc.com/v3.6/customer/action/get_dynamic_configuration",
+        "field": "url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 123
+     },
+     {
+      "name": "Monsido",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "b"
+      ],
+      "evidence": [
+       {
+        "ms": 272,
+        "url": "https://tracking.monsido.com/",
+        "field": "b",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 272
+     },
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[1].data.baseData.url",
+       "[2].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 273,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[1].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       },
+       {
+        "ms": 273,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[2].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 273
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [
+     {
+      "name": "Monsido",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "b"
+      ],
+      "evidence": [
+       {
+        "ms": 92,
+        "url": "https://tracking.monsido.com/",
+        "field": "b",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 92
+     },
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[0].data.baseData.url",
+       "[1].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 178,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[0].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       },
+       {
+        "ms": 178,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[1].data.baseData.url",
+        "snippet": "https://www.dk-pharmacy-b.example/?search=graviditetstest"
+       }
+      ],
+      "first_ms": 178
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "not_sent",
+   "country": "dk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Denmark (B)"
+  },
+  {
+   "site": "fi-clinic-a",
+   "term": "masennus",
+   "checked_at": "2026-11-16T19:26:38+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "not_sent",
+   "country": "fi",
+   "kind": "clinic",
+   "label": "Private clinic, Finland (A)"
+  },
+  {
+   "site": "fi-clinic-b",
+   "term": "masennus",
+   "checked_at": "2026-11-16T19:25:35+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "AddSearch",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "term"
+      ],
+      "evidence": [
+       {
+        "ms": 181,
+        "url": "https://api.addsearch.com/v1/search/…",
+        "field": "term",
+        "snippet": "masennus"
+       }
+      ],
+      "first_ms": 181
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "AddSearch",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "term"
+      ],
+      "evidence": [
+       {
+        "ms": 138,
+        "url": "https://api.addsearch.com/v1/search/…",
+        "field": "term",
+        "snippet": "masennus"
+       }
+      ],
+      "first_ms": 138
+     }
+    ],
+    "seen_once": [
+     "Google Ads"
+    ],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "AddSearch",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "term"
+      ],
+      "evidence": [
+       {
+        "ms": 90,
+        "url": "https://api.addsearch.com/v1/search/…",
+        "field": "term",
+        "snippet": "masennus"
+       }
+      ],
+      "first_ms": 90
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "not_sent",
+   "country": "fi",
+   "kind": "clinic",
+   "label": "Private clinic, Finland (B)"
+  },
+  {
+   "site": "fi-clinic-c",
+   "term": "masennus",
+   "checked_at": "2026-11-16T19:25:52+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "guessed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "verdict": "not_sent",
+   "country": "fi",
+   "kind": "clinic",
+   "label": "Private clinic, Finland (C)"
+  },
+  {
+   "site": "se-clinic-a",
+   "term": "depression",
+   "checked_at": "2026-11-16T19:27:36+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Rek.ai",
+      "category": "site search",
+      "own_domain": false,
+      "fields": [
+       "pid",
+       "mp.p[0]",
+       "url"
+      ],
+      "evidence": [
+       {
+        "ms": 193,
+        "url": "https://view.rekai.se/view",
+        "field": "pid",
+        "snippet": "/sok/?query=depression"
+       },
+       {
+        "ms": 193,
+        "url": "https://view.rekai.se/view",
+        "field": "mp.p[0]",
+        "snippet": "/sok/?query=depression"
+       },
+       {
+        "ms": 193,
+        "url": "https://view.rekai.se/view",
+        "field": "url",
+        "snippet": "/sok/?query=depression"
+       }
+      ],
+      "first_ms": 193
+     }
+    ],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "not_sent",
+   "country": "se",
+   "kind": "clinic",
+   "label": "Private clinic, Sweden (A)"
+  },
+  {
+   "site": "se-pharmacy-f",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:16:45+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "url",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "text"
+   },
+   "verdict": "not_sent",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (F)"
+  },
+  {
+   "site": "uk-pharmacy-c",
+   "term": "pregnancy test",
+   "checked_at": "2026-11-16T19:24:12+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "reject": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [],
+    "seen_once": [],
+    "answered_via": "button"
+   },
+   "verdict": "not_sent",
+   "country": "uk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, United Kingdom (C)"
+  },
+  {
+   "site": "de-pharmacy-d",
+   "term": "schwangerschaftstest",
+   "checked_at": "2026-11-16T19:21:35+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "unknown",
+   "country": "de",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Germany (D)"
+  },
+  {
+   "site": "no-pharmacy-c",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:18:55+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "ok",
+    "searched": "typed",
+    "recipients": [
+     {
+      "name": "Azure Application Insights",
+      "category": "site monitoring",
+      "own_domain": false,
+      "fields": [
+       "[3].data.baseData.url",
+       "[4].data.baseData.url"
+      ],
+      "evidence": [
+       {
+        "ms": 1555,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[3].data.baseData.url",
+        "snippet": "…://www.no-pharmacy-c.example/search?searchPhrase=graviditetstest"
+       },
+       {
+        "ms": 1555,
+        "url": "https://swedencentral-0.in.applicationinsights.azure.com//v2/track",
+        "field": "[4].data.baseData.url",
+        "snippet": "…://www.no-pharmacy-c.example/search?searchPhrase=graviditetstest"
+       }
+      ],
+      "first_ms": 1555
+     }
+    ],
+    "seen_once": []
+   },
+   "after": {
+    "status": "no_accept",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "no_reject",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "unknown",
+   "country": "no",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Norway (C)"
+  },
+  {
+   "site": "se-pharmacy-b",
+   "term": "graviditetstest",
+   "checked_at": "2026-11-16T19:15:11+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "unknown",
+   "country": "se",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, Sweden (B)"
+  },
+  {
+   "site": "uk-pharmacy-a",
+   "term": "pregnancy test",
+   "checked_at": "2026-11-16T19:23:48+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "unknown",
+   "country": "uk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, United Kingdom (A)"
+  },
+  {
+   "site": "uk-pharmacy-d",
+   "term": "pregnancy test",
+   "checked_at": "2026-11-16T19:23:58+00:00",
+   "browser": "Chromium 148.0.7778.96",
+   "before": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "after": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "reject": {
+    "status": "blocked",
+    "error": null,
+    "recipients": [],
+    "seen_once": []
+   },
+   "verdict": "unknown",
+   "country": "uk",
+   "kind": "pharmacy",
+   "label": "Online pharmacy, United Kingdom (D)"
+  }
+ ]
+}
