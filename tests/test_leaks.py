@@ -101,6 +101,15 @@ class MergeAndVerdictTest(unittest.TestCase):
         runs = [{"searched": None, "error": None, "answered": None, "blocked": True, "carriers": {}}] * 2
         self.assertEqual(lk._phase(runs, None)["status"], "blocked")
 
+    def test_failed_phase_reports_the_failing_runs_reason(self):
+        good = {"searched": "url", "error": None, "answered": None, "carriers": {}}
+        wall = {"searched": None, "error": None, "answered": None, "blocked": True, "carriers": {}}
+        self.assertEqual(lk._phase([good, wall], None)["status"], "blocked")
+
+    def test_opensearch_template_is_encoded_and_optional_params_dropped(self):
+        url = lk.fill_template("https://shop.example/s?q={searchTerms}&amp;p={startPage?}", "c&a test")
+        self.assertEqual(url, "https://shop.example/s?q=c%26a+test")
+
     def test_phase_records_how_the_banner_was_answered(self):
         runs = [{"searched": "url", "error": None, "answered": "api", "carriers": {}}] * 2
         self.assertEqual(lk._phase(runs, "accept")["answered_via"], "api")
@@ -161,6 +170,27 @@ class AnonymiseTest(unittest.TestCase):
         self.assertEqual(labels, {"se-pharmacy-a": "Online pharmacy, Sweden (A)",
                                   "dk-pharmacy-a": "Online pharmacy, Denmark (A)"})
         self.assertEqual(out["summary"]["own_domain"], ["se-pharmacy-a"])
+
+    def _anon_snippet(self, site: str, snippet: str, term: str = "graviditetstest") -> str:
+        ev = {"ms": 5, "url": "https://www.google-analytics.com/g/collect", "field": "dl", "snippet": snippet}
+        row = {"site": site, "country": "dk", "kind": "pharmacy", "term": term, "verdict": "sent_before_consent",
+               "before": {"status": "ok", "recipients": [{**_rec("GA", "analytics"), "evidence": [ev]}]}}
+        out = lk.anonymise({"method": {}, "summary": {"own_domain": []}, "sites": [row]})
+        return out["sites"][0]["before"]["recipients"][0]["evidence"][0]["snippet"]
+
+    def test_domain_cut_by_the_snippet_window_is_masked(self):
+        s = self._anon_snippet("pillerimas.dk", "…mas.dk/mor-barn/graviditet-efterfoedsel/graviditetstest?q=graviditetstest")
+        self.assertTrue(s.startswith("…dk-pharmacy-a.example/…"), s)
+        self.assertNotIn("mas.dk", s)
+        self.assertNotIn("mor-barn", s)  # a category path can identify the site
+
+    def test_generic_search_paths_stay(self):
+        s = self._anon_snippet("pillerimas.dk", "https://www.pillerimas.dk/soeg/graviditetstest?q=graviditetstest")
+        self.assertEqual(s, "https://www.dk-pharmacy-a.example/soeg/graviditetstest?q=graviditetstest")
+
+    def test_short_brand_as_a_word_leaves_only_the_term(self):
+        s = self._anon_snippet("vax.se", "Sök: graviditetstest – Vax")
+        self.assertEqual(s, "…graviditetstest…")
 
     def test_brand_in_another_spelling_leaves_only_the_term(self):
         ev = {"ms": 5, "url": "https://www.google-analytics.com/g/collect", "field": "dt",

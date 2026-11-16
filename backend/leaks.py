@@ -21,18 +21,24 @@ CLI:
 """
 from __future__ import annotations
 
+import ipaddress
 import json
+import logging
 import re
+import socket
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 from typing import Optional
-from urllib.parse import quote_plus, urlencode, urljoin, urlsplit
+from urllib.parse import quote_plus, urlsplit
 
 from backend import payload
 from backend import trackers as tr
+
+log = logging.getLogger(__name__)
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 CACHE_DIR = DATA / "leaks"                       # gitignored: sites by name, raw results
@@ -137,7 +143,8 @@ def carriers(site: str, requests: list[dict], term: str) -> dict[str, dict]:
         who = tr.recipient(r["url"])
         if _is_site(urlsplit(r["url"]).netloc, site) and not who["own_domain"]:
             continue  # the site's own search request, not a recipient
-        f = found.setdefault(who["name"], {**who, "fields": [], "evidence": [], "first_ms": r["ms"]})
+        f = found.setdefault(who["name"], {**who, "counted": who["category"] in SENSITIVE, "fields": [],
+                                           "evidence": [], "first_ms": r["ms"]})
         for h in hits:
             if h["field"] not in f["fields"]:
                 f["fields"].append(h["field"])
@@ -156,8 +163,15 @@ def merge_runs(runs: list[dict[str, dict]]) -> tuple[list[dict], list[str]]:
     return stable, once
 
 
+def fill_template(template: str, term: str) -> str:
+    """An OpenSearch URL template with the term URL-encoded and unfilled optional parameters ({startPage?}) removed."""
+    url = template.replace("&amp;", "&").replace("{searchTerms}", quote_plus(term))
+    return re.sub(r"[?&][^=&]+=\{[^}]*\?\}|\{[^}]*\?\}", "", url)
+
+
 def search_url(page, term: str) -> Optional[str]:
-    """A URL that runs the site's search: from its OpenSearch description, else from a GET search form."""
+    """A URL that runs the site's search: from its OpenSearch description, else from a GET search form (all its
+    fields, including hidden ones and any query already in its action, with the term in the search box)."""
     href = page.eval_on_selector_all(
         "link[rel=search][type*=opensearch]", "els => els.length ? els[0].href : null")
     if href:
@@ -166,20 +180,36 @@ def search_url(page, term: str) -> Optional[str]:
             m = re.search(r'<Url[^>]*type="text/html"[^>]*template="([^"]+)"', xml) or \
                 re.search(r'<Url[^>]*template="([^"]+)"[^>]*type="text/html"', xml)
             if m and "{searchTerms}" in m.group(1):
-                return m.group(1).replace("&amp;", "&").replace("{searchTerms}", term.replace(" ", "+"))
+                return fill_template(m.group(1), term)
         except Exception as e:  # a broken description just means we try the form next
-            print(f"  opensearch failed: {type(e).__name__}", file=sys.stderr)
-    form = page.evaluate("""sel => {
+            log.debug("opensearch failed: %s", type(e).__name__)
+    return page.evaluate("""([sel, term]) => {
         for (const input of document.querySelectorAll(sel)) {
             const f = input.form;
-            if (f && input.name && (f.method || 'get').toLowerCase() === 'get') return [f.action, input.name];
+            if (!f || !input.name || (f.method || 'get').toLowerCase() !== 'get') continue;
+            const url = new URL(f.getAttribute('action') || location.href, location.href);
+            const data = new FormData(f);
+            data.set(input.name, term);
+            for (const [k, v] of data) if (typeof v === 'string') url.searchParams.set(k, v);
+            return url.href;
         }
         return null;
-    }""", SEARCH_INPUT)
-    if form and form[0]:
-        action = form[0] if form[0].startswith("http") else urljoin(page.url, form[0])
-        return f"{action.split('?')[0]}?{urlencode({form[1]: term})}"
-    return None
+    }""", [SEARCH_INPUT, term])
+
+
+def shows_term(page, term: str) -> bool:
+    """Did the search run? The results page shows the term in its text or a field. The address alone doesn't count:
+    a home page reached with ?search=term has the term in its URL without having searched."""
+    try:
+        return bool(page.evaluate("""term => {
+            const t = term.toLowerCase();
+            const inText = (document.body?.innerText || '').toLowerCase().includes(t);
+            const inField = [...document.querySelectorAll('input')].some(i => (i.value || '').toLowerCase().includes(t));
+            return inText || inField;
+        }""", term))
+    except Exception as e:  # the page navigated away mid-call: can't confirm
+        log.debug("shows_term failed: %s", type(e).__name__)
+        return False
 
 
 def type_search(page, term: str) -> bool:
@@ -194,7 +224,8 @@ def type_search(page, term: str) -> bool:
                     box.fill(term, timeout=3000)
                     box.press("Enter", timeout=3000)
                     return True
-            except Exception:  # covered or read-only: try the next box
+            except Exception as e:  # covered or read-only: try the next box
+                log.debug("search box %d unusable: %s", i, type(e).__name__)
                 continue
         if attempt == 0:
             opener = page.get_by_role("button", name=SEARCH_OPENER)
@@ -202,21 +233,23 @@ def type_search(page, term: str) -> bool:
                 if not opener.count() or not opener.first.is_visible():
                     return False
                 opener.first.click(timeout=3000, force=True)
-            except Exception:
+            except Exception as e:
+                log.debug("search opener failed: %s", type(e).__name__)
                 return False
             page.wait_for_timeout(800)
     return False
 
 
-def guess_search(page, site: str, term: str) -> Optional[str]:
-    """Last resort: common search addresses. Kept only if the page loads on the site and shows the term."""
+def guess_search(page, origin: str, site: str, term: str) -> Optional[str]:
+    """Last resort: common search addresses on `origin`. Kept only if the page loads on the site and shows the term."""
     for path in SEARCH_PATHS:
-        url = f"https://{site}{path.format(quote_plus(term))}"
+        url = f"{origin.rstrip('/')}{path.format(quote_plus(term))}"
         try:
             res = page.request.get(url, timeout=10000)
             if res.ok and _is_site(urlsplit(res.url).netloc, site) and term.lower() in res.text().lower():
                 return url
-        except Exception:  # unreachable address: try the next pattern
+        except Exception as e:  # unreachable address: try the next pattern
+            log.debug("guess %s failed: %s", path, type(e).__name__)
             continue
     return None
 
@@ -233,7 +266,8 @@ def answer_banner(page, choice: str) -> Optional[str]:
                 if btn.count() and btn.first.is_visible():
                     btn.first.click(timeout=3000)
                     return "button"
-            except Exception:  # detached frame or a covered button: try the next way
+            except Exception as e:  # detached frame or a covered button: try the next way
+                log.debug("%s selector %s failed: %s", choice, sel, type(e).__name__)
                 continue
     for frame in page.frames:
         try:
@@ -241,11 +275,13 @@ def answer_banner(page, choice: str) -> Optional[str]:
             if btn.count() and btn.first.is_visible():
                 btn.first.click(timeout=3000)
                 return "text"
-        except Exception:
+        except Exception as e:
+            log.debug("%s button text failed: %s", choice, type(e).__name__)
             continue
     try:
         return "api" if page.evaluate(js) else None
-    except Exception:  # the page navigated away mid-call
+    except Exception as e:  # the page navigated away mid-call
+        log.debug("%s consent call failed: %s", choice, type(e).__name__)
         return None
 
 
@@ -254,10 +290,34 @@ def blocked(status, title: str, text: str) -> bool:
     return (status is not None and status in (401, 403, 429, 503)) or bool(BLOCK_TITLE.search(title)) or not text.strip()
 
 
-def _run(browser, ua: str, site: str, term: str, choice: Optional[str], base_url: Optional[str] = None) -> dict:
-    """One fresh browser context: load, optionally answer the banner ("accept" or "reject"), search, and record
-    what follows. `base_url` overrides https://{site}/ (the local test fixture)."""
+@lru_cache(maxsize=512)
+def is_public_host(host: str) -> bool:
+    """True when every address `host` resolves to is a public internet address (not loopback, private, link-local
+    or cloud metadata). Bare IPs count by their own address."""
+    try:
+        addrs = {info[4][0] for info in socket.getaddrinfo(host, 443, proto=socket.IPPROTO_TCP)}
+    except (socket.gaierror, UnicodeError):
+        return False
+    return bool(addrs) and all(ipaddress.ip_address(a.split("%")[0]).is_global for a in addrs)
+
+
+def _guard(route) -> None:
+    """Browser-side SSRF guard: every request, including redirects and anything the page itself loads, must go to
+    a public host. Checked again here because the page can redirect or a name can resolve differently later."""
+    host = urlsplit(route.request.url).hostname or ""
+    if route.request.url.startswith(("data:", "blob:")) or (host and is_public_host(host)):
+        route.continue_()
+    else:
+        log.info("blocked request to non-public host %s", host)
+        route.abort("blockedbyclient")
+
+
+def _run(browser, ua: str, site: str, term: str, choice: Optional[str], origin: str, guard: bool = True) -> dict:
+    """One fresh browser context: load `origin`, optionally answer the banner ("accept" or "reject"), search, and
+    record what follows. `guard` blocks every request to a non-public address (off only for the local test site)."""
     ctx = browser.new_context(user_agent=ua, viewport={"width": 1366, "height": 900})
+    if guard:
+        ctx.route("**/*", _guard)
     page = ctx.new_page()
     reqs: list[dict] = []
     start = [0.0]
@@ -272,11 +332,11 @@ def _run(browser, ua: str, site: str, term: str, choice: Optional[str], base_url
     page.on("request", on_request)
     out = {"answered": None, "searched": None, "error": None, "blocked": False}
     try:
-        res = page.goto(base_url or f"https://{site}/", wait_until="commit", timeout=30000)
+        res = page.goto(origin, wait_until="commit", timeout=30000)
         try:
             page.wait_for_load_state("domcontentloaded", timeout=15000)
-        except Exception:
-            pass  # slow pages still get the fixed wait below
+        except Exception as e:  # slow pages still get the fixed wait below
+            log.debug("domcontentloaded not reached: %s", type(e).__name__)
         page.wait_for_timeout(LOAD_WAIT_MS)
         if blocked(res.status if res else None, page.title(), page.inner_text("body", timeout=3000)):
             out["blocked"] = True
@@ -293,13 +353,16 @@ def _run(browser, ua: str, site: str, term: str, choice: Optional[str], base_url
         elif type_search(page, term):
             out["searched"] = "typed"
         else:
-            url = guess_search(page, site, term)
+            url = guess_search(page, origin, site, term)
             start[0] = time.monotonic()  # the probes above aren't part of the visit
             if url:
                 page.goto(url, wait_until="commit", timeout=30000)
             out["searched"] = "guessed" if url else False
         if out["searched"]:
             page.wait_for_timeout(WAIT_MS)
+            # A search that silently landed elsewhere (home page, error) must not count as "nothing was sent"
+            if not shows_term(page, term):
+                out["searched"] = False
     except Exception as e:
         out["error"] = f"{type(e).__name__}: {str(e).splitlines()[0]}"[:160]
     ctx.close()
@@ -313,7 +376,7 @@ def _run(browser, ua: str, site: str, term: str, choice: Optional[str], base_url
 def _phase(runs: list[dict], choice: Optional[str]) -> dict:
     ok = [r for r in runs if r["searched"] and not r["error"] and (r["answered"] if choice else True)]
     if len(ok) < len(runs):
-        first = runs[0]
+        first = next(r for r in runs if r not in ok)  # the run that failed, so its own reason is reported
         status = ("blocked" if first.get("blocked") else "error" if first["error"] else "no_search" if not first["searched"]
                   else f"no_{choice}" if choice and not first["answered"] else "unstable")
         return {"status": status, "error": first["error"], "recipients": [], "seen_once": []}
@@ -324,11 +387,15 @@ def _phase(runs: list[dict], choice: Optional[str]) -> dict:
     return out
 
 
-def check_search(site: str, term: str, runs: int = RUNS, base_url: Optional[str] = None) -> dict:
-    """All three phases for one site and term, each run `runs` times in a fresh context."""
+def check_search(site: str, term: str, runs: int = RUNS, base_url: Optional[str] = None,
+                 allow_private: bool = False) -> dict:
+    """All three phases for one site and term, each run `runs` times in a fresh context. The browser opens the host
+    exactly as given (www. included); `base_url` and `allow_private` exist only for the local test site."""
     from playwright.sync_api import sync_playwright  # imported here so the module loads without Playwright
 
-    site = _base(urlsplit(site if "//" in site else f"//{site}").netloc)
+    host = (urlsplit(site if "//" in site else f"//{site}").hostname or "").lower()
+    origin = base_url or f"https://{host}/"
+    site = _base(host)
     row = {"site": site, "term": term, "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -337,7 +404,7 @@ def check_search(site: str, term: str, runs: int = RUNS, base_url: Optional[str]
         # some consent tools auto-accept for headless browsers. Disclosed in the survey method.
         ua = browser.new_page().evaluate("navigator.userAgent").replace("HeadlessChrome", "Chrome")
         for phase, choice in zip(PHASES, (None, "accept", "reject")):
-            runs_ = [_run(browser, ua, site, term, choice, base_url) for _ in range(runs)]
+            runs_ = [_run(browser, ua, site, term, choice, origin, guard=not allow_private) for _ in range(runs)]
             row[phase] = _phase(runs_, choice)
         browser.close()
     row["verdict"] = verdict(row)
@@ -450,6 +517,20 @@ def _term_only(text: str, term: str) -> str:
     return f"…{term}…" if term.lower() in text.lower() else "…"
 
 
+# URL path segments that say only "this is a search", so they can stay in published evidence
+SEARCH_WORDS = {"", "search", "suche", "soeg", "sok", "soek", "haku", "sivustohaku", "result", "results", "fi", "en",
+                "catalogsearch", "s"}
+
+
+def _generic_path(m: re.Match, term: str) -> str:
+    """Keep a masked site's URL path only if every segment is a search word or the term itself: a category path
+    like /mor-barn/graviditet-efterfoedsel/ could identify the site."""
+    segments = [s for s in m.group(2).split("/")]
+    keep = all(s.lower() in SEARCH_WORDS or s.lower() == term.lower().replace(" ", "-") or s.lower() == term.lower()
+               for s in segments)
+    return m.group(0) if keep else f"{m.group(1)}/…"
+
+
 def anonymise(report: dict) -> dict:
     """The published survey: each site becomes a label ("Online pharmacy, Germany (A)") and an id ("de-pharmacy-a"),
     and its domain and brand are masked in every URL and snippet. Recipient companies stay named."""
@@ -464,11 +545,22 @@ def anonymise(report: dict) -> dict:
 
     by_length = sorted(names, key=len, reverse=True)
     brands = {_squash(s.split(".")[0]) for s in names if len(s.split(".")[0]) >= 4}
+    short = [s.split(".")[0] for s in names if len(s.split(".")[0]) < 4]
 
     def mask(text: str, term: str) -> str:
         # Full domains first, so two sites sharing a brand (apotekangen.se, apotekangen.dk) keep their own ids
         for site in by_length:
             text = re.sub(re.escape(site), f"{names[site][1]}.example", text, flags=re.I)
+        # A snippet cut inside a domain ("…ngen.dk/…"): the leftover piece still points at one site
+        for site in by_length:
+            for i in range(1, len(site) - 3):
+                if text.startswith("…" + site[i:]):
+                    text = f"…{names[site][1]}.example" + text[1 + len(site) - i:]
+                    break
+        text = re.sub(r"([\w-]+\.example)(/[^?#\s\"'&]*)", lambda m: _generic_path(m, term), text)
+        # A short brand (3 letters) as a whole word, e.g. in a page title: keep only the term
+        if any(re.search(rf"(?<![a-z0-9]){re.escape(b)}(?![a-z0-9])", text, re.I) for b in short):
+            return _term_only(text, term)
         for site in by_length:
             brand = site.split(".")[0]
             if len(brand) >= 4:
